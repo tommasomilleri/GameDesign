@@ -1,14 +1,20 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
     public int maxHealth = 100;
     private int currentHealth;
-
+    public TextMeshProUGUI myLife;
+    public TextMeshProUGUI myAtk;
     public Slider healthBar; // UI barra della vita
     public int baseDefense = 0;
+    public TextMeshProUGUI myDef;
     private int bonusDefense = 0; // da power-up
+    public int baseMoney = 0;
+    public TextMeshProUGUI myMoney;
+    //private int bonusMoney = 0;
 
     void Start()
     {
@@ -17,7 +23,11 @@ public class PlayerHealth : MonoBehaviour
         {
             healthBar.maxValue = maxHealth;
             healthBar.value = currentHealth;
+            myLife.text = $"Life: {currentHealth.ToString()}";
         }
+        myMoney.text = "Mon: 000";
+        myDef.text = $"Def: {baseDefense.ToString()}";
+        //myAtk.text = $"Atk: {baseDamage.ToString()}";
     }
 
     public void TakeDamage(int incomingDamage)
@@ -60,6 +70,13 @@ public class PlayerHealth : MonoBehaviour
     {
         return bonusDefense > 0;
     }
+
+    /*public int SetMoney(int value)
+    {
+
+    }*/
+
+    /*funzione per ripristinare vita quando si raccoglie una coppa*/
 
 }
 
