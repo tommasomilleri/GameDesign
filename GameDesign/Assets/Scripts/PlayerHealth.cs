@@ -7,7 +7,6 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth = 100;
     private int currentHealth;
     public TextMeshProUGUI myLife;
-    public TextMeshProUGUI myAtk;
     public Slider healthBar; // UI barra della vita
     public int baseDefense = 0;
     public TextMeshProUGUI myDef;
@@ -25,9 +24,8 @@ public class PlayerHealth : MonoBehaviour
             healthBar.value = currentHealth;
             myLife.text = $"Life: {currentHealth.ToString()}";
         }
-        myMoney.text = "Mon: 000";
+        myMoney.text = "Mon: 0";
         myDef.text = $"Def: {baseDefense.ToString()}";
-        //myAtk.text = $"Atk: {baseDamage.ToString()}";
     }
 
     public void TakeDamage(int incomingDamage)
@@ -40,13 +38,14 @@ public class PlayerHealth : MonoBehaviour
 
         if (healthBar != null)
             healthBar.value = currentHealth;
-
+            myLife.text = $"Life: {currentHealth.ToString()}";
         Debug.Log($"{gameObject.name} ha subito {finalDamage} danni (difesa: {effectiveDefense})");
 
         // Consuma il bonus se è stato utile
         if (bonusDefense > 0 && finalDamage > 0)
         {
             bonusDefense = 0;
+            myDef.text = $"Def: {baseDefense.ToString()}";
         }
 
         if (currentHealth <= 0)
@@ -58,6 +57,7 @@ public class PlayerHealth : MonoBehaviour
     public void SetBonusDefense(int value)
     {
         bonusDefense = Mathf.Clamp(value, 1, 7);
+        myDef.text = $"Def: {(baseDefense + bonusDefense).ToString()}";
         Debug.Log($"{gameObject.name} ha ricevuto una difesa bonus di {bonusDefense}");
     }
 

@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -7,7 +8,15 @@ public class PlayerAttack : MonoBehaviour
     public float attackRange = 2f;
     public int baseDamage = 5;
 
+    public TextMeshProUGUI myAtk;
+
     private int powerUpValue = 0; // Valore del power-up raccolto, da 1 a 7
+
+
+    void Start()
+    {
+        myAtk.text = $"Atk: {baseDamage.ToString()}";
+    }
 
     void Update()
     {
@@ -32,8 +41,9 @@ public class PlayerAttack : MonoBehaviour
                     int totalDamage = baseDamage + powerUpValue;
                     enemyHealth.TakeDamage(totalDamage);
                     Debug.Log($"{gameObject.name} ha colpito {hit.name} infliggendo {totalDamage} danni!");
-
+                    
                     powerUpValue = 0; // Consuma il power-up solo se colpisce
+                    myAtk.text = $"Atk: {baseDamage.ToString()}";
                     hitSomething = true;
                 }
             }
@@ -49,6 +59,7 @@ public class PlayerAttack : MonoBehaviour
     public void SetPowerUpValue(int value)
     {
         powerUpValue = Mathf.Clamp(value, 1, 7); // Limita il valore da 1 a 7
+        myAtk.text = $"Atk: {(baseDamage + powerUpValue).ToString()}";
         Debug.Log($"{gameObject.name} ha raccolto un power-up di valore {powerUpValue}");
     }
 

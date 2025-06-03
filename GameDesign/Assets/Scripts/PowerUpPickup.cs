@@ -14,6 +14,7 @@ public class PowerUpPickup : MonoBehaviour
             {
                 attack.SetPowerUpValue(powerUpValue);
                 Destroy(gameObject);
+
             }
             else
             {
