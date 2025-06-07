@@ -5,7 +5,7 @@ using TMPro;
 public class PlayerHealth : MonoBehaviour
 {
     public int maxHealth = 100;
-    private int currentHealth;
+    public int currentHealth;
     public TextMeshProUGUI myLife;
     public Slider healthBar; // UI barra della vita
     public int baseDefense = 0;
@@ -37,8 +37,10 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
         if (healthBar != null)
+        {
             healthBar.value = currentHealth;
             myLife.text = $"Life: {currentHealth.ToString()}";
+        }
         Debug.Log($"{gameObject.name} ha subito {finalDamage} danni (difesa: {effectiveDefense})");
 
         // Consuma il bonus se è stato utile
@@ -70,13 +72,5 @@ public class PlayerHealth : MonoBehaviour
     {
         return bonusDefense > 0;
     }
-
-    /*public int SetMoney(int value)
-    {
-
-    }*/
-
-    /*funzione per ripristinare vita quando si raccoglie una coppa*/
-
 }
 

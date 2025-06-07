@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GenerateCards : MonoBehaviour
 {
@@ -15,16 +16,17 @@ public class GenerateCards : MonoBehaviour
     };
 
     public GameObject card_to_copy;
-
+    public TextMeshProUGUI remaining_cards;
     public Material coppe;
     public Material spade;
     public Material denari;
     public Material bastoni;
+    private List<(int, char)> cards2 = new List<(int, char)>();
 
     void Awake()
     {
+        remaining_cards.text = "";
         card_to_copy.SetActive(false);
-        List<(int, char)> cards2 = new List<(int, char)>();
         foreach ((int, char) card in cards)
         {
             cards2.Add(card);
@@ -33,8 +35,11 @@ public class GenerateCards : MonoBehaviour
         {
             CreateCard(cards2);
         }
+        foreach ((int, char) card in cards2)
+        {
+            remaining_cards.text += $"{card.Item1}{card.Item2} ";
+        }
     }
-
 
     public void SpawnCard(GameObject c) //fa apparire la carta passata sul terreno di gioco
     {
@@ -42,7 +47,7 @@ public class GenerateCards : MonoBehaviour
         float x = UnityEngine.Random.Range(-20.000000f, 20.000000f);
         float z = UnityEngine.Random.Range(-2.000000f, 15.000000f);
 
-        c.transform.position = new Vector3(x, (float)3.481633, z);
+        c.transform.position = new Vector3(x, (float)1, z);
         c.SetActive(true);
         return;
     }
@@ -81,4 +86,17 @@ public class GenerateCards : MonoBehaviour
         deck.RemoveAt(n);
     }
     /*servono un metodo Spawn e un metodo che crea un oggetto e gli dà tutti gli attributi della carta*/
+
+    void Update()
+    {
+        if (Empty_Card.active_cards < 10 && cards2.Count > 0)
+        {
+            CreateCard(cards2);
+            remaining_cards.text = "";
+            foreach ((int, char) card in cards2)
+            {
+                remaining_cards.text += $"{card.Item1}{card.Item2} ";
+            }
+        }
+    }
 }

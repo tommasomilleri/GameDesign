@@ -7,9 +7,7 @@ public class PlayerAttack : MonoBehaviour
     public KeyCode attackKey = KeyCode.F;
     public float attackRange = 2f;
     public int baseDamage = 5;
-
     public TextMeshProUGUI myAtk;
-
     private int powerUpValue = 0; // Valore del power-up raccolto, da 1 a 7
 
 
