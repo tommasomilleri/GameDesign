@@ -52,7 +52,7 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Die();
+            GameOver();
         }
     }
 
@@ -63,9 +63,10 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log($"{gameObject.name} ha ricevuto una difesa bonus di {bonusDefense}");
     }
 
-    void Die()
+    void GameOver()
     {
         gameObject.SetActive(false);
+        
         Debug.Log($"{gameObject.name} è morto!");
     }
     public bool HasActiveBonusDefense()
