@@ -1387,6 +1387,7 @@ MonoBehaviour:
   game_over_screen: {fileID: 1840533384}
   pause_menu_screen: {fileID: 1840533384}
   settings_screen: {fileID: 1287451780}
+  beginning_screen: {fileID: 1840533384}
   player1: {fileID: 1840533384}
   player2: {fileID: 1840533384}
 --- !u!1 &1840533384

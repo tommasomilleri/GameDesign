@@ -363,6 +363,7 @@
 "Assets/Scripts/PlayerMovement.cs"
 "Assets/Scripts/PowerUpPickup.cs"
 "Assets/Scripts/Screens.cs"
+"Assets/Scripts/Stats.cs"
 -langversion:9.0
 
 /deterministic

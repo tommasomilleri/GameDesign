@@ -5,15 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class Screens : MonoBehaviour
 {
-    public GameObject game_over_screen, pause_menu_screen, settings_screen/*, beginning_screen*/;
+    public GameObject game_over_screen, pause_menu_screen, settings_screen, beginning_screen;
     public GameObject player1, player2;
 
     void Awake()
     {
-        Time.timeScale = 1f;
+        Time.timeScale = 0f;
         game_over_screen.SetActive(false);
         pause_menu_screen.SetActive(false);
         settings_screen.SetActive(false);
+        beginning_screen.SetActive(true);
+        BeginningScreenOperation();
     }
 
     void Update()
@@ -70,6 +72,14 @@ public class Screens : MonoBehaviour
     public void ExitGamePressed()
     {
         Application.Quit();
+    }
+
+    public void BeginningScreenOperation()
+    {
+        player1.GetComponent<PlayerHealth>().maxHealth = Stats_Fante.START_LIFE;
+        player2.GetComponent<PlayerHealth>().maxHealth = Stats_Cavallo.START_LIFE;
+        beginning_screen.SetActive(false);
+        Time.timeScale = 1f;
     }
 
 }

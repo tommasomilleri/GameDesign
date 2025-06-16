@@ -52,6 +52,22 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
+# Added by me
+*.json
+*.dll
+*.payloads
+*.dag
+*.dag_derived
+*.rsp
+*.traceevents
+*.digestcache
+*.state
+*.state.map
+*.pid
+*.asset
+*.db
+*.dwlt
+
 
 # Unity3D generated meta files
 *.pidb.meta
