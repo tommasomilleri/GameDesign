@@ -55,6 +55,7 @@ ExportedObj/
 # Added by me
 *.json
 *.dll
+*.ref.dll
 *.payloads
 *.dag
 *.dag_derived

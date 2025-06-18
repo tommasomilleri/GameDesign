@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
+using System.Threading;
 
 public class Screens : MonoBehaviour
 {
     public GameObject game_over_screen, pause_menu_screen, settings_screen, beginning_screen;
     public GameObject player1, player2;
+    public TextMeshProUGUI textp1, textp2;
 
     void Awake()
     {
@@ -15,7 +18,7 @@ public class Screens : MonoBehaviour
         pause_menu_screen.SetActive(false);
         settings_screen.SetActive(false);
         beginning_screen.SetActive(true);
-        BeginningScreenOperation();
+        if (SceneManager.GetActiveScene().name == "Gioco") BeginningScreenOperation();
     }
 
     void Update()
@@ -76,10 +79,89 @@ public class Screens : MonoBehaviour
 
     public void BeginningScreenOperation()
     {
-        player1.GetComponent<PlayerHealth>().maxHealth = Stats_Fante.START_LIFE;
-        player2.GetComponent<PlayerHealth>().maxHealth = Stats_Cavallo.START_LIFE;
+        System.Random rnd = new System.Random();
+        int p1, p2;
+        p1 = rnd.Next(1, 4);
+        p2 = rnd.Next(1, 4);
+        switch (p1)
+        {
+            case 1:
+                player1.GetComponent<PlayerHealth>().maxHealth = Stats_Fante.START_LIFE;
+                player1.GetComponent<PlayerAttack>().baseDamage = Stats_Fante.START_ATTACK;
+                player1.GetComponent<PlayerHealth>().baseDefense = Stats_Fante.START_DEFENSE;
+                player1.GetComponent<PlayerMovement>().speed = Stats_Fante.START_MOVEMENT_SPEED;
+                player1.GetComponent<PlayerHealth>().baseMoney = Stats_Fante.START_MONEY;
+                player1.GetComponent<PlayerAttack>().attackRange = Stats_Fante.START_RANGE;
+                //player1.GetComponent<PlayerAttack>().????? = Stats_Fante.START_ATTACK_SPEED;
+                //player1.GetComponent<PlayerAttack>().????? = Stats_Fante.START_RELOAD_TIME;
+                textp1.text = "Fante";
+                break;
+            case 2:
+                player1.GetComponent<PlayerHealth>().maxHealth = Stats_Cavallo.START_LIFE;
+                player1.GetComponent<PlayerAttack>().baseDamage = Stats_Cavallo.START_ATTACK;
+                player1.GetComponent<PlayerHealth>().baseDefense = Stats_Cavallo.START_DEFENSE;
+                player1.GetComponent<PlayerMovement>().speed = Stats_Cavallo.START_MOVEMENT_SPEED;
+                player1.GetComponent<PlayerHealth>().baseMoney = Stats_Cavallo.START_MONEY;
+                player1.GetComponent<PlayerAttack>().attackRange = Stats_Cavallo.START_RANGE;
+                //player1.GetComponent<PlayerAttack>().????? = Stats_Cavallo.START_ATTACK_SPEED;
+                //player1.GetComponent<PlayerAttack>().????? = Stats_Cavallo.START_RELOAD_TIME;
+                textp1.text = "Cavallo";
+                break;
+            case 3:
+                player1.GetComponent<PlayerHealth>().maxHealth = Stats_Re.START_LIFE;
+                player1.GetComponent<PlayerAttack>().baseDamage = Stats_Re.START_ATTACK;
+                player1.GetComponent<PlayerHealth>().baseDefense = Stats_Re.START_DEFENSE;
+                player1.GetComponent<PlayerMovement>().speed = Stats_Re.START_MOVEMENT_SPEED;
+                player1.GetComponent<PlayerHealth>().baseMoney = Stats_Re.START_MONEY;
+                player1.GetComponent<PlayerAttack>().attackRange = Stats_Re.START_RANGE;
+                //player1.GetComponent<PlayerAttack>().????? = Stats_Re.START_ATTACK_SPEED;
+                //player1.GetComponent<PlayerAttack>().????? = Stats_Re.START_RELOAD_TIME;
+                textp1.text = "Re";
+                break;
+            default:
+                Application.Quit();
+                break;
+        }
+        switch (p2)
+        {
+            case 1:
+                player2.GetComponent<PlayerHealth>().maxHealth = Stats_Fante.START_LIFE;
+                player2.GetComponent<PlayerAttack>().baseDamage = Stats_Fante.START_ATTACK;
+                player2.GetComponent<PlayerHealth>().baseDefense = Stats_Fante.START_DEFENSE;
+                player2.GetComponent<PlayerMovement>().speed = Stats_Fante.START_MOVEMENT_SPEED;
+                player2.GetComponent<PlayerHealth>().baseMoney = Stats_Fante.START_MONEY;
+                player2.GetComponent<PlayerAttack>().attackRange = Stats_Fante.START_RANGE;
+                //player2.GetComponent<PlayerAttack>().????? = Stats_Fante.START_ATTACK_SPEED;
+                //player2.GetComponent<PlayerAttack>().????? = Stats_Fante.START_RELOAD_TIME;
+                textp2.text = "Fante";
+                break;
+            case 2:
+                player2.GetComponent<PlayerHealth>().maxHealth = Stats_Cavallo.START_LIFE;
+                player2.GetComponent<PlayerAttack>().baseDamage = Stats_Cavallo.START_ATTACK;
+                player2.GetComponent<PlayerHealth>().baseDefense = Stats_Cavallo.START_DEFENSE;
+                player2.GetComponent<PlayerMovement>().speed = Stats_Cavallo.START_MOVEMENT_SPEED;
+                player2.GetComponent<PlayerHealth>().baseMoney = Stats_Cavallo.START_MONEY;
+                player2.GetComponent<PlayerAttack>().attackRange = Stats_Cavallo.START_RANGE;
+                //player2.GetComponent<PlayerAttack>().????? = Stats_Cavallo.START_ATTACK_SPEED;
+                //player2.GetComponent<PlayerAttack>().????? = Stats_Cavallo.START_RELOAD_TIME;
+                textp2.text = "Cavallo";
+                break;
+            case 3:
+                player2.GetComponent<PlayerHealth>().maxHealth = Stats_Re.START_LIFE;
+                player2.GetComponent<PlayerAttack>().baseDamage = Stats_Re.START_ATTACK;
+                player2.GetComponent<PlayerHealth>().baseDefense = Stats_Re.START_DEFENSE;
+                player2.GetComponent<PlayerMovement>().speed = Stats_Re.START_MOVEMENT_SPEED;
+                player2.GetComponent<PlayerHealth>().baseMoney = Stats_Re.START_MONEY;
+                player2.GetComponent<PlayerAttack>().attackRange = Stats_Re.START_RANGE;
+                //player2.GetComponent<PlayerAttack>().????? = Stats_Re.START_ATTACK_SPEED;
+                //player2.GetComponent<PlayerAttack>().????? = Stats_Re.START_RELOAD_TIME;
+                textp2.text = "Re";
+                break;
+            default:
+                Application.Quit();
+                break;
+        }
         beginning_screen.SetActive(false);
         Time.timeScale = 1f;
     }
-
 }
