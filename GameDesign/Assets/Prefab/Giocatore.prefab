@@ -68,6 +68,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2b1ff9fee15d00540b848856ca413405, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4530849277304270022}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2b1ff9fee15d00540b848856ca413405, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7764989610312537715}
   m_SourcePrefab: {fileID: 100100000, guid: 2b1ff9fee15d00540b848856ca413405, type: 3}
 --- !u!1 &835711234307619478 stripped
 GameObject:
@@ -93,8 +96,8 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2.15
-  m_Radius: 0.28
+  m_Height: 4.15
+  m_Radius: 1.28
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -115,8 +118,8 @@ MonoBehaviour:
   opponentTag: Player2
   attackKey: 102
   attackRange: 1.5
-  attackDamage: 20
-  hasPowerUp: 0
+  baseDamage: 5
+  myAtk: {fileID: 0}
 --- !u!114 &134085229719734521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,7 +133,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 0
+  myLife: {fileID: 0}
   healthBar: {fileID: 0}
+  baseDefense: 0
+  myDef: {fileID: 0}
+  baseMoney: 0
+  myMoney: {fileID: 0}
 --- !u!114 &4530849277304270022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,3 +164,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   fallThreshold: -10
+--- !u!114 &7764989610312537715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835711234307619478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f73ae314f90d3e409b5235444fc1957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Fante: {fileID: 0}
+  Cavallo: {fileID: 0}
+  Re: {fileID: 0}

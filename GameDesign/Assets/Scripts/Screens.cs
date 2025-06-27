@@ -10,6 +10,9 @@ public class Screens : MonoBehaviour
     public GameObject game_over_screen, pause_menu_screen, settings_screen, beginning_screen;
     public GameObject player1, player2;
     public TextMeshProUGUI textp1, textp2;
+    public GameObject Fante;
+    public GameObject Cavallo;
+    public GameObject Re;
 
     void Awake()
     {
@@ -86,6 +89,8 @@ public class Screens : MonoBehaviour
         switch (p1)
         {
             case 1:
+                
+
                 player1.GetComponent<PlayerHealth>().maxHealth = Stats_Fante.START_LIFE;
                 player1.GetComponent<PlayerAttack>().baseDamage = Stats_Fante.START_ATTACK;
                 player1.GetComponent<PlayerHealth>().baseDefense = Stats_Fante.START_DEFENSE;
@@ -95,6 +100,10 @@ public class Screens : MonoBehaviour
                 //player1.GetComponent<PlayerAttack>().????? = Stats_Fante.START_ATTACK_SPEED;
                 //player1.GetComponent<PlayerAttack>().????? = Stats_Fante.START_RELOAD_TIME;
                 textp1.text = "Fante";
+
+                //modello swap
+
+                player1.GetComponent<ModelSwap>().ActivateModel("Fante");
                 break;
             case 2:
                 player1.GetComponent<PlayerHealth>().maxHealth = Stats_Cavallo.START_LIFE;
@@ -106,6 +115,10 @@ public class Screens : MonoBehaviour
                 //player1.GetComponent<PlayerAttack>().????? = Stats_Cavallo.START_ATTACK_SPEED;
                 //player1.GetComponent<PlayerAttack>().????? = Stats_Cavallo.START_RELOAD_TIME;
                 textp1.text = "Cavallo";
+
+                //modello swap
+
+                player1.GetComponent<ModelSwap>().ActivateModel("Cavallo");
                 break;
             case 3:
                 player1.GetComponent<PlayerHealth>().maxHealth = Stats_Re.START_LIFE;
@@ -117,6 +130,10 @@ public class Screens : MonoBehaviour
                 //player1.GetComponent<PlayerAttack>().????? = Stats_Re.START_ATTACK_SPEED;
                 //player1.GetComponent<PlayerAttack>().????? = Stats_Re.START_RELOAD_TIME;
                 textp1.text = "Re";
+
+                //modello swap
+
+                player1.GetComponent<ModelSwap>().ActivateModel("Re");
                 break;
             default:
                 Application.Quit();
@@ -125,6 +142,8 @@ public class Screens : MonoBehaviour
         switch (p2)
         {
             case 1:
+                
+
                 player2.GetComponent<PlayerHealth>().maxHealth = Stats_Fante.START_LIFE;
                 player2.GetComponent<PlayerAttack>().baseDamage = Stats_Fante.START_ATTACK;
                 player2.GetComponent<PlayerHealth>().baseDefense = Stats_Fante.START_DEFENSE;
@@ -134,6 +153,10 @@ public class Screens : MonoBehaviour
                 //player2.GetComponent<PlayerAttack>().????? = Stats_Fante.START_ATTACK_SPEED;
                 //player2.GetComponent<PlayerAttack>().????? = Stats_Fante.START_RELOAD_TIME;
                 textp2.text = "Fante";
+
+                //modello swap
+
+                player2.GetComponent<ModelSwap>().ActivateModel("Fante");
                 break;
             case 2:
                 player2.GetComponent<PlayerHealth>().maxHealth = Stats_Cavallo.START_LIFE;
@@ -145,6 +168,10 @@ public class Screens : MonoBehaviour
                 //player2.GetComponent<PlayerAttack>().????? = Stats_Cavallo.START_ATTACK_SPEED;
                 //player2.GetComponent<PlayerAttack>().????? = Stats_Cavallo.START_RELOAD_TIME;
                 textp2.text = "Cavallo";
+
+                //modello swap
+
+                player2.GetComponent<ModelSwap>().ActivateModel("Cavallo");
                 break;
             case 3:
                 player2.GetComponent<PlayerHealth>().maxHealth = Stats_Re.START_LIFE;
@@ -156,6 +183,10 @@ public class Screens : MonoBehaviour
                 //player2.GetComponent<PlayerAttack>().????? = Stats_Re.START_ATTACK_SPEED;
                 //player2.GetComponent<PlayerAttack>().????? = Stats_Re.START_RELOAD_TIME;
                 textp2.text = "Re";
+
+                //modello swap
+
+                player2.GetComponent<ModelSwap>().ActivateModel("Re");
                 break;
             default:
                 Application.Quit();
