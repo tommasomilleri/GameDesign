@@ -7,10 +7,14 @@ public class Door : MonoBehaviour
     public float openAngle = 90f;
     public float openSpeed = 2f;
 
-    [Header("Oggetto da spostare")]
-    public Transform oggettoDaSpostare;
-    public Vector3 offsetMovimentoOggetto = new Vector3(0, 3, 0);
-    public float movimentoOggettoSpeed = 2f;
+    [Header("Oggetti da spostare")]
+    public Transform camera;
+    public Vector3 offsetMovimentoCamera = new Vector3(0, 3, 0);
+    public float movimentoCameraSpeed = 2f;
+
+    public Transform tetto;
+    public Vector3 offsetMovimentoTetto = new Vector3(0, 3, 0);
+    public float movimentoTettoSpeed = 2f;
 
     [Header("Giocatore 1")]
     public string player1Tag = "Player1";
@@ -24,9 +28,13 @@ public class Door : MonoBehaviour
     private bool isRotating = false;
     private Quaternion targetRotation;
 
-    private bool spostaOggetto = false;
-    private Vector3 oggettoStartPos;
-    private Vector3 oggettoTargetPos;
+    private bool spostaCamera = false;
+    private Vector3 cameraStartPos;
+    private Vector3 cameraTargetPos;
+
+    private bool spostaTetto = false;
+    private Vector3 tettoStartPos;
+    private Vector3 tettoTargetPos;
 
     private bool player1Inside = false;
     private bool player2Inside = false;
@@ -36,7 +44,6 @@ public class Door : MonoBehaviour
 
     void Update()
     {
-        // 🎮 INPUT solo se la porta non è già aperta o in movimento
         if (!isOpen && !isRotating)
         {
             if (player1Inside && Input.GetKeyDown(player1Key))
@@ -52,7 +59,6 @@ public class Door : MonoBehaviour
             }
         }
 
-        // 🚪 Rotazione della porta
         if (isRotating)
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * openSpeed);
@@ -64,15 +70,25 @@ public class Door : MonoBehaviour
             }
         }
 
-        // 🔁 Movimento oggetto extra
-        if (spostaOggetto && oggettoDaSpostare != null)
+        if (spostaCamera && camera != null)
         {
-            oggettoDaSpostare.position = Vector3.Lerp(oggettoDaSpostare.position, oggettoTargetPos, Time.deltaTime * movimentoOggettoSpeed);
-            if (Vector3.Distance(oggettoDaSpostare.position, oggettoTargetPos) < 0.05f)
+            camera.position = Vector3.Lerp(camera.position, cameraTargetPos, Time.deltaTime * movimentoCameraSpeed);
+            if (Vector3.Distance(camera.position, cameraTargetPos) < 0.05f)
             {
-                oggettoDaSpostare.position = oggettoTargetPos;
-                spostaOggetto = false;
-                Debug.Log("Oggetto extra spostato completamente");
+                camera.position = cameraTargetPos;
+                spostaCamera = false;
+                Debug.Log("Camera spostata completamente");
+            }
+        }
+
+        if (spostaTetto && tetto != null)
+        {
+            tetto.position = Vector3.Lerp(tetto.position, tettoTargetPos, Time.deltaTime * movimentoTettoSpeed);
+            if (Vector3.Distance(tetto.position, tettoTargetPos) < 0.05f)
+            {
+                tetto.position = tettoTargetPos;
+                spostaTetto = false;
+                Debug.Log("Tetto spostato completamente");
             }
         }
     }
@@ -81,7 +97,7 @@ public class Door : MonoBehaviour
     {
         if (player != null && player.TrySpendGold(goldCost))
         {
-            OpenDoor();
+            OpenDoor(spostaCamera: false); // apertura manuale, NO spostamento camera
             return true;
         }
 
@@ -89,20 +105,54 @@ public class Door : MonoBehaviour
         return false;
     }
 
-    void OpenDoor()
+    private void OpenDoor(bool spostaCamera)
     {
+        if (isOpen) return;
+
         Debug.Log("Apertura porta avviata");
         isOpen = true;
         isRotating = true;
         targetRotation = Quaternion.Euler(transform.eulerAngles + new Vector3(0f, openAngle, 0f));
 
-        if (oggettoDaSpostare != null)
+        if (tetto != null)
         {
-            spostaOggetto = true;
-            oggettoStartPos = oggettoDaSpostare.position;
-            oggettoTargetPos = oggettoStartPos + offsetMovimentoOggetto;
-            Debug.Log("Inizio movimento oggetto extra");
+            spostaTetto = true;
+            tettoStartPos = tetto.position;
+            tettoTargetPos = tettoStartPos + offsetMovimentoTetto;
+            Debug.Log("Inizio movimento tetto");
         }
+
+        if (spostaCamera && camera != null)
+        {
+            spostaCamera = true;
+            cameraStartPos = camera.position;
+            cameraTargetPos = cameraStartPos + offsetMovimentoCamera;
+            Debug.Log("Inizio movimento camera");
+        }
+    }
+
+    public void ForceOpen()
+    {
+        if (!isOpen)
+        {
+            Debug.Log("Apertura forzata ricevuta");
+            OpenDoor(spostaCamera: true);
+        }
+    }
+
+    // Metodo pubblico per spostare la camera sempre, anche se porta aperta
+    public void MoveCamera()
+    {
+        if (camera == null)
+        {
+            Debug.LogWarning("Camera non assegnata!");
+            return;
+        }
+
+        spostaCamera = true;
+        cameraStartPos = camera.position;
+        cameraTargetPos = cameraStartPos + offsetMovimentoCamera;
+        Debug.Log("Movimento camera forzato");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -137,5 +187,3 @@ public class Door : MonoBehaviour
         }
     }
 }
-
-

@@ -10,17 +10,24 @@ public class ShrinkingZone : MonoBehaviour
     public float damageInterval = 1f;
     public float fixedHeight = 100f;  // Altezza fissa
 
+    public Door door;  // assegna la porta in inspector
+
     private float currentRadius;
     private float shrinkTimer = 0f;
     private float damageTimer = 0f;
 
     private Transform zoneVisual;
+    private Renderer zoneRenderer;
+
+    private bool doorOpenedOnShrink = false;
 
     void Start()
     {
         zoneVisual = transform;
+        zoneRenderer = GetComponent<Renderer>(); // prendi il renderer del cilindro
+
         currentRadius = startRadius;
-        UpdateScale();  // imposta scala con Y fissa
+        UpdateScale();
     }
 
     void Update()
@@ -36,11 +43,26 @@ public class ShrinkingZone : MonoBehaviour
             damageTimer = 0f;
             ApplyDamageOutsideZone();
         }
+
+        if (t >= 1f && door != null && !doorOpenedOnShrink)
+        {
+            door.ForceOpen();
+            door.MoveCamera();
+            doorOpenedOnShrink = true;
+            Debug.Log("Cerchio finito: porta aperta, camera spostata");
+
+            // Disattiva il renderer per nascondere il cilindro
+            if (zoneRenderer != null)
+            {
+                zoneRenderer.enabled = false;
+                Debug.Log("Renderer del cerchio disattivato");
+            }
+        }
     }
 
     void UpdateScale()
     {
-        zoneVisual.localScale = new Vector3(currentRadius * 2f, 200f, currentRadius * 2f);
+        zoneVisual.localScale = new Vector3(currentRadius * 2f, fixedHeight, currentRadius * 2f);
     }
 
     void ApplyDamageOutsideZone()
@@ -74,5 +96,11 @@ public class ShrinkingZone : MonoBehaviour
         return combined;
     }
 }
+
+
+
+
+
+
 
 

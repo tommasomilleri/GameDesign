@@ -82,6 +82,18 @@ public class PlayerHealth : MonoBehaviour
         StartCoroutine(HandleGameOver());
     }
 
+    public void ForceGameOver()
+{
+    foreach (MonoBehaviour script in inputScriptsToDisable)
+    {
+        script.enabled = false;
+    }
+
+    Animator anim = GetComponentInChildren<Animator>();
+    if (anim != null)
+        anim.SetBool("IsDead", true);
+}
+
     IEnumerator HandleGameOver()
     {
         // Aspetta la durata dell'animazione morte

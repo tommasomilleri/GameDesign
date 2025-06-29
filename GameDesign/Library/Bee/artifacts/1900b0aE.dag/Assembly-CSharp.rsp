@@ -362,6 +362,7 @@
 "Assets/Scripts/Door.cs"
 "Assets/Scripts/Empty_Card.cs"
 "Assets/Scripts/GenerateCards.cs"
+"Assets/Scripts/MatchTimer.cs"
 "Assets/Scripts/ModelSwap.cs"
 "Assets/Scripts/PlayerAttack.cs"
 "Assets/Scripts/PlayerHealth.cs"
