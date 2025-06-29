@@ -132,7 +132,7 @@ public class GenerateCards : MonoBehaviour
             {
                 if (hit.collider.gameObject == spawn)
                 {
-                    float altezzaOffset = 1f; // regola a piacere
+                    float altezzaOffset = 3f; // regola a piacere
                     Vector3 posizioneTest = hit.point + Vector3.up * altezzaOffset;
                     if (!posizioniOccupate.Exists(p => Vector3.Distance(p, posizioneTest) < distanzaMinimaTraCarte))
                     {
