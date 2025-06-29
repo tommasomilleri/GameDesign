@@ -8,23 +8,61 @@ public class PlayerAttack : MonoBehaviour
     public float attackRange = 2f;
     public int baseDamage = 5;
     public TextMeshProUGUI myAtk;
-    private int powerUpValue = 0; // Valore del power-up raccolto, da 1 a 7
+    private int powerUpValue = 0;
 
+    private Animator animator;
+    private bool isAttacking = false;
 
     void Start()
     {
-        myAtk.text = $"Atk: {baseDamage.ToString()}";
+        myAtk.text = $"Atk: {baseDamage}";
+        UpdateAnimatorReference();
+    }
+
+    void UpdateAnimatorReference()
+    {
+        animator = null;
+        foreach (Transform child in transform)
+        {
+            if (child.gameObject.activeSelf)
+            {
+                Animator a = child.GetComponent<Animator>();
+                if (a != null)
+                {
+                    animator = a;
+                    Debug.Log($"Animator trovato sul modello attivo: {child.name}");
+                    break;
+                }
+            }
+        }
+
+        if (animator == null)
+        {
+            Debug.LogWarning("Nessun Animator trovato tra i figli attivi!");
+        }
     }
 
     void Update()
     {
+        if (isAttacking) return;
+
         if (Input.GetKeyDown(attackKey))
         {
-            AttemptAttack();
+            Attack();
         }
     }
 
-    void AttemptAttack()
+    void Attack()
+    {
+        if (animator != null)
+        {
+            animator.SetTrigger("Attack");
+        }
+        isAttacking = true;
+    }
+
+    // Metodo chiamato tramite Animation Event a metà animazione
+    public void AttemptAttack()
     {
         bool hitSomething = false;
 
@@ -39,9 +77,9 @@ public class PlayerAttack : MonoBehaviour
                     int totalDamage = baseDamage + powerUpValue;
                     enemyHealth.TakeDamage(totalDamage);
                     Debug.Log($"{gameObject.name} ha colpito {hit.name} infliggendo {totalDamage} danni!");
-                    
-                    powerUpValue = 0; // Consuma il power-up solo se colpisce
-                    myAtk.text = $"Atk: {baseDamage.ToString()}";
+
+                    powerUpValue = 0;
+                    myAtk.text = $"Atk: {baseDamage}";
                     hitSomething = true;
                 }
             }
@@ -53,12 +91,23 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    // Metodo pubblico da chiamare quando si raccoglie un power-up
+    // Metodo chiamato tramite Animation Event a fine animazione
+    public void OnAttackAnimationEnd()
+    {
+        isAttacking = false;
+    }
+
     public void SetPowerUpValue(int value)
     {
-        powerUpValue = Mathf.Clamp(value, 1, 7); // Limita il valore da 1 a 7
-        myAtk.text = $"Atk: {(baseDamage + powerUpValue).ToString()}";
+        powerUpValue = Mathf.Clamp(value, 1, 7);
+        myAtk.text = $"Atk: {(baseDamage + powerUpValue)}";
         Debug.Log($"{gameObject.name} ha raccolto un power-up di valore {powerUpValue}");
+    }
+
+    // Chiamare se cambi modello attivo in runtime
+    public void RefreshAnimatorReference()
+    {
+        UpdateAnimatorReference();
     }
 
     void OnDrawGizmosSelected()
@@ -66,9 +115,10 @@ public class PlayerAttack : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position + transform.forward, attackRange);
     }
+
     public bool HasActivePowerUp()
     {
         return powerUpValue > 0;
     }
-
 }
+

@@ -23,15 +23,55 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 startPosition;
 
+    private Animator animator;
+
+    private PlayerHealth playerHealth;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        startPosition = transform.position; // Memorizza la posizione iniziale
+        startPosition = transform.position;
+
+        playerHealth = GetComponent<PlayerHealth>();
+        if (playerHealth != null)
+        {
+            playerHealth.OnPlayerDeath += HandleDeath;
+        }
+
+        UpdateAnimatorReference();
+    }
+
+    void UpdateAnimatorReference()
+    {
+        animator = null;
+        foreach (Transform child in transform)
+        {
+            if (child.gameObject.activeSelf)
+            {
+                Animator a = child.GetComponent<Animator>();
+                if (a != null)
+                {
+                    animator = a;
+                    Debug.Log($"Animator trovato sul modello attivo: {child.name}");
+                    break;
+                }
+            }
+        }
+
+        if (animator == null)
+        {
+            Debug.LogWarning("Nessun Animator trovato tra i figli attivi!");
+        }
     }
 
     void Update()
     {
-        // Controllo se il player è a terra
+        if (playerHealth != null && playerHealth.currentHealth <= 0)
+        {
+            // Morte: blocca movimento
+            return;
+        }
+
         isGrounded = Physics.CheckSphere(transform.position - Vector3.up * 0.1f, groundCheckDistance, groundMask);
 
         if (isGrounded && velocity.y < 0)
@@ -39,7 +79,6 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = -2f;
         }
 
-        // Movimento
         float x = 0f;
         float z = 0f;
 
@@ -58,14 +97,27 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
-        // Gravità
+        // Aggiorna animazione
+        if (animator != null)
+        {
+            animator.SetFloat("Speed", move.magnitude);
+        }
+
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
-        // Controllo se è caduto nel vuoto
         if (transform.position.y < fallThreshold)
         {
             Respawn();
+        }
+    }
+
+    void HandleDeath()
+    {
+        if (animator != null)
+        {
+            animator.SetBool("IsDead", true);
+            animator.SetFloat("Speed", 0);
         }
     }
 
@@ -74,7 +126,28 @@ public class PlayerMovement : MonoBehaviour
         controller.enabled = false;
         transform.position = startPosition;
         velocity = Vector3.zero;
+
+        if (animator != null)
+        {
+            animator.SetBool("IsDead", false);
+        }
+
+        if (playerHealth != null)
+        {
+            playerHealth.currentHealth = playerHealth.maxHealth;
+            if (playerHealth.healthBar != null)
+            {
+                playerHealth.healthBar.value = playerHealth.currentHealth;
+                playerHealth.myLife.text = $"Life: {playerHealth.currentHealth}";
+            }
+        }
+
         controller.enabled = true;
     }
-}
 
+    // Chiamare se cambi modello attivo in runtime
+    public void RefreshAnimatorReference()
+    {
+        UpdateAnimatorReference();
+    }
+}
