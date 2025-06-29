@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections; // NECESSARIO per IEnumerator
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -13,7 +14,9 @@ public class PlayerHealth : MonoBehaviour
     private int bonusDefense = 0; // da power-up
     public int baseMoney = 0;
     public TextMeshProUGUI myMoney;
-    //private int bonusMoney = 0;
+
+    // OPTIONAL: per messaggi tipo "non hai abbastanza oro"
+    public TextMeshProUGUI messageText;
 
     void Start()
     {
@@ -26,6 +29,9 @@ public class PlayerHealth : MonoBehaviour
         }
         myMoney.text = "Mon: 0";
         myDef.text = $"Def: {baseDefense.ToString()}";
+
+        if (messageText != null)
+            messageText.gameObject.SetActive(false);
     }
 
     public void TakeDamage(int incomingDamage)
@@ -66,12 +72,45 @@ public class PlayerHealth : MonoBehaviour
     void GameOver()
     {
         gameObject.SetActive(false);
-        
         Debug.Log($"{gameObject.name} è morto!");
     }
+
     public bool HasActiveBonusDefense()
     {
         return bonusDefense > 0;
     }
+
+    // ✅ AGGIUNTA: Meccanica della porta — usa TrySpendGold da altri script
+    public bool TrySpendGold(int amount)
+    {
+        if (baseMoney >= amount)
+        {
+            baseMoney -= amount;
+            UpdateGoldUI();
+            return true;
+        }
+        else
+        {
+            if (messageText != null)
+                StartCoroutine(ShowMessage("Non hai abbastanza oro!", 2f));
+            return false;
+        }
+    }
+
+    void UpdateGoldUI()
+    {
+        if (myMoney != null)
+            myMoney.text = "Mon: " + baseMoney;
+    }
+
+    IEnumerator ShowMessage(string message, float duration)
+    {
+        messageText.text = message;
+        messageText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(duration);
+        messageText.gameObject.SetActive(false);
+    }
+
+    // 🟠 NOTA: La classe PlayerGold interna non è più necessaria se usi TrySpendGold
 }
 
