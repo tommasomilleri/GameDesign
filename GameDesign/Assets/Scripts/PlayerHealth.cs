@@ -3,9 +3,11 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using System.Linq;
+using System;
 
 public class PlayerHealth : MonoBehaviour
 {
+
     public int maxHealth = 100;
     public int currentHealth;
 
@@ -28,6 +30,9 @@ public class PlayerHealth : MonoBehaviour
     // --- AGGIUNTA PER FLASH ROSSO ---
     public Color flashColorPrefab = Color.red;
     public float prefabFlashDuration = 0.2f;
+    [Header("Mazzo-Vita")]
+    public Deck deck;               // trascina in Inspector il tuo GameObject con lo script Deck.cs
+    //public LifeDeckUI lifeDeckUI;   // l’UI che mostra le carte-vite
 
     void Start()
     {
@@ -43,6 +48,17 @@ public class PlayerHealth : MonoBehaviour
 
         if (messageText != null)
             messageText.gameObject.SetActive(false);
+        //lifeDeck = new LifeDeck(lifeFigure, maxLives);
+        //lifeDeck.OnLivesChanged += remaining => lifeDeckUI.SetLives(remaining);
+        //lifeDeck.FillDeck();
+        //lifeDeckUI.Initialize(maxLives);
+        // 1) prendo l’istanza single-ton di Deck
+        if (Deck.Instance == null)
+            Debug.LogError("PlayerHealth: non ho trovato nessun Deck in scena!");
+        deck = Deck.Instance;
+        lifeDeckUI.Initialize(deck.LivesRemaining);
+        deck.OnDeckEmpty += GameOver;
+        deck.OnCardDiscarded += _ => lifeDeckUI.SetLives(deck.LivesRemaining);
     }
 
     public void TakeDamage(int incomingDamage)
@@ -51,7 +67,10 @@ public class PlayerHealth : MonoBehaviour
         int finalDamage = Mathf.Max(incomingDamage - effectiveDefense, 0);
 
         currentHealth -= finalDamage;
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        // currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        if (finalDamage > 0)
+            deck.DiscardLives(finalDamage);
+        //lifeDeck.DiscardLives(finalDamage);
 
         if (healthBar != null)
         {
@@ -70,8 +89,8 @@ public class PlayerHealth : MonoBehaviour
         {
             StartCoroutine(FlashPrefabRenderers());
         }
-
-        if (currentHealth <= 0)
+        if (deck.LivesRemaining <= 0)
+        //if (lifeDeck.LivesRemaining <= 0 /*currentHealth <= 0 */)
         {
             GameOver();
         }
@@ -140,6 +159,15 @@ public class PlayerHealth : MonoBehaviour
             return false;
         }
     }
+    private void OnDisable()
+    {
+        if (deck != null)
+        {
+            deck.OnDeckEmpty -= GameOver;
+            deck.OnCardDiscarded -= _ => lifeDeckUI.SetLives(deck.LivesRemaining);
+        }
+    }
+
 
     void UpdateGoldUI()
     {

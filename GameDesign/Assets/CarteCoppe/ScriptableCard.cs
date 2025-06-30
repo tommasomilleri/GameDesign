@@ -9,6 +9,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "CardData")] //lets you create a new CardData Object with the right-click menu in the editor
 public class ScriptableCard : ScriptableObject
 {
+    [field: SerializeField] public Sprite CardBackSprite { get; private set; }
+
     //field: SerializeField lets you reveal properties in the inspector like they were public fields
     [field: SerializeField] public string CardName { get; private set; } 
     [field: SerializeField, TextArea] public string CardDescription { get; private set; } //TextArea makes an input field in the inspector to write longer text in

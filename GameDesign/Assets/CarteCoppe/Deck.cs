@@ -1,114 +1,133 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Represents a card deck and also governs the discard pile and works in concordance with the Hand script
-/// Singleton
-/// </summary>
 public class Deck : MonoBehaviour
 {
-    #region Fields and Properties
+   
+    // restituisce quante carte rimangono ancora nel mazzo prima di pescare
+    public int LivesRemaining => _deckPile.Count;
+    /// <summary>
+    /// Rimuove le prime `n` carte da _deckPile (le sposta in _discardPile e le disattiva).
+    /// Se al termine non resta niente né in deck né in discard, invoca OnDeckEmpty.
+    /// </summary>
+    public void DiscardLives(int n)
+    {
+        for (int i = 0; i < n && _deckPile.Count > 0; i++)
+        {
+            var c = _deckPile[0];
+            _deckPile.RemoveAt(0);
+            _discardPile.Add(c);
+            c.gameObject.SetActive(false);
+        }
 
-    public static Deck Instance { get; private set; } //Singleton
+        // Notifico la UI (se la stai usando)
+        OnCardDiscarded?.Invoke(null); // o un evento ad hoc che passi LivesRemaining
 
-    //now we need a reference to what a deck is, a.k.a. what cards it contains -> CardCollection
-    //we will work with one deck for now, but you can easily add several choices for the player to pick from
+        // Se davvero non resta più nulla
+        if (_deckPile.Count == 0 && _discardPile.Count == 0)
+            OnDeckEmpty?.Invoke();
+    }
+
+    public static Deck Instance { get; private set; }
+
     [SerializeField] private CardCollection _playerDeck;
-    [SerializeField] private Card _cardPrefab; //our cardPrefab, of which we will make copies with the different CardData
-
+    [SerializeField] private Card _cardPrefab;
     [SerializeField] private Canvas _cardCanvas;
 
-    //now to represent the instantiated Cards
-    private List<Card> _deckPile = new();
-    private List<Card> _discardPile = new();
-
+    private readonly List<Card> _deckPile = new();
+    private readonly List<Card> _discardPile = new();
     public List<Card> HandCards { get; private set; } = new();
 
-    //Alright, see you in the next tutorial! Probably about making the hand look nicer, maybe something else we'll see! Have a great time!
+    // 1) Eventi esistenti per draw & discard
+    public event Action<Card> OnCardDrawn;
+    public event Action<Card> OnCardDiscarded;
 
-    #endregion
-
-    #region Methods
+    // 2) Nuovo evento per deck empty
+    public event Action OnDeckEmpty;
 
     private void Awake()
     {
-        //typical singleton declaration
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
     }
 
     private void Start()
     {
-        //we will instantiate the deck once, at the start of the game/level
         InstantiateDeck();
     }
 
     private void InstantiateDeck()
     {
-        for (int i = 0; i < _playerDeck.CardsInCollection.Count; i++)
+        foreach (var data in _playerDeck.CardsInCollection)
         {
-            Card card = Instantiate(_cardPrefab, _cardCanvas.transform); //instantiates the Card Prefab as child of the Card Canvas == as UI
-            card.SetUp(_playerDeck.CardsInCollection[i]);
-            _deckPile.Add(card); //at the start, all cards are in the deck, none in hand, none in discard
-            card.gameObject.SetActive(false); //we will later activate the cards when we draw them, for now we just want to build the pool
+            var card = Instantiate(_cardPrefab, _cardCanvas.transform);
+            card.SetUp(data);
+            card.gameObject.SetActive(false);
+            _deckPile.Add(card);
         }
-
         ShuffleDeck();
     }
 
-    //call once at start and whenever deck count hits zero
-    //uses the Fisher-Yates shuffle algorithm
     private void ShuffleDeck()
     {
-        for (int i = _deckPile.Count - 1; i > 0; i--) 
+        for (int i = _deckPile.Count - 1; i > 0; i--)
         {
-            int j = Random.Range(0, i + 1);
-            var temp = _deckPile[i];
-            _deckPile[i] = _deckPile[j];
-            _deckPile[j] = temp;
+            int j = UnityEngine.Random.Range(0, i + 1);
+            (_deckPile[i], _deckPile[j]) = (_deckPile[j], _deckPile[i]);
         }
     }
 
-    //puts amount cards in hand
+    /// <summary>
+    /// Pesca e restituisce 1 carta; se non ci sono più carte né in deck né in discard,
+    /// emette l’evento OnDeckEmpty e restituisce null.
+    /// </summary>
+    public Card DrawCard()
+    {
+        // Se finito entrambe le pile => deck empty!
+        if (_deckPile.Count == 0 && _discardPile.Count == 0)
+        {
+            OnDeckEmpty?.Invoke();
+            return null;
+        }
+
+        // Riciclo automatico delle scartate, se necessario
+        if (_deckPile.Count == 0)
+        {
+            _deckPile.AddRange(_discardPile);
+            _discardPile.Clear();
+            ShuffleDeck();
+        }
+
+        // Pesca la carta
+        var card = _deckPile[0];
+        _deckPile.RemoveAt(0);
+        HandCards.Add(card);
+        card.gameObject.SetActive(true);
+
+        OnCardDrawn?.Invoke(card);
+        return card;
+    }
+
+    /// <summary>
+    /// Scarta una carta da mano (o da schermo) e emette OnCardDiscarded.
+    /// </summary>
+    public void DiscardCard(Card card)
+    {
+        if (!HandCards.Remove(card))
+            return;
+
+        _discardPile.Add(card);
+        card.gameObject.SetActive(false);
+        OnCardDiscarded?.Invoke(card);
+    }
+
+    /// <summary>
+    /// Pesca N carte in mano (usa DrawCard internamente).
+    /// </summary>
     public void DrawHand(int amount = 5)
     {
         for (int i = 0; i < amount; i++)
-        {
-            if (_deckPile.Count <= 0)
-            {
-                _discardPile = _deckPile;
-                _discardPile.Clear();
-                ShuffleDeck();
-            }
-
-            //will rarely happen in a real game, but if all cards are in hand we get that error
-            if (_deckPile.Count > 0)
-            {
-                HandCards.Add(_deckPile[0]);
-                _deckPile[0].gameObject.SetActive(true);
-                _deckPile.RemoveAt(0);
-            }
-        }
+            DrawCard();
     }
-
-    //we will assume no cards can be discarded directly from the deck to the discard pile
-    //otherwise make two methods, one to discard from hand, one from deck
-    public void DiscardCard(Card card)
-    {
-        if (HandCards.Contains(card))
-        {
-            HandCards.Remove(card);
-            _discardPile.Add(card);
-            card.gameObject.SetActive(false);
-        }
-    }
-
-    #endregion
 }
