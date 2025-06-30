@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using System.Linq;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -9,10 +10,10 @@ public class PlayerHealth : MonoBehaviour
     public int currentHealth;
 
     public TextMeshProUGUI myLife;
-    public Slider healthBar; 
+    public Slider healthBar;
     public int baseDefense = 0;
     public TextMeshProUGUI myDef;
-    private int bonusDefense = 0; 
+    private int bonusDefense = 0;
     public int baseMoney = 0;
     public TextMeshProUGUI myMoney;
 
@@ -23,6 +24,10 @@ public class PlayerHealth : MonoBehaviour
     public MonoBehaviour[] inputScriptsToDisable; // Inserisci PlayerMovement, PlayerAttack ecc.
     public GameObject gameOverScreen;
     public float delayBeforeGameOverScreen = 0.5f; // durata animazione morte
+
+    // --- AGGIUNTA PER FLASH ROSSO ---
+    public Color flashColorPrefab = Color.red;
+    public float prefabFlashDuration = 0.2f;
 
     void Start()
     {
@@ -61,6 +66,11 @@ public class PlayerHealth : MonoBehaviour
             myDef.text = $"Def: {baseDefense}";
         }
 
+        if (finalDamage > 0)
+        {
+            StartCoroutine(FlashPrefabRenderers());
+        }
+
         if (currentHealth <= 0)
         {
             GameOver();
@@ -83,16 +93,16 @@ public class PlayerHealth : MonoBehaviour
     }
 
     public void ForceGameOver()
-{
-    foreach (MonoBehaviour script in inputScriptsToDisable)
     {
-        script.enabled = false;
-    }
+        foreach (MonoBehaviour script in inputScriptsToDisable)
+        {
+            script.enabled = false;
+        }
 
-    Animator anim = GetComponentInChildren<Animator>();
-    if (anim != null)
-        anim.SetBool("IsDead", true);
-}
+        Animator anim = GetComponentInChildren<Animator>();
+        if (anim != null)
+            anim.SetBool("IsDead", true);
+    }
 
     IEnumerator HandleGameOver()
     {
@@ -109,7 +119,6 @@ public class PlayerHealth : MonoBehaviour
             script.enabled = false;
         }
     }
-    
 
     public bool HasActiveBonusDefense()
     {
@@ -145,7 +154,39 @@ public class PlayerHealth : MonoBehaviour
         yield return new WaitForSeconds(duration);
         messageText.gameObject.SetActive(false);
     }
+
+    // --- METODO AGGIUNTO PER FLASH ROSSO ---
+    IEnumerator FlashPrefabRenderers()
+    {
+        Renderer[] renderers = GetComponentsInChildren<Renderer>()
+            .Where(r => r.gameObject.activeInHierarchy)
+            .ToArray();
+
+        Material[][] originalMats = renderers
+            .Select(r => r.materials.ToArray())
+            .ToArray();
+
+        // Applica materiale rosso temporaneo
+        for (int i = 0; i < renderers.Length; i++)
+        {
+            Material[] flashingMats = originalMats[i]
+                .Select(mat =>
+                {
+                    Material newMat = new Material(mat);
+                    if (newMat.HasProperty("_Color"))
+                        newMat.color = flashColorPrefab;
+                    return newMat;
+                }).ToArray();
+
+            renderers[i].materials = flashingMats;
+        }
+
+        yield return new WaitForSeconds(prefabFlashDuration);
+
+        // Ripristina materiali originali
+        for (int i = 0; i < renderers.Length; i++)
+        {
+            renderers[i].materials = originalMats[i];
+        }
+    }
 }
-
-
-

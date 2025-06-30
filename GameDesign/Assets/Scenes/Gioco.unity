@@ -5625,6 +5625,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: e67931f28607fe745ab53a1d4209cd7f, type: 3}
+--- !u!114 &1452980473 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6625557638424185778, guid: e67931f28607fe745ab53a1d4209cd7f, type: 3}
+  m_PrefabInstance: {fileID: 1452980472}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae3293e14166f3e41abb6e5627fd3dee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1455347486
 GameObject:
   m_ObjectHideFlags: 0
@@ -8904,6 +8915,18 @@ PrefabInstance:
       propertyPath: delayBeforeGameOverScreen
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 134085229719734521, guid: a3cb22e28aac0384eaf03b9b2a953add, type: 3}
+      propertyPath: renderersToFlash.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 134085229719734521, guid: a3cb22e28aac0384eaf03b9b2a953add, type: 3}
+      propertyPath: inputScriptsToDisable.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 134085229719734521, guid: a3cb22e28aac0384eaf03b9b2a953add, type: 3}
+      propertyPath: inputScriptsToDisable.Array.data[0]
+      value: 
+      objectReference: {fileID: 1452980473}
     - target: {fileID: 835711234307619478, guid: a3cb22e28aac0384eaf03b9b2a953add, type: 3}
       propertyPath: m_Name
       value: Giocatore
