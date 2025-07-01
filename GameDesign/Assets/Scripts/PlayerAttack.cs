@@ -13,6 +13,10 @@ public class PlayerAttack : MonoBehaviour
     private Animator animator;
     private bool isAttacking = false;
 
+    public AudioSource sfx_player;
+    public AudioClip attacked_sound;
+    public AudioClip missed_sound;
+
     void Start()
     {
         myAtk.text = $"Atk: {baseDamage}";
@@ -81,12 +85,14 @@ public class PlayerAttack : MonoBehaviour
                     powerUpValue = 0;
                     myAtk.text = $"Atk: {baseDamage}";
                     hitSomething = true;
+                    sfx_player.PlayOneShot(attacked_sound);
                 }
             }
         }
 
         if (!hitSomething)
         {
+            sfx_player.PlayOneShot(missed_sound);
             Debug.Log($"{gameObject.name} ha attaccato ma ha mancato.");
         }
     }

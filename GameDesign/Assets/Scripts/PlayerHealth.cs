@@ -6,28 +6,36 @@ using System.Linq;
 
 public class PlayerHealth : MonoBehaviour
 {
+    [Header("Valori base")]
     public int maxHealth = 100;
     public int currentHealth;
+    public int baseDefense = 0;
+    public int baseMoney = 0;
 
+    [Header("UI")]
     public TextMeshProUGUI myLife;
     public Slider healthBar;
-    public int baseDefense = 0;
     public TextMeshProUGUI myDef;
-    private int bonusDefense = 0;
-    public int baseMoney = 0;
     public TextMeshProUGUI myMoney;
-
     public TextMeshProUGUI messageText;
+
+    [Header("Game Over")]
+    public GameObject gameOverScreen;
+    public float delayBeforeGameOverScreen = 0.5f;
+    public MonoBehaviour[] inputScriptsToDisable;
+
+    [Header("Riferimenti giocatori")]
+    public PlayerHealth otherPlayer;
+    public string playerDisplayName = "Giocatore";
+
+    [Header("Flash rosso danno")]
+    public Color flashColorPrefab = Color.red;
+    public float prefabFlashDuration = 0.2f;
 
     public delegate void PlayerDeathDelegate();
     public event PlayerDeathDelegate OnPlayerDeath;
-    public MonoBehaviour[] inputScriptsToDisable; // Inserisci PlayerMovement, PlayerAttack ecc.
-    public GameObject gameOverScreen;
-    public float delayBeforeGameOverScreen = 0.5f; // durata animazione morte
 
-    // --- AGGIUNTA PER FLASH ROSSO ---
-    public Color flashColorPrefab = Color.red;
-    public float prefabFlashDuration = 0.2f;
+    private int bonusDefense = 0;
 
     void Start()
     {
@@ -36,9 +44,10 @@ public class PlayerHealth : MonoBehaviour
         {
             healthBar.maxValue = maxHealth;
             healthBar.value = currentHealth;
-            myLife.text = $"Life: {currentHealth}";
+            myLife.text = $"Vita: {currentHealth}";
         }
-        myMoney.text = "Mon: 0";
+
+        myMoney.text = "Oro: 0";
         myDef.text = $"Def: {baseDefense}";
 
         if (messageText != null)
@@ -56,8 +65,9 @@ public class PlayerHealth : MonoBehaviour
         if (healthBar != null)
         {
             healthBar.value = currentHealth;
-            myLife.text = $"Life: {currentHealth}";
+            myLife.text = $"Vita: {currentHealth}";
         }
+
         Debug.Log($"{gameObject.name} ha subito {finalDamage} danni (difesa: {effectiveDefense})");
 
         if (bonusDefense > 0 && finalDamage > 0)
@@ -89,6 +99,12 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log($"{gameObject.name} è morto!");
         OnPlayerDeath?.Invoke();
 
+        if (messageText != null && otherPlayer != null && otherPlayer.currentHealth > 0)
+        {
+            messageText.text = $"{otherPlayer.playerDisplayName} ha vinto!";
+            messageText.gameObject.SetActive(true);
+        }
+
         StartCoroutine(HandleGameOver());
     }
 
@@ -106,14 +122,11 @@ public class PlayerHealth : MonoBehaviour
 
     IEnumerator HandleGameOver()
     {
-        // Aspetta la durata dell'animazione morte
         yield return new WaitForSeconds(delayBeforeGameOverScreen);
 
-        // Mostra pannello Game Over
         if (gameOverScreen != null)
             gameOverScreen.SetActive(true);
 
-        // Disabilita input
         foreach (MonoBehaviour script in inputScriptsToDisable)
         {
             script.enabled = false;
@@ -144,7 +157,7 @@ public class PlayerHealth : MonoBehaviour
     void UpdateGoldUI()
     {
         if (myMoney != null)
-            myMoney.text = "Mon: " + baseMoney;
+            myMoney.text = "Oro: " + baseMoney;
     }
 
     IEnumerator ShowMessage(string message, float duration)
@@ -155,7 +168,6 @@ public class PlayerHealth : MonoBehaviour
         messageText.gameObject.SetActive(false);
     }
 
-    // --- METODO AGGIUNTO PER FLASH ROSSO ---
     IEnumerator FlashPrefabRenderers()
     {
         Renderer[] renderers = GetComponentsInChildren<Renderer>()
@@ -166,7 +178,6 @@ public class PlayerHealth : MonoBehaviour
             .Select(r => r.materials.ToArray())
             .ToArray();
 
-        // Applica materiale rosso temporaneo
         for (int i = 0; i < renderers.Length; i++)
         {
             Material[] flashingMats = originalMats[i]
@@ -183,7 +194,6 @@ public class PlayerHealth : MonoBehaviour
 
         yield return new WaitForSeconds(prefabFlashDuration);
 
-        // Ripristina materiali originali
         for (int i = 0; i < renderers.Length; i++)
         {
             renderers[i].materials = originalMats[i];

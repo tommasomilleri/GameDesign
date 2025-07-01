@@ -7,7 +7,7 @@ using System.Threading;
 
 public class Screens : MonoBehaviour
 {
-    public GameObject game_over_screen, pause_menu_screen, settings_screen, beginning_screen;
+    public GameObject game_over_screen, pause_menu_screen, settings_screen, beginning_screen, comandi_screen;
     public GameObject player1, player2;
     public TextMeshProUGUI textp1, textp2;
     public GameObject Fante;
@@ -21,6 +21,7 @@ public class Screens : MonoBehaviour
         pause_menu_screen.SetActive(false);
         settings_screen.SetActive(false);
         beginning_screen.SetActive(true);
+        comandi_screen.SetActive(false);
         if (SceneManager.GetActiveScene().name == "Gioco") BeginningScreenOperation();
     }
 
@@ -56,11 +57,21 @@ public class Screens : MonoBehaviour
         pause_menu_screen.SetActive(true);
         settings_screen.SetActive(false);
     }
+    public void BackPressedC()
+    {
+        comandi_screen.SetActive(false);
+        settings_screen.SetActive(true);
+    }
 
     public void SettingsPressed()
     {
         pause_menu_screen.SetActive(false);
         settings_screen.SetActive(true);
+    }
+    public void GoToComandiPressed()
+    {
+        settings_screen.SetActive(false);
+        comandi_screen.SetActive(true);
     }
 
     public void GoToMainMenuPressed()

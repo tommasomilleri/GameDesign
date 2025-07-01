@@ -7,6 +7,11 @@ public class Empty_Card : MonoBehaviour
     public int my_value;
     public string my_suit;
     public static int active_cards = 0;
+    public AudioSource sfx_player;
+    public AudioClip defense_pickup_sound;
+    public AudioClip money_pickup_sound;
+    public AudioClip life_pickup_sound;
+    public AudioClip attack_pickup_sound;
 
     void OnTriggerEnter(Collider other)
     {
@@ -18,6 +23,7 @@ public class Empty_Card : MonoBehaviour
                 {
                     if (!base_atk.HasActivePowerUp())
                     {
+                        sfx_player.PlayOneShot(attack_pickup_sound);
                         base_atk.SetPowerUpValue(my_value);
                         Destroy(gameObject);
                     }
@@ -27,8 +33,9 @@ public class Empty_Card : MonoBehaviour
                 PlayerHealth base_money = other.GetComponent<PlayerHealth>();
                 if (base_money != null)
                 {
+                    sfx_player.PlayOneShot(money_pickup_sound);
                     base_money.baseMoney += my_value;
-                    base_money.myMoney.text = $"Mon: {base_money.baseMoney}";
+                    base_money.myMoney.text = $"Oro: {base_money.baseMoney}";
                     Destroy(gameObject);
                 }
                 break;
@@ -38,13 +45,14 @@ public class Empty_Card : MonoBehaviour
                 {
                     if (base_life.currentHealth < base_life.maxHealth)
                     {
+                        sfx_player.PlayOneShot(life_pickup_sound);
                         if ((base_life.currentHealth + my_value) <= base_life.maxHealth)
                         { base_life.currentHealth += my_value; }
                         else { base_life.currentHealth = base_life.maxHealth; }
                         if (base_life.healthBar != null)
                         {
                             base_life.healthBar.value = base_life.currentHealth;
-                            base_life.myLife.text = $"Life: {base_life.currentHealth.ToString()}";
+                            base_life.myLife.text = $"Vita: {base_life.currentHealth.ToString()}";
                         }
                         Destroy(gameObject);
                     }
@@ -56,6 +64,7 @@ public class Empty_Card : MonoBehaviour
                 {
                     if (!base_def.HasActiveBonusDefense())
                     {
+                        sfx_player.PlayOneShot(defense_pickup_sound);
                         base_def.SetBonusDefense(my_value);
                         Destroy(gameObject);
                     }

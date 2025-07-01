@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class Door : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class Door : MonoBehaviour
     public float openSpeed = 2f;
 
     [Header("Oggetti da spostare")]
-    public Transform camera;
+    public Transform MainCamera;
     public Vector3 offsetMovimentoCamera = new Vector3(0, 3, 0);
     public float movimentoCameraSpeed = 2f;
 
@@ -23,6 +24,10 @@ public class Door : MonoBehaviour
     [Header("Giocatore 2")]
     public string player2Tag = "Player2";
     public KeyCode player2Key;
+
+    [Header("Messaggio UI")]
+    public GameObject messaggioUI;
+    public TextMeshProUGUI messaggioText;
 
     private bool isOpen = false;
     private bool isRotating = false;
@@ -41,6 +46,12 @@ public class Door : MonoBehaviour
 
     private PlayerHealth player1Ref;
     private PlayerHealth player2Ref;
+
+    void Start()
+    {
+        if (messaggioUI != null)
+            messaggioUI.SetActive(false);
+    }
 
     void Update()
     {
@@ -70,12 +81,12 @@ public class Door : MonoBehaviour
             }
         }
 
-        if (spostaCamera && camera != null)
+        if (spostaCamera && MainCamera != null)
         {
-            camera.position = Vector3.Lerp(camera.position, cameraTargetPos, Time.deltaTime * movimentoCameraSpeed);
-            if (Vector3.Distance(camera.position, cameraTargetPos) < 0.05f)
+            MainCamera.position = Vector3.Lerp(MainCamera.position, cameraTargetPos, Time.deltaTime * movimentoCameraSpeed);
+            if (Vector3.Distance(MainCamera.position, cameraTargetPos) < 0.05f)
             {
-                camera.position = cameraTargetPos;
+                MainCamera.position = cameraTargetPos;
                 spostaCamera = false;
                 Debug.Log("Camera spostata completamente");
             }
@@ -122,13 +133,17 @@ public class Door : MonoBehaviour
             Debug.Log("Inizio movimento tetto");
         }
 
-        if (spostaCamera && camera != null)
+        if (spostaCamera && MainCamera != null)
         {
-            spostaCamera = true;
-            cameraStartPos = camera.position;
+            this.spostaCamera = true;
+            cameraStartPos = MainCamera.position;
             cameraTargetPos = cameraStartPos + offsetMovimentoCamera;
             Debug.Log("Inizio movimento camera");
         }
+
+        // Nasconde il messaggio dopo l'apertura
+        if (messaggioUI != null)
+            messaggioUI.SetActive(false);
     }
 
     public void ForceOpen()
@@ -140,36 +155,47 @@ public class Door : MonoBehaviour
         }
     }
 
-    // Metodo pubblico per spostare la camera sempre, anche se porta aperta
     public void MoveCamera()
     {
-        if (camera == null)
+        if (MainCamera == null)
         {
             Debug.LogWarning("Camera non assegnata!");
             return;
         }
 
         spostaCamera = true;
-        cameraStartPos = camera.position;
+        cameraStartPos = MainCamera.position;
         cameraTargetPos = cameraStartPos + offsetMovimentoCamera;
         Debug.Log("Movimento camera forzato");
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (isOpen) return; // ✅ AGGIUNTA: evita riattivazione del messaggio
+
         if (other.CompareTag(player1Tag))
         {
             player1Inside = true;
             player1Ref = other.GetComponent<PlayerHealth>();
             Debug.Log("Player1 è entrato nel trigger");
+
+            if (messaggioText != null)
+                messaggioText.text = $"Giocatore 1: Premi [{player1Key}] per aprire la porta ({goldCost} oro)";
         }
         else if (other.CompareTag(player2Tag))
         {
             player2Inside = true;
             player2Ref = other.GetComponent<PlayerHealth>();
             Debug.Log("Player2 è entrato nel trigger");
+
+            if (messaggioText != null)
+                messaggioText.text = $"Giocatore 2: Premi [{player2Key}] per aprire la porta ({goldCost} oro)";
         }
+
+        if (messaggioUI != null)
+            messaggioUI.SetActive(true);
     }
+
 
     private void OnTriggerExit(Collider other)
     {
@@ -185,5 +211,8 @@ public class Door : MonoBehaviour
             player2Ref = null;
             Debug.Log("Player2 è uscito dal trigger");
         }
+
+        if (messaggioUI != null)
+            messaggioUI.SetActive(false);
     }
 }

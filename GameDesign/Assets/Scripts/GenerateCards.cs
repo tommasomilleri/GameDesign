@@ -22,10 +22,10 @@ public class GenerateCards : MonoBehaviour
     private List<Vector3> posizioniOccupate = new List<Vector3>();
     private List<(int, char)> cards = new List<(int, char)>
     {
-        (1, 'c'), (2, 'c'), (3, 'c'), (4,'c'), (5, 'c'), (6, 'c'), (7, 'c'),
-        (1, 's'), (2, 's'), (3, 's'), (4,'s'), (5, 's'), (6, 's'), (7, 's'),
-        (1, 'b'), (2, 'b'), (3, 'b'), (4,'b'), (5, 'b'), (6, 'b'), (7, 'b'),
-        (1, 'd'), (2, 'd'), (3, 'd'), (4,'d'), (5, 'd'), (6, 'd'), (7, 'd')
+        (1, 'C'), (2, 'C'), (3, 'C'), (4,'C'), (5, 'C'), (6, 'C'), (7, 'C'),
+        (1, 'S'), (2, 'S'), (3, 'S'), (4,'S'), (5, 'S'), (6, 'S'), (7, 'S'),
+        (1, 'B'), (2, 'B'), (3, 'B'), (4,'B'), (5, 'B'), (6, 'B'), (7, 'B'),
+        (1, 'D'), (2, 'D'), (3, 'D'), (4,'D'), (5, 'D'), (6, 'D'), (7, 'D')
     };
     private List<(int, char)> cards2 = new List<(int, char)>();
 
@@ -90,19 +90,19 @@ public class GenerateCards : MonoBehaviour
 
         switch (suit)
         {
-            case 'c':
+            case 'C':
                 cardScript.my_suit = "coppe";
                 my_card.GetComponent<MeshRenderer>().material = coppe;
                 break;
-            case 'd':
+            case 'D':
                 cardScript.my_suit = "denari";
                 my_card.GetComponent<MeshRenderer>().material = denari;
                 break;
-            case 'b':
+            case 'B':
                 cardScript.my_suit = "bastoni";
                 my_card.GetComponent<MeshRenderer>().material = bastoni;
                 break;
-            case 's':
+            case 'S':
                 cardScript.my_suit = "spade";
                 my_card.GetComponent<MeshRenderer>().material = spade;
                 break;
