@@ -3984,8 +3984,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6625557638424185778, guid: e67931f28607fe745ab53a1d4209cd7f, type: 3}
+      propertyPath: buffDuration
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6625557638424185778, guid: e67931f28607fe745ab53a1d4209cd7f, type: 3}
       propertyPath: cooldownTime
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6625557638424185778, guid: e67931f28607fe745ab53a1d4209cd7f, type: 3}
+      propertyPath: upgradeAmount
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7634,7 +7642,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6625557638424185778, guid: e67931f28607fe745ab53a1d4209cd7f, type: 3}
       propertyPath: goldCost
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6625557638424185778, guid: e67931f28607fe745ab53a1d4209cd7f, type: 3}
       propertyPath: statType
@@ -7646,7 +7654,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6625557638424185778, guid: e67931f28607fe745ab53a1d4209cd7f, type: 3}
       propertyPath: upgradeAmount
-      value: 15
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9240,7 +9248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6625557638424185778, guid: e67931f28607fe745ab53a1d4209cd7f, type: 3}
       propertyPath: goldCost
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6625557638424185778, guid: e67931f28607fe745ab53a1d4209cd7f, type: 3}
       propertyPath: statType
@@ -9252,11 +9260,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6625557638424185778, guid: e67931f28607fe745ab53a1d4209cd7f, type: 3}
       propertyPath: cooldownTime
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6625557638424185778, guid: e67931f28607fe745ab53a1d4209cd7f, type: 3}
       propertyPath: upgradeAmount
-      value: 15
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
