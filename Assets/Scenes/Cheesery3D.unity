@@ -449,6 +449,66 @@ MonoBehaviour:
   hoverRotationAngle: 45
   rotationSpeed: 10
   clickVFXPrefab: {fileID: 0}
+--- !u!1001 &138110844
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 5f6071ce26be681408dc2424aa9053f2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5f6071ce26be681408dc2424aa9053f2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5f6071ce26be681408dc2424aa9053f2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5f6071ce26be681408dc2424aa9053f2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8489752
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5f6071ce26be681408dc2424aa9053f2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5f6071ce26be681408dc2424aa9053f2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.52843285
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5f6071ce26be681408dc2424aa9053f2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5f6071ce26be681408dc2424aa9053f2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5f6071ce26be681408dc2424aa9053f2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 63.799
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5f6071ce26be681408dc2424aa9053f2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5f6071ce26be681408dc2424aa9053f2, type: 3}
+      propertyPath: m_Name
+      value: Cow
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5f6071ce26be681408dc2424aa9053f2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1447186056}
+  m_SourcePrefab: {fileID: 100100000, guid: 5f6071ce26be681408dc2424aa9053f2, type: 3}
 --- !u!1 &150053381
 GameObject:
   m_ObjectHideFlags: 0
@@ -2587,7 +2647,7 @@ MonoBehaviour:
   tipText: {fileID: 1935687775}
   promptText: {fileID: 579589583}
   loadingIcon: {fileID: 1816252396}
-  loadingDuration: 5.83
+  loadingDuration: 1
   cheeseTips:
   - BLABLALA
   - EEEE
@@ -4638,6 +4698,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1403793522}
   m_CullTransparentMesh: 1
+--- !u!1 &1447186055 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5f6071ce26be681408dc2424aa9053f2, type: 3}
+  m_PrefabInstance: {fileID: 138110844}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1447186056
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1447186055}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c535e73b5da816d4988ad2dfc4fa2162, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1457531012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12639,3 +12726,4 @@ SceneRoots:
   - {fileID: 3579855615687554676}
   - {fileID: 1141641055}
   - {fileID: 1462431837}
+  - {fileID: 138110844}
