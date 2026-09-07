@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     public int currentLevel = 1;
     public float runStartTime;
 
+    [Header("3D Stations")]
+    public int unlockedStation = 0;
+
     [Tooltip("Drag the QualityBar UI object here just ONCE!")]
     public QualityBar globalQualityBar;
     public GameObject qualityBarContainer;
@@ -32,6 +35,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Loading Screen Universale")]
     public FakeLoadingScreen globalLoadingScreen;
+
+
 
     void Awake()
     {
@@ -141,6 +146,7 @@ public class GameManager : MonoBehaviour
     // --- IL NUOVO PONTE UNIVERSALE (AGGIORNATO AL CELLULAR SENZA SHADER) ---
     public void TransitionToNextLevel(GameObject currentLevel, GameObject targetLevel)
     {
+        unlockedStation++; // <-- AGGIUNGI QUESTA RIGA QUI!
         // Chiama il NOSTRO script infallibile invece di quello dell'asset
         if (SimpleCellularTransition.Instance != null && globalLoadingScreen != null)
         {

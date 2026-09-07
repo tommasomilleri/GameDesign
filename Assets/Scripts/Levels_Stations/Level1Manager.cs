@@ -8,10 +8,14 @@ public class Level1Manager : MonoBehaviour
 
     public GameObject NextLevel;
     public GameObject CurrentLevel;
-    public GameObject canvas;
+    public GameObject canvas; // Lasciato per retrocompatibilità
+
+    [Header("3D Setup")]
+    public GameObject lastClickedCow; // Sostituisce l'EventSystem: memorizza quale mucca 3D è stata cliccata
 
     void Start()
     {
+        // Riaccende la barra della qualità (logica intatta!)
         if (GameManager.instance != null)
         {
             if (GameManager.instance.qualityBarContainer != null)
@@ -19,72 +23,73 @@ public class Level1Manager : MonoBehaviour
             if (GameManager.instance.globalQualityBar != null)
                 GameManager.instance.globalQualityBar.gameObject.SetActive(true);
         }
-        // COLLEGAMENTO VIA CODICE: bypassa gli OnClick serializzati corrotti
-        if (CurrentLevel != null)
-        {
-            UnityEngine.UI.Button[] cows = CurrentLevel.GetComponentsInChildren<UnityEngine.UI.Button>(true);
-            for (int i = 0; i < cows.Length; i++)
-            {
-                int num = i + 1;
-                cows[i].onClick.AddListener(delegate { selectImage(num); });
-            }
-            Debug.Log("MUCCHE COLLEGATE VIA CODICE: " + cows.Length);
-        }
+
+        // HO ELIMINATO il blocco che cercava gli "UnityEngine.UI.Button". 
+        // Ora il collegamento avviene tramite i nostri nuovi script 3D (CowRef e Clickable3D).
     }
-    // Triggered by the UI Buttons
+
+    // --- NUOVO: Helper per ricevere il click dal mondo 3D ---
+    public void SelectCow(GameObject cow, int n)
+    {
+        lastClickedCow = cow;
+        selectImage(n);
+    }
+
     public void selectImage(int imageNumber)
     {
         if (imageNumber == correctImage)
         {
             Debug.Log("Correct choice! The cheesemaking process continues.");
-            // Selezionando l'oggetto appena cliccato
-            GameObject clickedCow = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
-            if (clickedCow != null)
+
+            if (lastClickedCow != null)
             {
-                StartCoroutine(JumpJoy(clickedCow.GetComponent<RectTransform>()));
+                // Avvia l'animazione di vittoria passando il Transform 3D
+                StartCoroutine(JumpJoy(lastClickedCow.transform));
             }
             else
             {
-                GoToNextLevel(); // Fallback se qualcosa va storto
+                GoToNextLevel(); // Fallback
             }
         }
         else
         {
             Debug.Log("Oh no! Wrong ingredient, cheese quality drops.");
 
-            // Chiama il GameManager globale invece del CheeseQualityManager!
+            if (lastClickedCow != null)
+            {
+                // Avvia l'animazione di errore sul modello 3D
+                StartCoroutine(HeadShake(lastClickedCow.transform));
+            }
+
             if (GameManager.instance != null)
             {
                 GameManager.instance.DecreaseGlobalQuality(wrongAnswerPenalty);
-            }
-            else
-            {
-                Debug.LogWarning("GameManager is missing from the scene!");
             }
         }
     }
 
     void GoToNextLevel()
     {
-        // Sblocca il cursore per sicurezza
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
 
-        // ECCO IL COLLEGAMENTO AL PONTE UNIVERSALE!
         if (GameManager.instance != null)
         {
             GameManager.instance.TransitionToNextLevel(CurrentLevel, NextLevel);
         }
         else
         {
-            // Fallback di emergenza
             if (NextLevel != null) NextLevel.SetActive(true);
             if (CurrentLevel != null) CurrentLevel.SetActive(false);
         }
     }
-    private System.Collections.IEnumerator JumpJoy(RectTransform target)
+
+    // ==========================================
+    // ANIMAZIONI CONVERTITE AL 3D (Transform invece di RectTransform)
+    // ==========================================
+    private System.Collections.IEnumerator JumpJoy(Transform target)
     {
         if (target == null) yield break;
-        Vector2 originalPos = target.anchoredPosition;
+        Vector3 originalPos = target.position;
         float duration = 0.4f;
         float elapsed = 0f;
 
@@ -92,18 +97,18 @@ public class Level1Manager : MonoBehaviour
         {
             elapsed += Time.unscaledDeltaTime;
             float t = elapsed / duration;
-            // Equazione per un salto morbido (ease out bounce)
             float yOffset = Mathf.Sin(t * Mathf.PI) * 20f;
-            target.anchoredPosition = originalPos + new Vector2(0, yOffset);
+
+            // Scaliamo il salto per il mondo 3D (moltiplichiamo per 0.02f), 
+            // altrimenti la mucca salta alta 20 metri!
+            target.position = originalPos + new Vector3(0, yOffset * 0.02f, 0);
             yield return null;
         }
-        target.anchoredPosition = originalPos;
-        GoToNextLevel(); // Finisce il salto e cambia livello!
+        target.position = originalPos;
+        GoToNextLevel();
     }
 
-    // Aggiungi questa chiamata se il giocatore sbaglia mucca:
-    // StartCoroutine(HeadShake(clickedCow.GetComponent<RectTransform>()));
-    private System.Collections.IEnumerator HeadShake(RectTransform target)
+    private System.Collections.IEnumerator HeadShake(Transform target)
     {
         if (target == null) yield break;
         Quaternion originalRot = target.localRotation;
@@ -113,7 +118,6 @@ public class Level1Manager : MonoBehaviour
         while (elapsed < duration)
         {
             elapsed += Time.unscaledDeltaTime;
-            // Oscillazione smorzata (3 colpi)
             float zOffset = Mathf.Sin(elapsed * 30f) * 6f * (1f - (elapsed / duration));
             target.localRotation = originalRot * Quaternion.Euler(0, 0, zOffset);
             yield return null;
