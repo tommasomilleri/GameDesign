@@ -8,8 +8,11 @@ public class Level3Manager : MonoBehaviour
     [SerializeField] private string[] correctOrder = { "Starter Culture", "Rennet", "Salt", "Annatto" };
     private int currentStep = 0;
 
-    [Header("Pot Visuals")]
+    [Header("Pot Visuals (Scegli uno dei due)")]
+    [Tooltip("Usa questo se la pentola ï¿½ in un Canvas3D")]
     public Image potImageComponent;
+    [Tooltip("Usa questo se la pentola ï¿½ un normale sprite nel mondo 3D")]
+    public SpriteRenderer potSpriteRenderer;
     public Sprite[] potSprites;
 
     [Header("UI & Level Management")]
@@ -23,35 +26,27 @@ public class Level3Manager : MonoBehaviour
     void Start()
     {
         UpdateText();
-
-        // Assicura che la pentola inizi vuota
-        if (potImageComponent != null && potSprites.Length > 0)
-        {
-            potImageComponent.sprite = potSprites[0];
-        }
+        UpdatePotVisuals();
     }
 
-    public void CheckIngredient(DraggableIngredient ingredient)
+    // --- NUOVA FIRMA FISICA: Usa l'ID e il Rigidbody 3D ---
+    public void CheckIngredient(IngredientID ingredient, Rigidbody rb)
     {
         if (currentStep >= correctOrder.Length) return;
         if (ingredient == null) return;
 
-        // --- SE L'INGREDIENTE È CORRETTO ---
+        // --- SE L'INGREDIENTE ï¿½ CORRETTO ---
         if (ingredient.ingredientName == correctOrder[currentStep])
         {
-            Debug.Log("Correct ingredient!");
+            Debug.Log("Correct ingredient: " + ingredient.ingredientName);
 
-            // 1. Aumenta il contatore SOLO se hai indovinato!
+            // 1. Aumenta il contatore
             currentStep++;
 
-            // 2. Magia Visiva: aggiorna l'immagine fermandosi al marrone
-            if (potImageComponent != null && potSprites.Length > 0)
-            {
-                int spriteIndex = Mathf.Min(currentStep, potSprites.Length - 1);
-                potImageComponent.sprite = potSprites[spriteIndex];
-            }
+            // 2. Magia Visiva: aggiorna l'immagine della pentola
+            UpdatePotVisuals();
 
-            // 3. Fai sparire il barattolo usato e aggiorna il testo
+            // 3. Fai sparire la boccetta usata e aggiorna il testo
             ingredient.gameObject.SetActive(false);
             UpdateText();
 
@@ -61,16 +56,37 @@ public class Level3Manager : MonoBehaviour
                 LevelComplete();
             }
         }
-        // --- SE L'INGREDIENTE È SBAGLIATO ---
+        // --- SE L'INGREDIENTE ï¿½ SBAGLIATO ---
         else
         {
-            Debug.Log("Wrong ingredient! Quality drops.");
+            Debug.Log("Wrong ingredient! Viene sputato via.");
 
-            // Penalizza solo la qualità globale, il barattolo tornerà al suo posto da solo!
+            // Penalizza la qualitï¿½ globale
             if (GameManager.instance != null)
             {
                 GameManager.instance.DecreaseGlobalQuality(wrongAnswerPenalty);
             }
+
+            // Effetto Rimbalzo Fisico: la pentola lo respinge in aria!
+            if (rb != null)
+            {
+                rb.linearVelocity = Vector3.zero; // Ferma la caduta
+                rb.AddForce(Vector3.up * 8f + Random.onUnitSphere * 2f, ForceMode.Impulse);
+            }
+        }
+    }
+
+    void UpdatePotVisuals()
+    {
+        if (potSprites != null && potSprites.Length > 0)
+        {
+            int spriteIndex = Mathf.Min(currentStep, potSprites.Length - 1);
+
+            if (potImageComponent != null)
+                potImageComponent.sprite = potSprites[spriteIndex];
+
+            if (potSpriteRenderer != null)
+                potSpriteRenderer.sprite = potSprites[spriteIndex];
         }
     }
 
@@ -90,7 +106,17 @@ public class Level3Manager : MonoBehaviour
 
     void GoToNextLevel()
     {
-        if (NextLevel != null) NextLevel.SetActive(true);
-        if (CurrentLevel != null) CurrentLevel.SetActive(false);
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+
+        // Usa il ponte universale del GameManager per le transizioni
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.TransitionToNextLevel(CurrentLevel, NextLevel);
+        }
+        else
+        {
+            if (NextLevel != null) NextLevel.SetActive(true);
+            if (CurrentLevel != null) CurrentLevel.SetActive(false);
+        }
     }
 }

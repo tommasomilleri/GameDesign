@@ -1,32 +1,27 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class ngredientDropZone : MonoBehaviour, IDropHandler
+public class IngredientDropZone : MonoBehaviour
 {
-    [Tooltip("Drag the GameObject holding the Level3Manager here")]
+    [Tooltip("Trascina qui l'oggetto con il Level3Manager")]
     public Level3Manager level3Manager;
 
-    // This function triggers automatically when you release the mouse OVER this object
-    public void OnDrop(PointerEventData eventData)
+    // NEL 3D USIAMO I TRIGGER FISICI, NON IL MOUSE DROP UI!
+    void OnTriggerEnter(Collider other)
     {
-        // 1. Check if we actually dropped something
-        if (eventData.pointerDrag != null)
-        {
-            // 2. Try to get the DraggableIngredient component from the dropped object
-            DraggableIngredient ingredient = eventData.pointerDrag.GetComponent<DraggableIngredient>();
+        // 1. Controlla se l'oggetto entrato è un ingrediente leggendo il suo ID
+        IngredientID ingredient = other.GetComponent<IngredientID>();
 
-            // 3. If it IS an ingredient, send it to the Manager
-            if (ingredient != null)
-            {
-                if (level3Manager != null)
-                {
-                    level3Manager.CheckIngredient(ingredient);
-                }
-                else
-                {
-                    Debug.LogWarning("Level3Manager is missing! Drag it into the PotDropZone Inspector.");
-                }
-            }
+        // 2. Se è davvero un ingrediente, lo inviamo al Manager
+        if (ingredient != null && level3Manager != null)
+        {
+            // Prendiamo anche il Rigidbody così il Manager può farlo rimbalzare via se è sbagliato!
+            Rigidbody rb = other.GetComponent<Rigidbody>();
+
+            level3Manager.CheckIngredient(ingredient, rb);
+        }
+        else if (level3Manager == null)
+        {
+            Debug.LogWarning("Attenzione: Level3Manager non assegnato nella DropZone!");
         }
     }
 }

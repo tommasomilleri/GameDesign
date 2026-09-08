@@ -36,6 +36,9 @@ public class GameManager : MonoBehaviour
     [Header("Loading Screen Universale")]
     public FakeLoadingScreen globalLoadingScreen;
 
+    [Header("Developer Cheat (Skip Level)")]
+    [Tooltip("Trascina qui tutti i GoST in ordine (GoST1, GoST2, GoST3...)")]
+    public GameObject[] debugGoSTSequence;
 
 
     void Awake()
@@ -179,5 +182,36 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(delay);
         if (next != null) next.SetActive(true);
         if (current != null) current.SetActive(false);
+    }
+    void Update()
+    {
+        // Se premi il tasto F12 sulla tastiera, si attiva il trucco!
+        if (Input.GetKeyDown(KeyCode.F12))
+        {
+            DevSkipLevel();
+        }
+    }
+
+    void DevSkipLevel()
+    {
+        if (debugGoSTSequence == null || debugGoSTSequence.Length == 0) return;
+
+        // Scansiona la lista per trovare quale GoST è attualmente ACCESO
+        for (int i = 0; i < debugGoSTSequence.Length - 1; i++)
+        {
+            if (debugGoSTSequence[i] != null && debugGoSTSequence[i].activeInHierarchy)
+            {
+                Debug.Log("Dev Cheat: Salto forzato da " + debugGoSTSequence[i].name + " a " + debugGoSTSequence[i + 1].name);
+
+                // Sblocca il cursore per sicurezza
+                Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+
+                // Usa il ponte universale già esistente per avviare le bolle e scambiare le telecamere!
+                TransitionToNextLevel(debugGoSTSequence[i], debugGoSTSequence[i + 1]);
+                return;
+            }
+        }
+
+        Debug.LogWarning("Nessun GoST da saltare o sei già all'ultimo livello!");
     }
 }

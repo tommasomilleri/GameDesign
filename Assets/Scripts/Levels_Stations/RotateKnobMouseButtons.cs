@@ -1,9 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using System.Collections;
 
-public class RotateKnobMouseButtons : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+// NOTA: Rimossi EventSystems e interfacce IPointer. Ora ascoltiamo il 3D!
+public class RotateKnobMouseButtons : MonoBehaviour
 {
     // [potState, zonaCorrente] -> zonaTarget. CONTRATTO COL MANUALE HTML.
     private static readonly int[,] TargetTable = {
@@ -11,16 +10,10 @@ public class RotateKnobMouseButtons : MonoBehaviour, IPointerClickHandler, IPoin
         {1, 2, 0},   // vapore
         {0, 1, 2}    // bolle
     };
-    public int outOfZonePenalty = 5;
+
     [Header("Visual Settings (Termometro Realistico)")]
     public Gradient gradient;
     public Image thermometerFill;
-
-    [Header("Rotazione Visiva Manopola (Limiti)")]
-    [Tooltip("Angolo della manopola quando il liquido è a 0 (es. 140)")]
-    public float minKnobAngle = 140f;
-    [Tooltip("Angolo della manopola quando il liquido è a 1 (es. -140)")]
-    public float maxKnobAngle = -140f;
 
     [Header("I Tre Topolini (Zone Target)")]
     public GameObject blueMouse;
@@ -36,7 +29,6 @@ public class RotateKnobMouseButtons : MonoBehaviour, IPointerClickHandler, IPoin
 
     [Header("Orologio Analogico (Infallibile)")]
     public RectTransform timerHand;
-    public bool tickMovement = true;
     public float degreesPerTick = 30f;
     public float clockOffset = -140f;
 
@@ -45,25 +37,25 @@ public class RotateKnobMouseButtons : MonoBehaviour, IPointerClickHandler, IPoin
     [Range(0.1f, 5f)] public float friction = 1.5f;
 
     [Header("Audio SFX (Pentola & Manopola)")]
-    public AudioSource audioSource; // Usa questo SOLO per pentola e manopola
+    public AudioSource audioSource;
     public AudioClip knobClickSound;
     public AudioClip steamSound;
     public AudioClip bubblesSound;
 
     [Header("Audio SFX (Orologio)")]
-    public AudioSource clockAudioSource; // NUOVO: Dedicato solo all'orologio
-    public AudioClip clockTickSound;     // NUOVO: La tua traccia da 8 secondi
+    public AudioSource clockAudioSource;
+    public AudioClip clockTickSound;
 
     [Header("Game Balance")]
     public float rotationStep = 15f;
     [Range(1f, 24f)] public float cookingTimeRequired = 12f;
     public int winsNeeded = 3;
     public float errorTolerance = 1f;
+    public int outOfZonePenalty = 5;
 
     // --- VARIABILI INTERNE ---
     private float currentFillAmount = 0f;
     private float fillVelocity = 0f;
-    private float currentKnobAngle = 0f;
 
     private int currentZone = 0;
     private int targetZone = 0;
@@ -76,16 +68,10 @@ public class RotateKnobMouseButtons : MonoBehaviour, IPointerClickHandler, IPoin
 
     private bool levelCompleted = false;
     private bool hasStarted = false;
-    private Vector3 originalKnobScale;
 
     void Start()
     {
-        originalKnobScale = transform.localScale;
         if (thermometerFill != null) currentFillAmount = thermometerFill.fillAmount;
-
-        currentKnobAngle = Mathf.Lerp(minKnobAngle, maxKnobAngle, currentFillAmount);
-        transform.localRotation = Quaternion.Euler(0f, 0f, currentKnobAngle);
-
         RandomizePotState();
     }
 
@@ -136,7 +122,7 @@ public class RotateKnobMouseButtons : MonoBehaviour, IPointerClickHandler, IPoin
                     if (!clockAudioSource.isPlaying)
                     {
                         clockAudioSource.clip = clockTickSound;
-                        clockAudioSource.loop = true; // Assicura che la traccia da 8 secondi riparta
+                        clockAudioSource.loop = true;
                         clockAudioSource.Play();
                     }
                 }
@@ -162,16 +148,15 @@ public class RotateKnobMouseButtons : MonoBehaviour, IPointerClickHandler, IPoin
                     currentErrorTime = 0f;
                     if (GameManager.instance != null)
                         GameManager.instance.DecreaseGlobalQuality(outOfZonePenalty);
+
+                    RandomizePotState(); // Costringe il giocatore a riadattarsi!
                 }
             }
         }
         else
         {
             // Silenzia l'orologio durante le pause o prima del primissimo click
-            if (clockAudioSource != null && clockAudioSource.isPlaying)
-            {
-                clockAudioSource.Stop();
-            }
+            if (clockAudioSource != null && clockAudioSource.isPlaying) clockAudioSource.Stop();
         }
 
         // =========================================================
@@ -179,19 +164,8 @@ public class RotateKnobMouseButtons : MonoBehaviour, IPointerClickHandler, IPoin
         // =========================================================
         if (timerHand != null)
         {
-            float displayTime;
-
-            if (!hasStarted || check.activeSelf)
-            {
-                displayTime = 0f;
-            }
-            else
-            {
-                displayTime = currentCookingTime;
-                if (tickMovement) displayTime = Mathf.Floor(displayTime);
-            }
-
-            float rotationAngle = clockOffset - (displayTime * degreesPerTick);
+            float displayTime = (!hasStarted || check.activeSelf) ? 0f : currentCookingTime;
+            float rotationAngle = clockOffset - (Mathf.Floor(displayTime) * degreesPerTick);
             timerHand.localRotation = Quaternion.Euler(0f, 0f, rotationAngle);
         }
 
@@ -205,7 +179,7 @@ public class RotateKnobMouseButtons : MonoBehaviour, IPointerClickHandler, IPoin
             {
                 check.SetActive(false);
                 checkTimer = 0f;
-                hasStarted = false;
+                hasStarted = false; // Mette in pausa finché non clicchi di nuovo
                 RandomizePotState();
             }
         }
@@ -215,13 +189,13 @@ public class RotateKnobMouseButtons : MonoBehaviour, IPointerClickHandler, IPoin
     {
         currentWins++;
         currentCookingTime = 0f;
-        fillVelocity = 0f;
+        fillVelocity = 0f; // Azzera l'inerzia
 
         check.SetActive(true);
         checkTimer = 0f;
 
-        if (audioSource != null) audioSource.Stop(); // Ferma la pentola
-        if (clockAudioSource != null) clockAudioSource.Stop(); // Ferma l'orologio
+        if (audioSource != null) audioSource.Stop();
+        if (clockAudioSource != null) clockAudioSource.Stop();
 
         if (currentWins >= winsNeeded) LevelComplete();
     }
@@ -235,7 +209,6 @@ public class RotateKnobMouseButtons : MonoBehaviour, IPointerClickHandler, IPoin
         if (audioSource != null)
         {
             audioSource.Stop();
-
             if (potState == 1 && steamSound != null)
             {
                 audioSource.clip = steamSound;
@@ -254,55 +227,33 @@ public class RotateKnobMouseButtons : MonoBehaviour, IPointerClickHandler, IPoin
         if (currentFillAmount <= 0.33f) startingColumn = 0;
         else if (currentFillAmount <= 0.66f) startingColumn = 1;
         else startingColumn = 2;
-        // Incrocia lo stato della pentola (Riga) e il topo attuale (Colonna) 
-        // leggendo la soluzione direttamente dalla Matrice, come da manuale.
+
+        // La famosa Matrice Infallibile!
         targetZone = TargetTable[potState, startingColumn];
     }
 
     // =========================================================
-    // CONTROLLI MOUSE - SCATTI ISTANTANEI
+    // NUOVI COMANDI 3D: GUIDANO L'INERZIA E LA ROTAZIONE!
     // =========================================================
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        if (levelCompleted) return;
+    public void ClickLeft() { HandleClick(-1); }
+    public void ClickRight() { HandleClick(1); }
 
+    private void HandleClick(int dir)
+    {
+        if (levelCompleted || check.activeSelf) return;
         if (!hasStarted) hasStarted = true;
 
-        if (eventData.button == PointerEventData.InputButton.Left)
-        {
-            fillVelocity -= clickForce;
-            currentKnobAngle += rotationStep;
-            ApplyClampedKnobRotation();
-            PlayClickSound();
-        }
-        else if (eventData.button == PointerEventData.InputButton.Right)
-        {
-            fillVelocity += clickForce;
-            currentKnobAngle -= rotationStep;
-            ApplyClampedKnobRotation();
-            PlayClickSound();
-        }
-    }
+        // Applica forza all'inerzia: dir = -1 (scende), +1 (sale)
+        fillVelocity += clickForce * dir;
 
-    void ApplyClampedKnobRotation()
-    {
-        float min = Mathf.Min(minKnobAngle, maxKnobAngle);
-        float max = Mathf.Max(minKnobAngle, maxKnobAngle);
+        // Ruota visivamente la manopola 3D sul suo asse Z
+        transform.Rotate(0f, rotationStep * dir, 0f);
 
-        currentKnobAngle = Mathf.Clamp(currentKnobAngle, min, max);
-        transform.localRotation = Quaternion.Euler(0f, 0f, currentKnobAngle);
-    }
-
-    void PlayClickSound()
-    {
         if (audioSource != null && knobClickSound != null)
         {
             audioSource.PlayOneShot(knobClickSound);
         }
     }
-
-    public void OnPointerEnter(PointerEventData eventData) { transform.localScale = originalKnobScale * 1.1f; }
-    public void OnPointerExit(PointerEventData eventData) { transform.localScale = originalKnobScale; }
 
     void UpdateMiceVisuals()
     {
@@ -317,21 +268,11 @@ public class RotateKnobMouseButtons : MonoBehaviour, IPointerClickHandler, IPoin
         if (check != null) check.SetActive(true);
         if (audioSource != null) audioSource.Stop();
         if (clockAudioSource != null) clockAudioSource.Stop();
-        StartCoroutine(GoToNextLevelAfter(1.5f));
-    }
 
-    void GoToNextLevel()
-    {
-        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto); // Se c'era un cursore, lo sblocca
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         if (GameManager.instance != null)
         {
-            // Manda il livello al vigile urbano (GameManager) che gestirà il ponte!
             GameManager.instance.TransitionToNextLevel(CurrentLevel, NextLevel);
         }
-    }
-    IEnumerator GoToNextLevelAfter(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        GoToNextLevel();
     }
 }
