@@ -2,33 +2,18 @@
 
 public class StationActivator : MonoBehaviour
 {
-    [Header("Telecamera della Stanza")]
-    [Tooltip("Trascina qui la VCam di Cinemachine corrispondente a questa postazione (es. VCam_Cows)")]
-    public GameObject myVirtualCamera;
+    [Header("Indice della Stazione")]
+    [Tooltip("0=Mucche, 1=Pentola, 2=Fiale, 3=Pressa, 4=Mensole")]
+    public int stationIndex;
 
     void OnEnable()
     {
-        Debug.Log("[STATION ACTIVATOR] La postazione " + gameObject.name + " è ATTIVA. Accendo la sua telecamera!");
+        Debug.Log("[STATION ACTIVATOR] La postazione " + gameObject.name + " è ATTIVA. Avviso il Regista!");
 
-        // Accende la telecamera di questa stanza appena il GameManager entra in questo livello
-        if (myVirtualCamera != null)
+        // Invece di accendere la camera a mano, diciamo al Regista globale di andarci dolcemente!
+        if (CameraDirector.Instance != null)
         {
-            myVirtualCamera.SetActive(true);
-        }
-        else
-        {
-            Debug.LogWarning("Manca la VCam nello script StationActivator di " + gameObject.name);
-        }
-    }
-
-    void OnDisable()
-    {
-        Debug.Log("[STATION ACTIVATOR] La postazione " + gameObject.name + " è SPENTA. Spengo la sua telecamera.");
-
-        // Spegne la telecamera di questa stanza quando si cambia livello (es. premendo F12)
-        if (myVirtualCamera != null)
-        {
-            myVirtualCamera.SetActive(false);
+            CameraDirector.Instance.GoTo(stationIndex);
         }
     }
 }
