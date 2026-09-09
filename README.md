@@ -2,341 +2,519 @@
 
 <a name="top"></a>
 
-<img src="Assets/Drawings/New%20Assets/NEW_Chit.png" alt="Chit" width="140"/>
-&nbsp;&nbsp;
-<img src="Assets/Drawings/title.png" alt="A Cheesy Chit-Chat" width="340"/>
-&nbsp;&nbsp;
-<img src="Assets/Drawings/New%20Assets/NEW_Chat.png" alt="Chat" width="140"/>
+<img src="Assets/Drawings/title.png" alt="A Cheesy Chit-Chat" width="400"/>
 
 # 🧀 A CHEESY CHIT-CHAT 🐭
 
 ### *Two mice. One recipe. No shared screen.*
 
-**[🇬🇧 English](#-english--the-tale) · [🇮🇹 Italiano](#-italiano--la-storia)**
+<br/>
+
+!\[Unity](https://img.shields.io/badge/Unity\_6-URP\_·\_2.5D-2b1f1a?style=for-the-badge\&logo=unity\&logoColor=e8c990)
+!\[Players](https://img.shields.io/badge/2\_players-local\_co--op-8b2020?style=for-the-badge)
+!\[Genre](https://img.shields.io/badge/asymmetric-puzzle-6e4629?style=for-the-badge)
+!\[Art](https://img.shields.io/badge/art-hand--drawn-c8952b?style=for-the-badge)
+!\[Cheese](https://img.shields.io/badge/cheese-aging\_nicely-7a8b3a?style=for-the-badge)
 
 <br/>
 
-![Unity](https://img.shields.io/badge/Unity_6-URP_·_2.5D-2b1f1a?style=for-the-badge&logo=unity&logoColor=e8c990)
-![Players](https://img.shields.io/badge/2_players-local_co--op-8b2020?style=for-the-badge)
-![Genre](https://img.shields.io/badge/asymmetric-puzzle-6e4629?style=for-the-badge)
-![Art](https://img.shields.io/badge/art-hand--drawn-c8952b?style=for-the-badge)
-![Cheese](https://img.shields.io/badge/cheese-aging_nicely-7a8b3a?style=for-the-badge)
+<img src="docs/mouse-run.gif" alt = "Chit runs" width="250"/>
 
-<br/>
+<img src="Assets/Drawings/New%20Assets/LoadingIcon.png" alt="Mouse run cycle" width="400"/>
 
-<!-- ANIM · sostituisci questa riga con:  <img src="docs/mouse-run.gif" width="160"/>  -->
-<img src="Assets/Drawings/New%20Assets/LoadingIcon.png" alt="Mouse run cycle — 14 frames" width="440"/>
-
-<sub>▲ `MouseRun` · 14 frame · 480×480 · il ciclo di corsa disegnato a mano</sub>
+<sub>▲ `MouseRun.anim` · 14 frame · 480×480 · ciclo di corsa disegnato a mano</sub>
 
 <br/><br/>
 
-<img src="Assets/Drawings/New%20Assets/Candle.png" width="55"/>
-<img src="Assets/Drawings/New%20Assets/Clock.png" width="90"/>
-<img src="Assets/Drawings/New%20Assets/Candle.png" width="55"/>
+<img src="Assets/Drawings/New%20Assets/Clock.png" width="110"/>
+<img src="Assets/Drawings/New%20Assets/ClockHand2.png" width="40"/>
 
 *🕯️ Le candele sono accese. Il pentolone fuma. Il tempo scorre. 🕯️*
 
 </div>
 
----
-
-## 📑 Indice · Table of Contents
-
-<table>
-<tr>
-<td valign="top" width="50%">
-
-**🇬🇧 English**
-- [The Tale](#-english--the-tale)
-- [Chit & Chat](#-chit--chat)
-- [The Five Sacred Steps](#-the-five-sacred-steps)
-- [The Four Vials](#-the-four-vials--and-one-trap)
-- [The Quality Meter](#-the-quality-meter--aka-the-mold)
-- [How to Play](#-how-to-play)
-
-</td>
-<td valign="top" width="50%">
-
-**🇮🇹 Italiano · 🛠 Tech**
-- [La Storia](#-italiano--la-storia)
-- [I Cinque Passi Sacri](#-i-cinque-passi-sacri)
-- [Under the Crust](#-under-the-crust--sotto-la-crosta)
-- [Mappa del codice](#-mappa-del-codice)
-- [Build & Run](#️-build--run)
-- [Credits](#-asset-credits)
-
-</td>
-</tr>
-</table>
-
-<div align="right"><sub><a href="#top">▲ torna su</a></sub></div>
-
----
+\---
 
 <div align="center">
 
-> *"Keep Talking and Nobody Explodes had a child with Venba.*
-> *The child was a mouse. The child stole a cheese recipe."*
+## 🌐 Scegli la lingua · Choose your language
+
+**Clicca per aprire ▾**
 
 </div>
 
----
+<table align="center">
+<tr>
+<td width="50%" valign="top">
 
-## 🇬🇧 English — The Tale
+<details>
+<summary><h3>🇬🇧 \&nbsp;ENGLISH</h3></summary>
 
-<img align="right" src="Assets/Drawings/New%20Assets/NEW_RatQueen.png" width="170"/>
+<br/>
+
+> \*"Keep Talking and Nobody Explodes had a child with Venba.
+> The child was a mouse. The child stole a cheese recipe."\*
 
 Humans locked the recipe away. **Chit** and **Chat**, two mouse siblings,
 broke into the old cheesery to steal it back — and free mousekind from
 the cheese monopoly forever.
 
-The Rat Queen gave them one warning: *the recipe was split in two.*
-
-**And so are you.**
+The recipe was split in two. **And so are you.**
 
 One of you sees a cheesery and cannot read.
 One of you reads a book and cannot touch.
 Between you there is only your voice — and a wheel of cheese
 slowly, quietly, going bad.
 
-<br clear="right"/>
+**How to play**
 
-### 🐭 Chit & Chat
+1. Launch the build · press **START**
+2. Player 2 opens the HTML manual — *do not let Player 1 see it*
+3. Player 1 takes the mouse and the cheesery
+4. **Talk.** Describe. Argue. Panic. Re-describe.
+5. Reach the cellar with green quality → 🏆 **the Divine Wheel**
 
-<table>
-<tr>
-<td align="center" width="50%">
-<img src="Assets/Drawings/New%20Assets/NEW_Chit.png" width="120"/><br/>
-<b>CHIT — The Cheesemaker</b><br/>
-<sub><i>Player 1 · Unity 2.5D</i></sub>
-<br/><br/>
-Turns the knob. Drops the vials.<br/>
-Slams the press. Drags the wheel to the cellar.<br/>
+</details>
+
+</td>
+<td width="50%" valign="top">
+
+<details open>
+<summary><h3>🇮🇹 \&nbsp;ITALIANO</h3></summary>
+
 <br/>
-<b>❌ Cannot read a word of the manual.</b>
-</td>
-<td align="center" width="50%">
-<img src="Assets/Drawings/New%20Assets/NEW_Chat.png" width="120"/><br/>
-<b>CHAT — The Reader</b><br/>
-<sub><i>Player 2 · HTML manual</i></sub>
-<br/><br/>
-Holds the ancient book. Ciphers, poems,<br/>
-fairy tales, pages to rub clean with a sponge.<br/>
-<br/>
-<b>❌ Cannot touch a thing in the cheesery.</b>
-</td>
-</tr>
-</table>
 
-<div align="right"><sub><a href="#top">▲ torna su</a></sub></div>
-
----
-
-### 🧀 The Five Sacred Steps
-
-<div align="center">
-<img src="Assets/Drawings/New%20Assets/Cow2.png" width="72"/>
-<img src="Assets/Drawings/New%20Assets/Pot.png" width="72"/>
-<img src="Assets/Drawings/New%20Assets/Rennet.png" width="52"/>
-<img src="Assets/Drawings/New%20Assets/Press.png" width="72"/>
-<img src="Assets/Drawings/New%20Assets/Term%20(1).png" width="52"/>
-</div>
-
-| # | Step | Chit does | Chat knows | ⚠️ The catch |
-|:-:|---|---|---|---|
-| 🐄 **I** | **Choose the Milk** | Describes four beasts | Deduction rules | Four cows. Almost identical. *Almost.* |
-| 🌡️ **II** | **Heat the Milk** | Turns the 3D knob | Target state matrix | Match **bubbles / steam / foam** — never the number |
-| 🧪 **III** | **Curdle It** | Drops four vials | A poem in riddle | One order only. Guess, and the milk dies. |
-| 🔩 **IV** | **Press the Wheel** | `drain → press → flip → press → flip` | The true sequence | 5 lights · one mistake resets **all of them** |
-| 🏺 **V** | **Age It** | Places the wheel on a shelf | A fairy tale of heat & damp | Three shelves. Only one keeps it alive. |
-
-<div align="right"><sub><a href="#top">▲ torna su</a></sub></div>
-
----
-
-### 🧪 The Four Vials — *and one trap*
-
-<div align="center">
-
-<img src="Assets/Drawings/New%20Assets/StarterCulture.png" width="80"/>
-<img src="Assets/Drawings/New%20Assets/Rennet.png" width="80"/>
-<img src="Assets/Drawings/New%20Assets/Salt.png" width="80"/>
-<img src="Assets/Drawings/New%20Assets/Annato.png" width="80"/>
-<img src="Assets/Drawings/New%20Assets/Herbs.png" width="80"/>
-
-</div>
-
-| Vial | What it truly does | The poem calls it… |
-|---|---|---|
-| 🦠 **Starter Culture** | Wakes the bacteria, sours the milk | *"the sleepers that must wake first"* |
-| 💧 **Rennet** | Splits curd from whey | *"the knife that cuts without a blade"* |
-| 🧂 **Salt** | Draws out water, guards from rot | *"the thirsty crystal"* |
-| 🟠 **Annatto** | Dyes the paste gold — *pure vanity* | *"the sunset the wheel wears"* |
-| 🌿 **Herbs** | **The trap.** Never in the true recipe. | *"the green temptation"* |
-
-<div align="right"><sub><a href="#top">▲ torna su</a></sub></div>
-
----
-
-### 🦠 The Quality Meter — a.k.a. *the mold*
-
-<table>
-<tr>
-<td width="55%" valign="middle">
-
-There is no health bar. There is **quality**, and it only goes down.
-
-| | State | Meaning |
-|:-:|---|---|
-| 🟢 | **Fresh** | Clean wheel. Divine ending still possible. |
-| 🟡 | **Veined** | The mold found a crack. Chat is reading too slowly. |
-| 🔴 | **Spoiled** | Edible only by regret. |
-
-Every wrong knob, every wrong vial, every reset of the press —
-the mold sprite creeps a little further across the wheel.
-
-> **You never fail instantly.**
-> **You fail beautifully, over five levels.**
-
-</td>
-<td width="45%" align="center" valign="middle">
-<img src="Assets/Drawings/New%20Assets/CheeseMeter.png" width="200"/><br/>
-<img src="Assets/Drawings/New%20Assets/Muffa.png" width="150"/>
-</td>
-</tr>
-</table>
-
-<div align="right"><sub><a href="#top">▲ torna su</a></sub></div>
-
----
-
-### 🎮 How to Play
-
-```
-1.  Launch the build  ·  press START
-2.  Player 2 opens the HTML manual   ← do NOT let Player 1 see it
-3.  Player 1 takes the mouse and the cheesery
-4.  TALK. Describe. Argue. Panic. Re-describe.
-5.  Reach the cellar with green quality  →  🏆 the Divine Wheel
-```
-
-> 💡 **Best played on two screens side by side** — or across a table, the way mice intended.
-
-<div align="right"><sub><a href="#top">▲ torna su</a></sub></div>
-
----
-
-## 🇮🇹 Italiano — La Storia
-
-<img align="right" src="Assets/Drawings/New%20Assets/NEW_RatQueen.png" width="150"/>
+> \*"Keep Talking and Nobody Explodes ha avuto un figlio con Venba.
+> Il figlio era un topo. Il figlio ha rubato una ricetta."\*
 
 Gli umani hanno chiuso la ricetta sotto chiave. **Chit** e **Chat**, due topi
 fratelli, si intrufolano nella vecchia casearia per rubarla — e liberare per
 sempre la loro specie dal monopolio del formaggio.
 
-Ma la ricetta è divisa in due. E anche voi.
+La ricetta è divisa in due. **E anche voi.**
 
-<br clear="right"/>
+Uno vede una casearia e non sa leggere.
+Uno legge un libro e non può toccare nulla.
+Tra voi c'è solo la voce — e una forma di formaggio
+che lentamente, silenziosamente, va a male.
 
-|  | Ruolo | Vede | Non può |
-|:-:|---|---|---|
-| 🧑‍🍳 | **Chit — Il Casaro** *(P1)* | La casearia 2.5D: pentolone, fiale, pressa, cantina | Leggere il manuale |
-| 📖 | **Chat — Il Lettore** *(P2)* | Il manuale HTML: cifrari, poemi, fiabe, pagine da grattare | Toccare nulla |
+**Come si gioca**
 
-**L'unica interfaccia tra voi è la voce.**
+1. Avvia il gioco · premi **START**
+2. Il Giocatore 2 apre il manuale HTML — *senza farlo vedere al 1*
+3. Il Giocatore 1 prende il mouse e la casearia
+4. **Parlate.** Descrivete. Litigate. Andate nel panico.
+5. Arrivate in cantina con la qualità verde → 🏆 **la Forma Divina**
 
-### 🧀 I Cinque Passi Sacri
+</details>
 
-| # | Passo | Il tranello |
-|:-:|---|---|
-| 🐄 **I** | **Scegli il Latte** | Quattro mucche quasi identiche. *Quasi.* |
-| 🌡️ **II** | **Scalda il Latte** | Si abbina lo **stato** del liquido (bolle, vapore, schiuma), mai il numero |
-| 🧪 **III** | **Caglia** | Quattro fiale, un solo ordine. Il poema lo sa, voi no. |
-| 🔩 **IV** | **Pressa** | `drain → press → flip → press → flip` · un errore azzera tutte e 5 le lucine |
-| 🏺 **V** | **Stagiona** | Tre mensole, una fiaba, tolleranze nascoste di umidità e calore |
-
-### 🧪 Le Fiale
-
-**Starter Culture** sveglia i batteri · **Rennet** separa la cagliata ·
-**Salt** toglie acqua e protegge · **Annatto** colora d'oro *(pura vanità)* ·
-🌿 **Herbs** *non è mai stata nella ricetta vera.*
-
-### 🦠 La Quality Bar
-
-Non c'è vita: c'è **qualità**, e scende soltanto. Ogni errore fa avanzare lo
-sprite della **muffa** sulla forma. Non si perde mai di colpo: si fallisce
-lentamente, con stile, per cinque livelli.
+</td>
+</tr>
+</table>
 
 <div align="right"><sub><a href="#top">▲ torna su</a></sub></div>
 
----
+\---
 
-## 🛠 Under the Crust · Sotto la Crosta
+## 📑 Indice
+
+||Sezione||Sezione|
+|:-:|-|:-:|-|
+|🪪|[Carte d'identità](#-le-carte-didentità)|🎨|[Dalla matita al pixel](#-dalla-matita-al-pixel)|
+|👑|[La Regina dei Topi](#-la-regina-dei-topi)|💻|[Il codice](#-il-codice--tre-meccaniche)|
+|🦠|[La Quality Bar](#-la-quality-bar--la-muffa-avanza)|🔊|[Jukebox](#-jukebox)|
+|🧪|[Stile \& Ingredienti](#-stile--ingredienti)|▶️|[Build \& Run](#️-build--run)|
+
+\---
+
+## 🪪 Le Carte d'Identità
+
+<table>
+<tr>
+
+<td align="center" width="50%">
+
+<img src="Assets/Drawings/New%20Assets/NEW\_Chit.png" width="150"/>
+
+### 🧑‍🍳 CHIT
+
+**IL CASARO** · *The Cheesemaker*
+
+|||
+|-|-|
+|🎮 **Giocatore**|1|
+|🖥 **Interfaccia**|Unity · casearia 2.5D|
+|✋ **Può**|girare, versare, premere, trascinare|
+|🚫 **Non può**|leggere *una sola parola* del manuale|
+|🗣 **Frase tipo**|*"È quella con la macchia storta!"*|
+|🧠 **Superpotere**|mani veloci|
+|💀 **Debolezza**|descrive male sotto pressione|
+
+<sub>Impulsivo. Tocca prima di chiedere.<br/>Ha già rovesciato il caglio due volte.</sub>
+
+</td>
+
+<td align="center" width="50%">
+
+<img src="Assets/Drawings/New%20Assets/NEW\_Chat.png" width="150"/>
+
+### 📖 CHAT
+
+**IL LETTORE** · *The Reader*
+
+|||
+|-|-|
+|🎮 **Giocatore**|2|
+|🖥 **Interfaccia**|manuale HTML · canvas/JS|
+|✋ **Può**|decifrare, tradurre, grattare pagine|
+|🚫 **Non può**|toccare *nulla* nella casearia|
+|🗣 **Frase tipo**|*"Aspetta. ASPETTA. Non ancora."*|
+|🧠 **Superpotere**|pazienza enciclopedica|
+|💀 **Debolezza**|legge troppo lentamente|
+
+<sub>Metodico. Chiede prima di toccare.<br/>Non ha mai toccato niente in vita sua.</sub>
+
+</td>
+
+</tr>
+</table>
+
+<div align="center">
+
+**⚡ L'unica interfaccia tra loro è la vostra voce. ⚡**
+
+</div>
+
+<div align="right"><sub><a href="#top">▲ torna su</a></sub></div>
+
+\---
+
+## 👑 La Regina dei Topi
+
+<img align="right" src="Assets/Drawings/New%20Assets/NEW\_RatQueen.png" width="190"/>
+
+Non gioca. **Giudica.**
+
+Appare all'inizio per affidarvi la missione e alla fine per pesare
+quello che avete combinato. Non dà indizi, non dà seconde possibilità:
+si limita a guardare la forma che le porgete e a decidere se la
+Grand Fromagerie vi accoglie o vi dimentica.
+
+> \*"Proprietà della Grand Fromagerie.
+> Che gli umani non lo trovino mai."\*
+
+Il suo verdetto dipende da **una sola variabile**: la qualità
+sopravvissuta ai cinque livelli. Nessun timer, nessun punteggio
+nascosto — solo la muffa che avete lasciato crescere.
+
+<br clear="right"/>
+
+<div align="right"><sub><a href="#top">▲ torna su</a></sub></div>
+
+\---
+
+## 🦠 La Quality Bar — *la muffa avanza*
+
+<table>
+<tr>
+<td width="42%" align="center" valign="middle">
+
+<img src="Assets/Drawings/New%20Assets/CheeseMeter.png" width="200"/>
+
+**▲ la forma**
+
+<img src="Assets/Drawings/New%20Assets/Muffa.png" width="170"/>
+
+**▲ la muffa**
+
+</td>
+<td width="58%" valign="middle">
+
+Non esiste una barra della vita. Esiste la **qualità**, e scende soltanto.
+
+La `Muffa.png` è una `Image` in **Filled mode**: ogni errore alza il suo
+`fillAmount`, e il verde si mangia il formaggio dall'esterno verso l'interno.
+
+||Soglia|Cosa succede|
+|:-:|-|-|
+|🟢|`> 80%`|Forma pulita · colore neutro · finale divino possibile|
+|🟡|`40–80%`|Venature verdi · il colore vira · Chat sta leggendo troppo piano|
+|🔴|`< 40%`|**La muffa pulsa** · alpha oscillante · commestibile solo dal rimpianto|
+
+> \*\*Non si perde mai di colpo.\*\*
+> \*\*Si fallisce lentamente, con stile, per cinque livelli.\*\*
+
+</td>
+</tr>
+</table>
+
+<details>
+<summary><b>💻 Come pulsa la muffa — <code>QualityBar.cs</code></b></summary>
+
+<br/>
+
+Sotto il 40% la muffa smette di essere statica e **respira**: un seno sul
+tempo non scalato modula l'alpha, così l'effetto continua anche a gioco in pausa.
+
+```csharp
+private void UpdateMoldVisual(float currentQuality, bool instant)
+{
+    float healthPercent = currentQuality / maxQuality;
+    moldFillImage.fillAmount = 1f - healthPercent;   // la muffa cresce
+
+    if (healthPercent < 0.4f)
+    {
+        // Muffa aggressiva + pulsazione alpha (Respira!)
+        float pulse = 0.8f + Mathf.Sin(Time.unscaledTime \* 5f) \* 0.2f;
+        moldFillImage.color = new Color(0.55f, 0.85f, 0.4f, pulse);
+    }
+    else if (healthPercent < 0.8f)
+        moldFillImage.color = new Color(0.7f, 0.9f, 0.55f, 1f);
+    else
+        moldFillImage.color = Color.white;
+}
+```
+
+E quando la barra prende danno fa un **wobble** elastico — 0.3s, scala 1 → 1.06 → 1:
+
+```csharp
+float scale = 1f + Mathf.Sin((elapsed / duration) \* Mathf.PI) \* 0.06f;
+transform.localScale = originalScale \* scale;
+```
+
+</details>
+
+<div align="right"><sub><a href="#top">▲ torna su</a></sub></div>
+
+\---
+
+## 🧪 Stile \& Ingredienti
+
+Il mondo è fatto di oggetti disegnati a mano, ognuno con un ruolo preciso
+nella ricetta — o nel depistarvi.
+
+<div align="center">
+
+<img src="Assets/Drawings/New%20Assets/Rennet.png" width="90"/>
+\&nbsp;\&nbsp;
+<img src="Assets/Drawings/New%20Assets/Herbs.png" width="90"/>
+\&nbsp;\&nbsp;
+<img src="Assets/Drawings/New%20Assets/Candle.png" width="60"/>
+\&nbsp;\&nbsp;
+<img src="Assets/Drawings/New%20Assets/Gear.png" width="80"/>
+\&nbsp;\&nbsp;
+<img src="Assets/Drawings/New%20Assets/Cow2.png" width="100"/>
+
+</div>
+
+|Asset|Ruolo|Il poema lo chiama…|
+|-|-|-|
+|💧 **Rennet**|Separa la cagliata dal siero|*"il coltello che taglia senza lama"*|
+|🌿 **Herbs**|**La trappola.** Mai nella ricetta vera.|*"la tentazione verde"*|
+|🕯️ **Candle**|Unica fonte di luce dinamica della cantina|*"l'occhio che non dorme"*|
+|⚙️ **Gear**|La bestia da ricomporre: dice quante pressate|*"il conto che gira"*|
+|🐄 **Cow**|Quattro esemplari. Uno solo dà il latte giusto.|*"le quattro che si somigliano"*|
+
+<div align="right"><sub><a href="#top">▲ torna su</a></sub></div>
+
+\---
+
+## 🎨 Dalla Matita al Pixel
+
+Ogni singola cosa che vedete è nata **su carta**, a mano. Nessun asset
+generato dal nulla: il tratto, la proporzione, la personalità sono partiti
+tutti da un disegno.
+
+### ① La prima passata — schizzi a mano
+
+I primi asset erano scansioni dirette: linee sporche, colori piatti,
+risoluzione bassa. Funzionavano per il prototipo, ma in una scena 3D
+illuminata si vedeva la carta.
+
+<div align="center">
+
+<img src="Assets/Drawings/chit.png" width="100"/>
+<img src="Assets/Drawings/chat.png" width="100"/>
+<img src="Assets/Drawings/ratqueen.png" width="100"/>
+<img src="Assets/Drawings/cow2.png" width="110"/>
+<img src="Assets/Drawings/rennett.png" width="80"/>
+
+<sub>▲ `Assets/Drawings/` — la prima generazione, scansioni dirette</sub>
+
+</div>
+
+### ② La seconda passata — rifiniti con Gemini
+
+Ogni schizzo è stato dato in pasto a **Gemini** come riferimento visivo,
+chiedendogli di ripulire linea e volumi **mantenendo il tratto originale**:
+stessa posa, stessa silhouette, stessa espressione — ma risoluzione alta,
+alpha pulito, ombreggiatura coerente con la luce di candela.
+
+<div align="center">
+
+<img src="Assets/Drawings/New%20Assets/NEW\_Chit.png" width="100"/>
+<img src="Assets/Drawings/New%20Assets/NEW\_Chat.png" width="100"/>
+<img src="Assets/Drawings/New%20Assets/NEW\_RatQueen.png" width="100"/>
+<img src="Assets/Drawings/New%20Assets/Cow2.png" width="110"/>
+<img src="Assets/Drawings/New%20Assets/Rennet.png" width="80"/>
+
+<sub>▲ `Assets/Drawings/New Assets/` — la seconda generazione, rifinita</sub>
+
+</div>
+
+<table>
+<tr><th>Prima · <code>Drawings/</code></th><th>Dopo · <code>New Assets/</code></th></tr>
+<tr>
+<td align="center"><img src="Assets/Drawings/pot.png" width="130"/></td>
+<td align="center"><img src="Assets/Drawings/New%20Assets/Pot.png" width="130"/></td>
+</tr>
+<tr>
+<td align="center"><img src="Assets/Drawings/cheesemeter.png" width="150"/></td>
+<td align="center"><img src="Assets/Drawings/New%20Assets/CheeseMeter.png" width="150"/></td>
+</tr>
+</table>
+
+> \*\*La regola era una sola:\*\* l'AI non ha mai \*inventato\* un soggetto.
+> Ha solo rifinito quello che la matita aveva già deciso.
+> Design, posa, palette e scrittura restano interamente umani.
+
+<div align="right"><sub><a href="#top">▲ torna su</a></sub></div>
+
+\---
+
+## 💻 Il Codice — tre meccaniche
 
 <details open>
-<summary><b>🎨 Il trucco 2.5D — come un disegno diventa fisica</b></summary>
+<summary><b>🖼 Il trucco 2.5D — un disegno che sta in piedi nel 3D</b></summary>
 
 <br/>
 
-Ogni disegno a mano è uno **Sprite 2D immerso in uno spazio 3D**:
-`Billboard.cs` lo tiene sempre in faccia alla camera, mentre `Rigidbody` e
-`Collider` sono veri. Le fiale **cadono** davvero, la forma **rotola** davvero.
+Ogni sprite è un cartonato piantato in uno spazio 3D. `Billboard.cs` lo
+ruota in `LateUpdate` per guardare sempre la camera, ma **solo sull'asse Y**:
+così resta dritto come una sagoma di cartone e non si "sdraia" quando la
+camera scende.
 
-> *Sembra un libro illustrato. Si comporta come una cucina.*
+```csharp
+void LateUpdate()
+{
+    if (cam == null) cam = Camera.main;
 
-</details>
-
-<details>
-<summary><b>📁 Mappa del codice</b></summary>
-
-<br/>
-
-```
-Assets/Scripts/
-│
-├── 🧠 Core_Managers/
-│     GameManager · GameConfig · MenuManager
-│     PauseMenuManager · EndingManager · VolumeSettings
-│
-├── 🧀 Levels_Stations/
-│     Level1Manager ............ deduzione mucche
-│     Level3Manager ............ sequenza fiale
-│     Level4Manager ............ drain / press / flip
-│     Level5Manager ............ mensole di stagionatura
-│     RotateKnobMouseButtons ... manopola del pentolone
-│
-├── 🖐 Interactions_3D/
-│     Interactor · Clickable3D · PhysicsGrabber
-│     DraggableIngredient · IngredientDropZone · IngredientID
-│     DraggableCheese · ShelfSlot · CheeseTag · CowRef
-│
-├── 🎥 Audio_Visuals/
-│     CameraDirector (Cinemachine) · Billboard · GameFeel
-│     IdleBreath · MouseParallax · PostFX
-│     BackgroundManager · StationActivator · SimpleCellularTransition
-│
-└── 🖼 UI_Interface/
-      QualityBar · HoverUI · ButtonFeedback · FakeLoadingScreen
+    if (yAxisOnly)
+    {
+        Vector3 dir = transform.position - cam.transform.position;
+        dir.y = 0f;                                   // ← resta in piedi
+        if (dir.sqrMagnitude > 0.001f)
+            transform.rotation = Quaternion.LookRotation(dir);
+    }
+    else transform.rotation = cam.transform.rotation; // billboard pieno
+}
 ```
 
 </details>
 
 <details>
-<summary><b>⚙️ Sistemi principali</b></summary>
+<summary><b>🧪 La sequenza delle fiale — e il rimbalzo fisico dell'errore</b></summary>
 
 <br/>
 
-| Sistema | Dove | Cosa fa |
-|---|---|---|
-| 🎥 **Regia** | `CameraDirector.cs` | Cinemachine: stacchi e push-in su ogni stazione |
-| 🎚️ **Audio** | `MainMixer.mixer` · `ProceduralMusicManager.cs` | Ducking sugli impatti, pitch randomizzato, musica generata |
-| 🔥 **Atmosfera** | `PostFX.cs` · `GameFeel.cs` · `IdleBreath.cs` | Luci di fuoco, screen-shake, sprite che "respirano" |
-| 🌀 **Transizioni** | `Easy Transition` · `SimpleCellularTransition.cs` | Dissolvenze cellulari fra i livelli |
-| 📖 **Manuale** | `Assets/StreamingAssets/manual` · `ChitRecipe.pdf` | Canvas/JS puro: crittografia, fisica CSS, audio Web API (spugna su tela) |
-| 🐭 **Animazioni** | `MouseRun.anim` · `CowIdle.controller` · `LoadingIcon.anim` | Topi che corrono, mucche che ruminano, caricamenti che girano |
+L'ordine è una `string\[]` e basta. Ma la parte bella è l'errore: la pentola
+non mostra un popup — **sputa via la fiala** con un impulso verso l'alto più
+una componente casuale, così ogni fallimento vola in una direzione diversa.
+
+```csharp
+\[SerializeField] private string\[] correctOrder =
+    { "Starter Culture", "Rennet", "Salt", "Annatto" };
+
+public void CheckIngredient(IngredientID ingredient, Rigidbody rb)
+{
+    if (ingredient.ingredientName == correctOrder\[currentStep])
+    {
+        currentStep++;
+        UpdatePotVisuals();                 // la pentola cambia colore
+        ingredient.gameObject.SetActive(false);
+        if (currentStep == correctOrder.Length) LevelComplete();
+    }
+    else
+    {
+        GameManager.instance.DecreaseGlobalQuality(wrongAnswerPenalty);
+
+        // Effetto Rimbalzo Fisico: la pentola lo respinge in aria!
+        rb.linearVelocity = Vector3.zero;
+        rb.AddForce(Vector3.up \* 8f + Random.onUnitSphere \* 2f, ForceMode.Impulse);
+    }
+}
+```
 
 </details>
+
+<details>
+<summary><b>🎨 La pentola che cambia colore ad ogni ingrediente</b></summary>
+
+<br/>
+
+Cinque sprite (`PotEmpty` → `PotCream` → `PotPink` → `PotLightBrown` → `PotBrown`),
+indicizzati direttamente sullo step corrente. Chit **vede** il progresso senza
+che nessun testo glielo dica — e può descriverlo a Chat.
+
+```csharp
+void UpdatePotVisuals()
+{
+    int spriteIndex = Mathf.Min(currentStep, potSprites.Length - 1);
+    if (potSpriteRenderer != null) potSpriteRenderer.sprite = potSprites\[spriteIndex];
+    if (potImageComponent  != null) potImageComponent.sprite  = potSprites\[spriteIndex];
+}
+```
+
+<div align="center">
+<img src="Assets/Drawings/New%20Assets/PotEmpty.png" width="70"/> →
+<img src="Assets/Drawings/New%20Assets/PotCream.png" width="70"/> →
+<img src="Assets/Drawings/New%20Assets/PotPink.png" width="70"/> →
+<img src="Assets/Drawings/New%20Assets/PotLightBrown.png" width="70"/> →
+<img src="Assets/Drawings/New%20Assets/PotBrown.png" width="70"/>
+</div>
+
+</details>
+
+<div align="right"><sub><a href="#top">▲ torna su</a></sub></div>
+
+\---
+
+## 🔊 Jukebox
+
+GitHub non incorpora audio nel README, ma **cliccando un file lo riproduce**
+nel suo viewer. Ascolta la casearia:
+
+||Suono|Dove vive nel gioco|
+|:-:|-|-|
+|🎹|[`cozy-and-warm-relaxing-piano.mp3`](Assets/Sounds/cozy-and-warm-relaxing-piano.mp3)|Il tema di fondo · cozy, lento, ingannevole|
+|🔥|[`fire-crackling.mp3`](Assets/Sounds/fire-crackling.mp3)|Sotto il pentolone, in loop 3D spazializzato|
+|🫧|[`boiling-water.mp3`](Assets/Sounds/boiling-water.mp3)|Livello II · quando la manopola va troppo su|
+|💧|[`simmering-water.mp3`](Assets/Sounds/simmering-water.mp3)|Livello II · lo stato corretto|
+|🕐|[`clock-ticking.mp3`](Assets/Sounds/clock-ticking.mp3)|La pressione che non vi lascia mai|
+|🎛|[`Knob.wav`](Assets/Sounds/Knob.wav)|Ogni scatto della manopola, con pitch randomizzato|
+|✅|[`correct.mp3`](Assets/Sounds/correct.mp3)|Sollievo|
+|❌|[`wrong.mp3`](Assets/Sounds/wrong.mp3)|Muffa|
+
+> 🎚️ Tutto passa da `MainMixer.mixer`: \*\*ducking\*\* sugli impatti (la musica si
+> abbassa da sola) e \*\*pitch randomizzato\*\* sui suoni ripetuti, per non
+> annoiare l'orecchio dopo la ventesima manopola.
+
+<div align="right"><sub><a href="#top">▲ torna su</a></sub></div>
+
+\---
+
+## ▶️ Build \& Run
+
+```bash
+git clone https://github.com/tommasomilleri/GameDesign.git
+```
+
+|Requisito|Valore|
+|-|-|
+|🎮 Engine|**Unity 6** · Universal Render Pipeline|
+|🎬 Scena principale|`Assets/Scenes/Cheesery3D.unity`|
+|📖 Manuale P2|`Assets/StreamingAssets/manual`|
+|💻 Piattaforma|Windows · macOS standalone|
 
 <details>
 <summary><b>🐭 Rigenerare la GIF del topo dallo sprite sheet</b></summary>
@@ -344,74 +522,58 @@ Assets/Scripts/
 <br/>
 
 `LoadingIcon.png` è una griglia **5×3** di celle **480×480**;
-`MouseRun.anim` usa i **primi 14 frame** a ~8.5 fps in loop.
+`MouseRun.anim` usa i **primi 14 frame** a \~8.5 fps in loop.
 
 ```bash
-mkdir -p docs && python3 - <<'EOF'
+mkdir -p docs \&\& python3 - <<'EOF'
 from PIL import Image
 sheet = Image.open("Assets/Drawings/New Assets/LoadingIcon.png").convert("RGBA")
 W = H = 480
-frames = [sheet.crop(((i%5)*W, (i//5)*H, (i%5)*W+W, (i//5)*H+H)).resize((160,160), Image.LANCZOS)
+frames = \[sheet.crop(((i%5)\*W, (i//5)\*H, (i%5)\*W+W, (i//5)\*H+H)).resize((150,150), Image.LANCZOS)
           for i in range(14)]
-out = [Image.alpha_composite(Image.new("RGBA",(160,160),(26,20,16,255)), f)
+out = \[Image.alpha\_composite(Image.new("RGBA",(150,150),(26,20,16,255)), f)
        .convert("P", palette=Image.ADAPTIVE) for f in frames]
-out[0].save("docs/mouse-run.gif", save_all=True, append_images=out[1:],
+out\[0].save("docs/mouse-run.gif", save\_all=True, append\_images=out\[1:],
             duration=117, loop=0, optimize=True)
 EOF
 ```
 
-Poi sostituisci il commento `<!-- ANIM -->` in cima con:
-`<img src="docs/mouse-run.gif" width="160"/>`
+Poi sostituisci il commento `<!-- ANIM -->` in cima con
+`<img src="docs/mouse-run.gif" width="150"/>`.
 
 </details>
 
-### ▶️ Build & Run
-
-```bash
-git clone https://github.com/tommasomilleri/GameDesign.git
-```
-
-| Requisito | Valore |
-|---|---|
-| Engine | **Unity 6** · Universal Render Pipeline |
-| Scena principale | `Assets/Scenes/Cheesery3D.unity` |
-| Manuale P2 | `Assets/StreamingAssets/manual` |
-| Piattaforma | Windows / macOS standalone |
-
 <div align="right"><sub><a href="#top">▲ torna su</a></sub></div>
 
----
+\---
 
-## 🎨 Asset Credits
+## 🎨 Crediti
 
-> Tutta l'arte 2D disegnata a mano, il design, la scrittura e il codice di gioco:
-> **Tommaso Milleri** 🐭
+> Arte 2D disegnata a mano, design, scrittura e codice di gioco:
+> \*\*Tommaso Milleri\*\* 🐭
+> \*Rifinitura degli sprite assistita da Gemini, su disegni originali.\*
 
-| Pack | Autore |
-|---|---|
-| [KayKit Dungeon Pack](https://kaylousberg.itch.io/kaykit-dungeon-pack) | Kay Lousberg |
-| [Lowpoly Animated Animals](https://quaternius.itch.io/lowpoly-animated-animals) | Quaternius |
-| [Dungeon Props Low Poly](https://imersastudios.itch.io/dungeon-props-low-poly-pack) | Imersa Studios |
-| [Medieval Slavic Tavern](https://goryana.itch.io/medieval-slavic-tavern-game-assets) | Goryana |
-| [2D/3D Halloween Assets](https://goryana.itch.io/2d-and-3d-halloween-game-assets) | Goryana |
-| Casual Game Sounds · Free UI Click SFX Pack | *(vedi `Assets/Sounds`)* |
+|Pack|Autore|
+|-|-|
+|[KayKit Dungeon Pack](https://kaylousberg.itch.io/kaykit-dungeon-pack)|Kay Lousberg|
+|[Lowpoly Animated Animals](https://quaternius.itch.io/lowpoly-animated-animals)|Quaternius|
+|[Dungeon Props Low Poly](https://imersastudios.itch.io/dungeon-props-low-poly-pack)|Imersa Studios|
+|[Medieval Slavic Tavern](https://goryana.itch.io/medieval-slavic-tavern-game-assets)|Goryana|
+|[2D/3D Halloween Assets](https://goryana.itch.io/2d-and-3d-halloween-game-assets)|Goryana|
+|Casual Game Sounds · Free UI Click SFX Pack|*(vedi `Assets/Sounds`)*|
 
----
+\---
 
 <div align="center">
 
-<img src="Assets/Drawings/New%20Assets/WaxStamps/WaxFoot.png" width="50"/>
-<img src="Assets/Drawings/New%20Assets/WaxStamps/WaxFoot2.png" width="50"/>
-<img src="Assets/Drawings/New%20Assets/WaxStamps/WaxFoot3.png" width="50"/>
-<img src="Assets/Drawings/New%20Assets/WaxStamps/WaxFoot4.png" width="50"/>
-
-*"Proprietà della Grand Fromagerie.*
-*Che gli umani non lo trovino mai."*
-
-<br/>
+<img src="Assets/Drawings/New%20Assets/WaxStamps/WaxFoot.png" width="45"/>
+<img src="Assets/Drawings/New%20Assets/WaxStamps/WaxFoot2.png" width="45"/>
+<img src="Assets/Drawings/New%20Assets/WaxStamps/WaxFoot3.png" width="45"/>
+<img src="Assets/Drawings/New%20Assets/WaxStamps/WaxFoot4.png" width="45"/>
 
 **🐭 squeak responsibly 🧀**
 
 <sub><a href="#top">▲ back to top</a></sub>
 
 </div>
+
