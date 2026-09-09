@@ -1693,6 +1693,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db78e71f8fa35d24da659fb8dc999774, type: 3}
       insertIndex: -1
       addedObject: {fileID: 294774984}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: db78e71f8fa35d24da659fb8dc999774, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 294774985}
   m_SourcePrefab: {fileID: 100100000, guid: db78e71f8fa35d24da659fb8dc999774, type: 3}
 --- !u!4 &294774978 stripped
 Transform:
@@ -1737,8 +1740,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f37e1f82c9a39438c6084647ff572b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shelfslot
-  slotNumber: 1
   level5Manager: {fileID: 1573941974}
+  slotNumber: 1
+  fanObject: {fileID: 0}
+  heaterObject: {fileID: 0}
+  fanMinDistance: 1
+  fanMaxDistance: 3
+  heaterMinDistance: 4
+  heaterMaxDistance: 8
 --- !u!65 &294774984
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1760,6 +1769,26 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 0.19, z: 0.5}
   m_Center: {x: 0, y: 0.02, z: 0.24999999}
+--- !u!114 &294774985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294774979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0f37e1f82c9a39438c6084647ff572b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Shelfslot
+  level5Manager: {fileID: 1573941974}
+  slotNumber: 1
+  fanObject: {fileID: 0}
+  heaterObject: {fileID: 0}
+  fanMinDistance: 1
+  fanMaxDistance: 3
+  heaterMinDistance: 4
+  heaterMaxDistance: 8
 --- !u!1001 &304863217
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3074,6 +3103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 095fbc4460d90324898fa170e0686b21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PhysicsGrabber
+  grabSpeed: 15
   maxThrowSpeed: 1000
 --- !u!114 &524423204
 MonoBehaviour:
