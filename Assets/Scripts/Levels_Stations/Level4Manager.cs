@@ -19,8 +19,8 @@ public class Level4Manager : MonoBehaviour
     public Transform pressModel;
     public Transform flipModel;
     public Transform drainModel;
-
     [Header("Visual Progress (I Timbri di Cera UI)")]
+    public GameObject waxContainer; // Il contenitore padre che racchiude i 5 timbri
     public Image[] progressLights;
     public Sprite waxEmptySprite;
     public Sprite[] waxStampedSprites;
@@ -32,8 +32,10 @@ public class Level4Manager : MonoBehaviour
 
     private bool isAnimating = false;
 
-    void Start()
+    void OnEnable()
     {
+        // Accende i timbri OGNI VOLTA che questo livello viene attivato
+        if (waxContainer != null) waxContainer.SetActive(true);
         UpdateLights(true);
     }
 
@@ -292,6 +294,8 @@ public class Level4Manager : MonoBehaviour
 
     void OnDisable()
     {
+        // Spegne i timbri quando questo livello si disattiva o viene completato
+        if (waxContainer != null) waxContainer.SetActive(false);
         StopAllCoroutines();
     }
 }

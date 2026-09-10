@@ -1666,7 +1666,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 269652727}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 43ad954e2d298d144af2a61ade8b1146, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1705,7 +1705,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 1
 --- !u!212 &269652732
 SpriteRenderer:
@@ -3400,12 +3400,12 @@ GameObject:
   m_Component:
   - component: {fileID: 469110830}
   m_Layer: 0
-  m_Name: Waxs
+  m_Name: waxContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &469110830
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7784,7 +7784,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &896562490
 Transform:
   m_ObjectHideFlags: 0
@@ -7829,6 +7829,7 @@ MonoBehaviour:
   pressModel: {fileID: 701561255}
   flipModel: {fileID: 1411333902}
   drainModel: {fileID: 2130267485}
+  waxContainer: {fileID: 469110829}
   progressLights:
   - {fileID: 1635217934}
   - {fileID: 187772757}
@@ -8490,7 +8491,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 962006584}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 43ad954e2d298d144af2a61ade8b1146, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -8529,7 +8530,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 1
 --- !u!212 &962006589
 SpriteRenderer:
@@ -14422,7 +14423,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 1
 --- !u!114 &1736978662
 MonoBehaviour:
@@ -14444,7 +14445,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1736978659}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 43ad954e2d298d144af2a61ade8b1146, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -17132,7 +17133,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 1
 --- !u!114 &2125397062
 MonoBehaviour:
@@ -17154,7 +17155,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2125397059}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 43ad954e2d298d144af2a61ade8b1146, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -24406,6 +24407,7 @@ MonoBehaviour:
   pressModel: {fileID: 0}
   flipModel: {fileID: 0}
   drainModel: {fileID: 0}
+  waxContainer: {fileID: 0}
   progressLights:
   - {fileID: 150053383}
   - {fileID: 1355043003}
@@ -24992,7 +24994,7 @@ MonoBehaviour:
   StoryPage: {fileID: 2460456717518858163}
   TutorialPage: {fileID: 7688370430742273891}
   PlayerSelectPage: {fileID: 4884828979753150697}
-  Lvl1: {fileID: 1730657592}
+  Lvl1: {fileID: 1425090292}
 --- !u!114 &8316273084904653060
 MonoBehaviour:
   m_ObjectHideFlags: 0
