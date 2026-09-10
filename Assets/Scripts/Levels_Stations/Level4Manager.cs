@@ -4,7 +4,6 @@ using System.Collections;
 
 public class Level4Manager : MonoBehaviour
 {
-
     [Header("Co-op Sequence")]
     [SerializeField] private string[] correctSequence = { "drain", "press", "flip", "press", "flip" };
     private int currentStep = 0;
@@ -16,21 +15,14 @@ public class Level4Manager : MonoBehaviour
     public GameObject NextLevel;
     public GameObject CurrentLevel;
 
-    [Header("Graphics to Animate")]
-    public RectTransform pressGraphic;
-    public RectTransform flipGraphic;
-    public RectTransform drainGraphic;
+    [Header("3D Models to Animate (Usa i Transform!)")]
+    public Transform pressModel;
+    public Transform flipModel;
+    public Transform drainModel;
 
-    [Header("Visual Progress (I Timbri di Cera)")]
-    [Tooltip("Inserisci qui le 5 immagini della UI (i quadratini da sostituire)")]
+    [Header("Visual Progress (I Timbri di Cera UI)")]
     public Image[] progressLights;
-
-    [Tooltip("L'immagine della cera VUOTA (Es. WaxEmpty)")]
     public Sprite waxEmptySprite;
-
-    // VECCHIO: public Sprite waxStampedSprite;
-    // NUOVO: Un array per contenere tutti i tuoi timbri!
-    [Tooltip("Trascina qui tutti i tuoi WaxFoot (1, 2, 3...) per pescarli a caso!")]
     public Sprite[] waxStampedSprites;
 
     [Header("Audio Feedback")]
@@ -49,17 +41,17 @@ public class Level4Manager : MonoBehaviour
     {
         if (isAnimating) return;
 
-        RectTransform clickedGraphic = null;
-        if (process == "press") clickedGraphic = pressGraphic;
-        else if (process == "flip") clickedGraphic = flipGraphic;
-        else if (process == "drain") clickedGraphic = drainGraphic;
+        Transform clickedModel = null;
+        if (process == "press") clickedModel = pressModel;
+        else if (process == "flip") clickedModel = flipModel;
+        else if (process == "drain") clickedModel = drainModel;
 
         // --- AZIONE CORRETTA ---
         if (process == correctSequence[currentStep])
         {
             Debug.Log("Correct: " + process);
 
-            // 1. Avvia l'animazione fisica del timbro!
+            // 1. Animazione del timbro di cera UI
             if (currentStep < progressLights.Length)
             {
                 StartCoroutine(StampWaxAnimation(progressLights[currentStep]));
@@ -67,16 +59,17 @@ public class Level4Manager : MonoBehaviour
 
             currentStep++;
 
-            // Suono di successo con pitch randomico[cite: 3]
+            // Suono di successo con pitch random
             if (audioSource != null && successSound != null)
             {
                 audioSource.pitch = Random.Range(0.9f, 1.1f);
                 audioSource.PlayOneShot(successSound);
             }
 
-            if (process == "press") StartCoroutine(SquishAnimation(clickedGraphic));
-            else if (process == "flip") StartCoroutine(RotateAnimation(clickedGraphic));
-            else if (process == "drain") StartCoroutine(VibrateAnimation(clickedGraphic));
+            // Animazioni Fisiche dei Modelli 3D
+            if (process == "press") StartCoroutine(SquishAnimation(clickedModel));
+            else if (process == "flip") StartCoroutine(RotateAnimation(clickedModel));
+            else if (process == "drain") StartCoroutine(VibrateAnimation(clickedModel));
 
             if (currentStep == correctSequence.Length)
             {
@@ -97,7 +90,6 @@ public class Level4Manager : MonoBehaviour
 
             StartCoroutine(GlobalResetAnimation());
 
-            // Penalità globale
             if (GameManager.instance != null)
             {
                 GameManager.instance.DecreaseGlobalQuality(wrongActionPenalty);
@@ -108,7 +100,7 @@ public class Level4Manager : MonoBehaviour
     public void ResetSequence()
     {
         currentStep = 0;
-        UpdateLights(true); // Resetta visivamente tutte le cere istantaneamente
+        UpdateLights(true);
         Debug.Log("Sequence reset. Try again!");
     }
 
@@ -129,7 +121,7 @@ public class Level4Manager : MonoBehaviour
     }
 
     // ==========================================
-    // ANIMAZIONE: IL TIMBRO RANDOM SULLA CERA
+    // ANIMAZIONE UI: IL TIMBRO DI CERA
     // ==========================================
     IEnumerator StampWaxAnimation(Image waxImage)
     {
@@ -138,7 +130,6 @@ public class Level4Manager : MonoBehaviour
         RectTransform rt = waxImage.rectTransform;
         Vector3 originalScale = Vector3.one;
 
-        // 1. Il timbro scende (si schiaccia visivamente come per assorbire il colpo)
         float durationDown = 0.1f;
         float elapsed = 0f;
         while (elapsed < durationDown)
@@ -148,14 +139,12 @@ public class Level4Manager : MonoBehaviour
             yield return null;
         }
 
-        // 2. MAGIA: Se hai inserito dei timbri nell'Array, ne pesca uno a caso!
         if (waxStampedSprites != null && waxStampedSprites.Length > 0)
         {
             int randomIndex = Random.Range(0, waxStampedSprites.Length);
             waxImage.sprite = waxStampedSprites[randomIndex];
         }
 
-        // 3. Rimbalzo elastico verso l'alto
         float durationUp = 0.15f;
         elapsed = 0f;
         while (elapsed < durationUp)
@@ -169,10 +158,10 @@ public class Level4Manager : MonoBehaviour
     }
 
     // ==========================================
-    // ANIMAZIONI STRUMENTI (Esistenti)
+    // ANIMAZIONI STRUMENTI 3D 
     // ==========================================
 
-    IEnumerator SquishAnimation(RectTransform target)
+    IEnumerator SquishAnimation(Transform target)
     {
         if (target == null) yield break;
         isAnimating = true;
@@ -185,7 +174,7 @@ public class Level4Manager : MonoBehaviour
         isAnimating = false;
     }
 
-    IEnumerator RotateAnimation(RectTransform target)
+    IEnumerator RotateAnimation(Transform target)
     {
         if (target == null) yield break;
         isAnimating = true;
@@ -205,7 +194,7 @@ public class Level4Manager : MonoBehaviour
         isAnimating = false;
     }
 
-    IEnumerator VibrateAnimation(RectTransform target)
+    IEnumerator VibrateAnimation(Transform target)
     {
         if (target == null) yield break;
         isAnimating = true;
@@ -216,7 +205,8 @@ public class Level4Manager : MonoBehaviour
 
         while (elapsed < duration)
         {
-            target.localPosition = originalPos + new Vector3(Random.Range(-6f, 6f), Random.Range(-4f, 4f), 0);
+            // In 3D scuotiamo di soli 0.1 metri su X e Z
+            target.localPosition = originalPos + new Vector3(Random.Range(-0.1f, 0.1f), 0, Random.Range(-0.1f, 0.1f));
             elapsed += Time.deltaTime;
             yield return null;
         }
@@ -226,50 +216,56 @@ public class Level4Manager : MonoBehaviour
     }
 
     // ==========================================
-    // ANIMAZIONE DI ERRORE GLOBALE
+    // ANIMAZIONE DI ERRORE GLOBALE 3D
     // ==========================================
 
     IEnumerator GlobalResetAnimation()
     {
         isAnimating = true;
 
-        Image pressImg = pressGraphic != null ? pressGraphic.GetComponent<Image>() : null;
-        Image flipImg = flipGraphic != null ? flipGraphic.GetComponent<Image>() : null;
-        Image drainImg = drainGraphic != null ? drainGraphic.GetComponent<Image>() : null;
+        // 1. Prende i MeshRenderer (la "pelle" degli oggetti 3D) invece delle Image UI
+        MeshRenderer pressRend = pressModel != null ? pressModel.GetComponentInChildren<MeshRenderer>() : null;
+        MeshRenderer flipRend = flipModel != null ? flipModel.GetComponentInChildren<MeshRenderer>() : null;
+        MeshRenderer drainRend = drainModel != null ? drainModel.GetComponentInChildren<MeshRenderer>() : null;
 
-        Color origPress = pressImg != null ? pressImg.color : Color.white;
-        Color origFlip = flipImg != null ? flipImg.color : Color.white;
-        Color origDrain = drainImg != null ? drainImg.color : Color.white;
+        // 2. Salva i colori base originali (in URP Lit la proprietà si chiama _BaseColor)
+        Color origPress = pressRend != null ? pressRend.material.GetColor("_BaseColor") : Color.white;
+        Color origFlip = flipRend != null ? flipRend.material.GetColor("_BaseColor") : Color.white;
+        Color origDrain = drainRend != null ? drainRend.material.GetColor("_BaseColor") : Color.white;
 
+        // 3. Tinge i modelli 3D di rosso vivo
         Color errorColor = new Color(1f, 0.3f, 0.3f);
-        if (pressImg != null) pressImg.color = errorColor;
-        if (flipImg != null) flipImg.color = errorColor;
-        if (drainImg != null) drainImg.color = errorColor;
+        if (pressRend != null) pressRend.material.SetColor("_BaseColor", errorColor);
+        if (flipRend != null) flipRend.material.SetColor("_BaseColor", errorColor);
+        if (drainRend != null) drainRend.material.SetColor("_BaseColor", errorColor);
 
-        Vector3 pPos = pressGraphic != null ? pressGraphic.localPosition : Vector3.zero;
-        Vector3 fPos = flipGraphic != null ? flipGraphic.localPosition : Vector3.zero;
-        Vector3 dPos = drainGraphic != null ? drainGraphic.localPosition : Vector3.zero;
+        // 4. Salva le posizioni originali
+        Vector3 pPos = pressModel != null ? pressModel.localPosition : Vector3.zero;
+        Vector3 fPos = flipModel != null ? flipModel.localPosition : Vector3.zero;
+        Vector3 dPos = drainModel != null ? drainModel.localPosition : Vector3.zero;
 
-        float shakeAmount = 20f;
+        // 5. Shake meccanico (abbassato da 20f a 0.2f per i metri del 3D!)
+        float shakeAmount = 0.2f;
         for (int i = 0; i < 4; i++)
         {
             float dir = (i % 2 == 0) ? 1f : -1f;
             Vector3 offset = new Vector3(shakeAmount * dir, 0, 0);
 
-            if (pressGraphic != null) pressGraphic.localPosition = pPos + offset;
-            if (flipGraphic != null) flipGraphic.localPosition = fPos + offset;
-            if (drainGraphic != null) drainGraphic.localPosition = dPos + offset;
+            if (pressModel != null) pressModel.localPosition = pPos + offset;
+            if (flipModel != null) flipModel.localPosition = fPos + offset;
+            if (drainModel != null) drainModel.localPosition = dPos + offset;
 
             yield return new WaitForSeconds(0.06f);
         }
 
-        if (pressGraphic != null) pressGraphic.localPosition = pPos;
-        if (flipGraphic != null) flipGraphic.localPosition = fPos;
-        if (drainGraphic != null) drainGraphic.localPosition = dPos;
+        // 6. Ripristina posizioni e colori originali ai modelli 3D
+        if (pressModel != null) pressModel.localPosition = pPos;
+        if (flipModel != null) flipModel.localPosition = fPos;
+        if (drainModel != null) drainModel.localPosition = dPos;
 
-        if (pressImg != null) pressImg.color = origPress;
-        if (flipImg != null) flipImg.color = origFlip;
-        if (drainImg != null) drainImg.color = origDrain;
+        if (pressRend != null) pressRend.material.SetColor("_BaseColor", origPress);
+        if (flipRend != null) flipRend.material.SetColor("_BaseColor", origFlip);
+        if (drainRend != null) drainRend.material.SetColor("_BaseColor", origDrain);
 
         isAnimating = false;
     }
@@ -293,6 +289,7 @@ public class Level4Manager : MonoBehaviour
         if (NextLevel != null) NextLevel.SetActive(true);
         if (CurrentLevel != null) CurrentLevel.SetActive(false);
     }
+
     void OnDisable()
     {
         StopAllCoroutines();

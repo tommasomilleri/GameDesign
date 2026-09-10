@@ -5,7 +5,7 @@ public class PhysicsGrabber : MonoBehaviour
     [Header("Impostazioni Presa")]
     public float grabSpeed = 15f;
     public float maxThrowSpeed = 5f;
-
+    public bool IsHolding { get; private set; }
     Camera cam;
     Rigidbody held;
     Plane dragPlane;
@@ -36,6 +36,7 @@ public class PhysicsGrabber : MonoBehaviour
                     held.linearDamping = 10f;
 
                     dragPlane = new Plane(-cam.transform.forward, held.position);
+                    IsHolding = true;
                 }
             }
         }
@@ -50,6 +51,7 @@ public class PhysicsGrabber : MonoBehaviour
             // Limitiamo la velocità di lancio
             held.linearVelocity = Vector3.ClampMagnitude(held.linearVelocity, maxThrowSpeed);
             held = null;
+            IsHolding = false;
         }
     }
 
