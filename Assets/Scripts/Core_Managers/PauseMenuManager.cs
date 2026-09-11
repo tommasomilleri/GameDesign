@@ -188,10 +188,15 @@ public class PauseMenuManager : MonoBehaviour
 
         if (activeLevelGO != null)
         {
+            // Sblocca eventuali transizioni rimaste appese
+            if (GameManager.instance != null)
+                GameManager.instance.NotifyTransitionFinished();
+
             activeLevelGO.SetActive(false);
             activeLevelGO.SetActive(true);
             ResumeGame();
         }
+
         else
         {
             Debug.LogWarning("Impossibile trovare il livello attivo per il Replay!");

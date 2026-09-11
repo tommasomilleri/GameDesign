@@ -82,6 +82,10 @@ public class PhysicsGrabber : MonoBehaviour
     void FixedUpdate()
     {
         if (held == null) return;
+        // La fiala giusta viene disattivata dal Level3Manager mentre
+        // magari la stiamo ancora tenendo: rilascio pulito.
+        if (!held.gameObject.activeInHierarchy) { held = null; IsHolding = false; return; }
+
 
         // Target = punto sul raggio del mouse ALLA PROFONDITA' corrente
         // (niente piu' Plane fisso: la rotella muove currentDepth)

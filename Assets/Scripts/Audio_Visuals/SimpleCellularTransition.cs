@@ -20,6 +20,7 @@ public class SimpleCellularTransition : MonoBehaviour
     private Canvas canvas;
     private List<RectTransform> circles = new List<RectTransform>();
     private bool busy;
+    public bool IsBusy { get { return busy; } }
 
     void Awake()
     {

@@ -31,17 +31,22 @@ public class Level4Manager : MonoBehaviour
     public AudioClip errorSound;
 
     private bool isAnimating = false;
+    private bool levelCompleted = false;
 
     void OnEnable()
     {
+        levelCompleted = false;   // reset per il Replay
         // Accende i timbri OGNI VOLTA che questo livello viene attivato
         if (waxContainer != null) waxContainer.SetActive(true);
+
         UpdateLights(true);
     }
 
     public void ClickProcess(string process)
     {
+        if (levelCompleted) return;
         if (isAnimating) return;
+
 
         Transform clickedModel = null;
         if (process == "press") clickedModel = pressModel;
@@ -279,18 +284,31 @@ public class Level4Manager : MonoBehaviour
     IEnumerator CompleteLevelRoutine()
     {
         isAnimating = true;
+        levelCompleted = true;
         Debug.Log("LEVEL 4 COMPLETE!");
 
-        yield return new WaitForSeconds(0.5f);
+        // Realtime: immune a timeScale e coerente col resto del flusso
+        yield return new WaitForSecondsRealtime(0.5f);
 
         GoToNextLevel();
     }
 
     void GoToNextLevel()
     {
-        if (NextLevel != null) NextLevel.SetActive(true);
-        if (CurrentLevel != null) CurrentLevel.SetActive(false);
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+
+        // Ponte ufficiale: bolle + loading + unlockedStation++
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.TransitionToNextLevel(CurrentLevel, NextLevel);
+        }
+        else
+        {
+            if (NextLevel != null) NextLevel.SetActive(true);
+            if (CurrentLevel != null) CurrentLevel.SetActive(false);
+        }
     }
+
 
     void OnDisable()
     {

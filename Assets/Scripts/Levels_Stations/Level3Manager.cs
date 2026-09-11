@@ -7,6 +7,12 @@ public class Level3Manager : MonoBehaviour
     [Header("Recipe Settings")]
     [SerializeField] private string[] correctOrder = { "Starter Culture", "Rennet", "Salt", "Annatto" };
     private int currentStep = 0;
+    private bool levelCompleted = false;
+
+    [Tooltip("Secondi di grazia dopo un errore: la fiala respinta che ricade nel trigger non ri-penalizza")]
+    public float penaltyCooldown = 1.5f;
+    private float lastPenaltyTime = -99f;
+
 
     [Header("Pot Visuals (Scegli uno dei due)")]
     [Tooltip("Usa questo se la pentola � in un Canvas3D")]
@@ -28,12 +34,18 @@ public class Level3Manager : MonoBehaviour
         UpdateText();
         UpdatePotVisuals();
     }
+    void OnEnable()
+    {
+        levelCompleted = false;   // reset per il Replay
+    }
 
     // --- NUOVA FIRMA FISICA: Usa l'ID e il Rigidbody 3D ---
     public void CheckIngredient(IngredientID ingredient, Rigidbody rb)
     {
+        if (levelCompleted) return;
         if (currentStep >= correctOrder.Length) return;
         if (ingredient == null) return;
+
 
         // --- SE L'INGREDIENTE � CORRETTO ---
         if (ingredient.ingredientName == correctOrder[currentStep])
@@ -61,11 +73,17 @@ public class Level3Manager : MonoBehaviour
         {
             Debug.Log("Wrong ingredient! Viene sputato via.");
 
-            // Penalizza la qualit� globale
-            if (GameManager.instance != null)
+            // Cooldown: la stessa fiala che rimbalza e ricade nel
+            // trigger non deve mitragliare penalita' (-20,-20,-20...)
+            if (Time.time - lastPenaltyTime >= penaltyCooldown)
             {
-                GameManager.instance.DecreaseGlobalQuality(wrongAnswerPenalty);
+                lastPenaltyTime = Time.time;
+                if (GameManager.instance != null)
+                {
+                    GameManager.instance.DecreaseGlobalQuality(wrongAnswerPenalty);
+                }
             }
+
 
             // Effetto Rimbalzo Fisico: la pentola lo respinge in aria!
             if (rb != null)
@@ -100,9 +118,12 @@ public class Level3Manager : MonoBehaviour
 
     void LevelComplete()
     {
+        if (levelCompleted) return;
+        levelCompleted = true;
         Debug.Log("LEVEL 3 COMPLETE! The cheese is ready for the cellar.");
         GoToNextLevel();
     }
+
 
     void GoToNextLevel()
     {

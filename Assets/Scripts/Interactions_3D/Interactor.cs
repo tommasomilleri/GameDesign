@@ -32,5 +32,15 @@ public class Interactor : MonoBehaviour
         {
             hit.collider.GetComponentInParent<Clickable3D>()?.Click(btn);
         }
+
+        // Transizione a bolle in corso? Niente click sul mondo.
+        if (SimpleCellularTransition.Instance != null &&
+            SimpleCellularTransition.Instance.IsBusy) return;
+
+        // Cambio livello in corso?
+        if (GameManager.instance != null &&
+            GameManager.instance.IsChangingLevel) return;
+
+
     }
 }
