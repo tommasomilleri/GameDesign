@@ -1,20 +1,37 @@
+
 using UnityEngine;
 
 public class Level5Manager : MonoBehaviour
 {
     [Header("Penalty Settings")]
     public int wrongShelfPenalty = 20;
-    [SerializeField] private int correctSlot = 5;
+
+    [Tooltip("Slot corretto: 3 = terza mensola dal basso (come da manuale!)")]
+    [SerializeField] private int correctSlot = 3;
+
     [Header("Audio SFX")]
     public AudioSource audioSource;
     public AudioClip successClip;
     public AudioClip errorClip;
 
+    private bool levelCompleted = false;
+
     public void CheckPosition(int slotNumber)
     {
+        // Lucchetto: dopo la vittoria niente piu' valutazioni
+        if (levelCompleted) return;
+
         if (slotNumber == correctSlot)
         {
             Debug.Log("Correct shelf position!");
+            levelCompleted = true;
+
+            // FIX: il successClip prima non veniva MAI suonato
+            if (audioSource != null && successClip != null)
+            {
+                audioSource.pitch = 1f;
+                audioSource.PlayOneShot(successClip);
+            }
 
             LevelComplete();
         }
@@ -41,3 +58,4 @@ public class Level5Manager : MonoBehaviour
             Debug.LogWarning("GameManager missing: cannot trigger ending!");
     }
 }
+
