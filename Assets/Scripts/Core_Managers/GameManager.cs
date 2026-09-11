@@ -25,11 +25,10 @@ public class GameManager : MonoBehaviour
     [Header("Story Endings Settings")]
     public GameObject endingPanel;
 
-    // (La variabile levelTransitionEffect non serve più, ma la lascio per non rompere l'Inspector)
     [Header("Easy Transition")]
     public PixeLadder.EasyTransition.TransitionEffect levelTransitionEffect;
 
-    [Header("Transition Settings (NOVITA')")]
+    [Header("Transition Settings")]
     public UnityEvent onPlayTransition;
     public float transitionDelay = 1.5f;
 
@@ -40,6 +39,8 @@ public class GameManager : MonoBehaviour
     [Tooltip("Trascina qui tutti i GoST in ordine (GoST1, GoST2, GoST3...)")]
     public GameObject[] debugGoSTSequence;
 
+    private bool isChangingLevel = false;
+    public bool IsChangingLevel { get { return isChangingLevel; } }
 
     void Awake()
     {
@@ -84,37 +85,22 @@ public class GameManager : MonoBehaviour
         if (currentQuality <= 0)
         {
             currentQuality = 0;
-            Debug.Log("Quality hit zero! Instant Bad Ending!");
             TriggerEnding();
 
             if (globalQualityBar != null)
-            {
                 globalQualityBar.gameObject.SetActive(false);
-            }
         }
         else
         {
-            Debug.Log("Global Quality is now: " + currentQuality);
             if (globalQualityBar != null)
-            {
                 globalQualityBar.SetQuality(currentQuality);
-            }
         }
     }
 
     public void TriggerEnding()
     {
-        Debug.Log("Triggering Ending Panel. Final Quality: " + currentQuality);
-
-        if (endingPanel != null)
-        {
-            endingPanel.SetActive(true);
-        }
-
-        if (qualityBarContainer != null)
-        {
-            qualityBarContainer.SetActive(false);
-        }
+        if (endingPanel != null) endingPanel.SetActive(true);
+        if (qualityBarContainer != null) qualityBarContainer.SetActive(false);
     }
 
     public void ResetQuality()
@@ -122,6 +108,10 @@ public class GameManager : MonoBehaviour
         currentQuality = maxQuality;
         runStartTime = Time.time;
         errorsPerLevel = new int[6];
+        currentLevel = 1;
+        unlockedStation = 0;
+        isChangingLevel = false;
+
         if (globalQualityBar != null)
         {
             globalQualityBar.SetMaxQuality(maxQuality);
@@ -131,7 +121,11 @@ public class GameManager : MonoBehaviour
         if (endingPanel != null) endingPanel.SetActive(false);
     }
 
-    // --- LA MAGIA DELLE TRANSIZIONI ---
+    public void NotifyTransitionFinished()
+    {
+        isChangingLevel = false;
+    }
+
     public void TransitionBetweenPanels(GameObject currentPanel, GameObject nextPanel)
     {
         if (onPlayTransition != null && onPlayTransition.GetPersistentEventCount() > 0)
@@ -141,40 +135,105 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            if (nextPanel != null) nextPanel.SetActive(true); // <-- CORRETTO QUI! (Era nextLevel)
+            if (nextPanel != null) nextPanel.SetActive(true);
             if (currentPanel != null) currentPanel.SetActive(false);
         }
     }
 
-    // --- IL NUOVO PONTE UNIVERSALE (AGGIORNATO AL CELLULAR SENZA SHADER) ---
     public void TransitionToNextLevel(GameObject currentLevel, GameObject targetLevel)
     {
-        unlockedStation++; // <-- AGGIUNGI QUESTA RIGA QUI!
-        // Chiama il NOSTRO script infallibile invece di quello dell'asset
+        if (isChangingLevel)
+        {
+            Debug.LogWarning("[GameManager] TransitionToNextLevel ignorata: gia' in corso.");
+            return;
+        }
+        if (targetLevel == null)
+        {
+            Debug.LogError("[GameManager] targetLevel NULL! Assegna NextLevel nell'Inspector.");
+            return;
+        }
+        if (targetLevel == currentLevel)
+        {
+            Debug.LogError("[GameManager] NextLevel == CurrentLevel! Controlla l'Inspector.");
+            return;
+        }
+
+        isChangingLevel = true;
+        unlockedStation++;
+
+        StartLoadingSequence(currentLevel, targetLevel);
+    }
+
+    public void TransitionIntoFirstLevel(GameObject currentPanel, GameObject firstLevel)
+    {
+        if (isChangingLevel)
+        {
+            Debug.LogWarning("[GameManager] TransitionIntoFirstLevel ignorata: gia' in corso.");
+            return;
+        }
+        if (firstLevel == null)
+        {
+            Debug.LogError("[GameManager] firstLevel NULL!");
+            return;
+        }
+
+        isChangingLevel = true;
+        unlockedStation = 0;
+
+        StartLoadingSequence(currentPanel, firstLevel);
+    }
+
+    private void StartLoadingSequence(GameObject currentPanel, GameObject targetPanel)
+    {
         if (SimpleCellularTransition.Instance != null && globalLoadingScreen != null)
         {
-            globalLoadingScreen.nextLevelPanel = targetLevel;
-
-            // FASE 1: Le bolle crescono per coprire lo schermo e ci restano!
             SimpleCellularTransition.Instance.PlayOut(() =>
             {
-                globalLoadingScreen.gameObject.SetActive(true);
-                if (currentLevel != null) currentLevel.SetActive(false);
+                if (currentPanel != null) currentPanel.SetActive(false);
+                globalLoadingScreen.BeginLoading(targetPanel);
             });
+            return;
         }
-        else
+
+        if (globalLoadingScreen != null)
         {
-            // Fallback: vecchio sistema a pannelli
-            if (globalLoadingScreen != null)
-            {
-                globalLoadingScreen.nextLevelPanel = targetLevel;
-                TransitionBetweenPanels(currentLevel, globalLoadingScreen.gameObject);
-            }
-            else
-            {
-                TransitionBetweenPanels(currentLevel, targetLevel);
-            }
+            if (currentPanel != null) currentPanel.SetActive(false);
+            globalLoadingScreen.BeginLoading(targetPanel);
+            return;
         }
+
+        Debug.LogWarning("[GameManager] LoadingScreen mancante: passaggio diretto al livello.");
+        targetPanel.SetActive(true);
+        if (currentPanel != null) currentPanel.SetActive(false);
+        isChangingLevel = false;
+    }
+
+    // Accende il pannello al frame SUCCESSIVO: evita che il click che ha chiuso
+    // la loading screen venga riletto dall'Update del pannello appena acceso.
+    public void ActivatePanelNextFrame(GameObject panel)
+    {
+        StartCoroutine(ActivatePanelRoutine(panel));
+    }
+
+    private IEnumerator ActivatePanelRoutine(GameObject panel)
+    {
+        yield return null;
+
+        if (panel != null)
+        {
+            panel.SetActive(true);
+
+            if (!panel.activeInHierarchy)
+                Debug.LogError("[GameManager] " + panel.name + ": il padre e' spento!", panel);
+        }
+
+        if (SimpleCellularTransition.Instance != null)
+            SimpleCellularTransition.Instance.PlayIn(null);
+
+        // Sblocco GARANTITO: non dipende dalla callback di PlayIn, che non viene
+        // invocata se la transizione precedente era ancora in corso ('busy').
+        yield return new WaitForSecondsRealtime(1.2f);
+        isChangingLevel = false;
     }
 
     private IEnumerator SwapAfterDelay(GameObject current, GameObject next, float delay)
@@ -183,35 +242,31 @@ public class GameManager : MonoBehaviour
         if (next != null) next.SetActive(true);
         if (current != null) current.SetActive(false);
     }
+
     void Update()
     {
-        // Se premi il tasto F12 sulla tastiera, si attiva il trucco!
-        if (Input.GetKeyDown(KeyCode.F12))
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+        if (Input.GetKeyDown(KeyCode.F12) && !isChangingLevel)
         {
             DevSkipLevel();
         }
+#endif
     }
 
     void DevSkipLevel()
     {
         if (debugGoSTSequence == null || debugGoSTSequence.Length == 0) return;
 
-        // Scansiona la lista per trovare quale GoST è attualmente ACCESO
         for (int i = 0; i < debugGoSTSequence.Length - 1; i++)
         {
             if (debugGoSTSequence[i] != null && debugGoSTSequence[i].activeInHierarchy)
             {
-                Debug.Log("Dev Cheat: Salto forzato da " + debugGoSTSequence[i].name + " a " + debugGoSTSequence[i + 1].name);
-
-                // Sblocca il cursore per sicurezza
                 Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
-
-                // Usa il ponte universale già esistente per avviare le bolle e scambiare le telecamere!
                 TransitionToNextLevel(debugGoSTSequence[i], debugGoSTSequence[i + 1]);
                 return;
             }
         }
 
-        Debug.LogWarning("Nessun GoST da saltare o sei già all'ultimo livello!");
+        Debug.LogWarning("Nessun GoST da saltare o sei gia' all'ultimo livello!");
     }
 }

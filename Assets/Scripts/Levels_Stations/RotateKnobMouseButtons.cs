@@ -1,14 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-// NOTA: Rimossi EventSystems e interfacce IPointer. Ora ascoltiamo il 3D!
 public class RotateKnobMouseButtons : MonoBehaviour
 {
-    // [potState, zonaCorrente] -> zonaTarget. CONTRATTO COL MANUALE HTML.
     private static readonly int[,] TargetTable = {
-        {2, 0, 1},   // pentola vuota
-        {1, 2, 0},   // vapore
-        {0, 1, 2}    // bolle
+        {2, 0, 1},
+        {1, 2, 0},
+        {0, 1, 2}
     };
 
     [Header("Visual Settings (Termometro Realistico)")]
@@ -19,21 +17,22 @@ public class RotateKnobMouseButtons : MonoBehaviour
     public GameObject blueMouse;
     public GameObject yellowMouse;
     public GameObject redMouse;
+
     [Header("UI & Level Management")]
-    public GameObject level2InterfaceContainer; // Il contenitore stile Wax per Orologio e Termometro nel 3D
-    public GameObject globalCanvasLevel2; // NUOVO: Il contenitore per la roba UI del livello 2 nel Canvas Generale
+    public GameObject level2InterfaceContainer;
+    public GameObject globalCanvasLevel2;
     public GameObject NextLevel;
     public GameObject CurrentLevel;
     public GameObject foam;
     public GameObject steam;
     public GameObject check;
 
-    [Header("Orologio Analogico (Infallibile)")]
+    [Header("Orologio Analogico")]
     public RectTransform timerHand;
     public float degreesPerTick = 30f;
     public float clockOffset = -140f;
 
-    [Header("Fisica dell'Inerzia (Difficoltà)")]
+    [Header("Fisica dell'Inerzia (Difficolta)")]
     [Range(0.01f, 1f)] public float clickForce = 0.15f;
     [Range(0.1f, 5f)] public float friction = 1.5f;
 
@@ -54,7 +53,6 @@ public class RotateKnobMouseButtons : MonoBehaviour
     public float errorTolerance = 1f;
     public int outOfZonePenalty = 5;
 
-    // --- VARIABILI INTERNE ---
     private float currentFillAmount = 0f;
     private float fillVelocity = 0f;
 
@@ -70,25 +68,50 @@ public class RotateKnobMouseButtons : MonoBehaviour
     private bool levelCompleted = false;
     private bool hasStarted = false;
 
-    // =========================================================
-    // NUOVO: GESTIONE ACCENSIONE/SPEGNIMENTO INTERFACCIA (Stile Livello 4)
-    // =========================================================
+    void Awake()
+    {
+        SetLevel2UI(false); // Parte rigorosamente spento
+    }
+
     void OnEnable()
     {
-        // Accende termometro e orologio OGNI VOLTA che questo livello viene attivato
-        if (level2InterfaceContainer != null) level2InterfaceContainer.SetActive(true);
-        if (globalCanvasLevel2 != null) globalCanvasLevel2.SetActive(true); // Accende la UI globale
+        // Non forziamo l'accensione qui, lasciamo fare al LateUpdate!
     }
 
     void OnDisable()
     {
-        // Spegne tutto quando questo livello si disattiva o viene completato
-        if (level2InterfaceContainer != null) level2InterfaceContainer.SetActive(false);
-        if (globalCanvasLevel2 != null) globalCanvasLevel2.SetActive(false); // Spegne la UI globale
+        SetLevel2UI(false);
 
-        // Stoppiamo anche i suoni per massima sicurezza!
         if (audioSource != null) audioSource.Stop();
         if (clockAudioSource != null) clockAudioSource.Stop();
+    }
+
+    void LateUpdate()
+    {
+        // 1. Spia l'interruttore del livello (GoST2) per sapere se siamo nel Livello 2
+        bool levelActive = (CurrentLevel != null) ? CurrentLevel.activeInHierarchy : false;
+
+        // 2. Mostra l'UI solo se siamo attivi e non abbiamo ancora vinto
+        bool show = levelActive && !levelCompleted;
+
+        // 3. Nascondi tutto durante le bolle di caricamento!
+        if (GameManager.instance != null && GameManager.instance.IsChangingLevel)
+            show = false;
+
+        SetLevel2UI(show);
+    }
+
+    private void SetLevel2UI(bool show)
+    {
+        if (level2InterfaceContainer != null && level2InterfaceContainer.activeSelf != show)
+            level2InterfaceContainer.SetActive(show);
+
+        if (globalCanvasLevel2 != null
+            && globalCanvasLevel2 != level2InterfaceContainer
+            && globalCanvasLevel2.activeSelf != show)
+        {
+            globalCanvasLevel2.SetActive(show);
+        }
     }
 
     void Start()
@@ -101,9 +124,6 @@ public class RotateKnobMouseButtons : MonoBehaviour
     {
         if (levelCompleted) return;
 
-        // =========================================================
-        // 1. FISICA DELL'INERZIA (SOLO PER IL LIQUIDO)
-        // =========================================================
         if (thermometerFill != null)
         {
             fillVelocity = Mathf.Lerp(fillVelocity, 0f, friction * Time.deltaTime);
@@ -119,18 +139,12 @@ public class RotateKnobMouseButtons : MonoBehaviour
             thermometerFill.color = gradient.Evaluate(currentFillAmount);
         }
 
-        // =========================================================
-        // 2. LOGICA DELLE ZONE
-        // =========================================================
         if (currentFillAmount <= 0.33f) currentZone = 0;
         else if (currentFillAmount <= 0.66f) currentZone = 1;
         else currentZone = 2;
 
         UpdateMiceVisuals();
 
-        // =========================================================
-        // 3. TIMER DI COTTURA SPIETATO & AUDIO OROLOGIO
-        // =========================================================
         if (hasStarted && check.activeSelf == false)
         {
             if (currentZone == targetZone)
@@ -138,7 +152,6 @@ public class RotateKnobMouseButtons : MonoBehaviour
                 currentErrorTime = 0f;
                 currentCookingTime += Time.deltaTime;
 
-                // GESTIONE AUDIO OROLOGIO CONTINUO
                 if (clockAudioSource != null && clockTickSound != null)
                 {
                     if (!clockAudioSource.isPlaying)
@@ -159,7 +172,6 @@ public class RotateKnobMouseButtons : MonoBehaviour
                 currentCookingTime = 0f;
                 currentErrorTime += Time.deltaTime;
 
-                // FERMA L'OROLOGIO: Il liquido è fuori zona, il timer si azzera!
                 if (clockAudioSource != null && clockAudioSource.isPlaying)
                 {
                     clockAudioSource.Stop();
@@ -171,19 +183,15 @@ public class RotateKnobMouseButtons : MonoBehaviour
                     if (GameManager.instance != null)
                         GameManager.instance.DecreaseGlobalQuality(outOfZonePenalty);
 
-                    RandomizePotState(); // Costringe il giocatore a riadattarsi!
+                    RandomizePotState();
                 }
             }
         }
         else
         {
-            // Silenzia l'orologio durante le pause o prima del primissimo click
             if (clockAudioSource != null && clockAudioSource.isPlaying) clockAudioSource.Stop();
         }
 
-        // =========================================================
-        // 4. OROLOGIO ANALOGICO
-        // =========================================================
         if (timerHand != null)
         {
             float displayTime = (!hasStarted || check.activeSelf) ? 0f : currentCookingTime;
@@ -191,9 +199,6 @@ public class RotateKnobMouseButtons : MonoBehaviour
             timerHand.localRotation = Quaternion.Euler(0f, 0f, rotationAngle);
         }
 
-        // =========================================================
-        // 5. SPUNTA VERDE E RIPARTENZA
-        // =========================================================
         if (check.activeSelf)
         {
             checkTimer += Time.deltaTime;
@@ -201,7 +206,7 @@ public class RotateKnobMouseButtons : MonoBehaviour
             {
                 check.SetActive(false);
                 checkTimer = 0f;
-                hasStarted = false; // Mette in pausa finché non clicchi di nuovo
+                hasStarted = false;
                 RandomizePotState();
             }
         }
@@ -211,7 +216,7 @@ public class RotateKnobMouseButtons : MonoBehaviour
     {
         currentWins++;
         currentCookingTime = 0f;
-        fillVelocity = 0f; // Azzera l'inerzia
+        fillVelocity = 0f;
 
         check.SetActive(true);
         checkTimer = 0f;
@@ -250,13 +255,9 @@ public class RotateKnobMouseButtons : MonoBehaviour
         else if (currentFillAmount <= 0.66f) startingColumn = 1;
         else startingColumn = 2;
 
-        // La famosa Matrice Infallibile!
         targetZone = TargetTable[potState, startingColumn];
     }
 
-    // =========================================================
-    // NUOVI COMANDI 3D: GUIDANO L'INERZIA E LA ROTAZIONE!
-    // =========================================================
     public void ClickLeft() { HandleClick(-1); }
     public void ClickRight() { HandleClick(1); }
 
@@ -265,10 +266,8 @@ public class RotateKnobMouseButtons : MonoBehaviour
         if (levelCompleted || check.activeSelf) return;
         if (!hasStarted) hasStarted = true;
 
-        // Applica forza all'inerzia: dir = -1 (scende), +1 (sale)
         fillVelocity += clickForce * dir;
 
-        // Ruota visivamente la manopola 3D sul suo asse Z
         transform.Rotate(0f, rotationStep * dir, 0f);
 
         if (audioSource != null && knobClickSound != null)
@@ -290,6 +289,8 @@ public class RotateKnobMouseButtons : MonoBehaviour
         if (check != null) check.SetActive(true);
         if (audioSource != null) audioSource.Stop();
         if (clockAudioSource != null) clockAudioSource.Stop();
+
+        SetLevel2UI(false);
 
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
         if (GameManager.instance != null)

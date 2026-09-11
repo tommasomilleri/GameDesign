@@ -70,14 +70,29 @@ public class SimpleCellularTransition : MonoBehaviour
 
         go.SetActive(false);
     }
+
     public void PlayOut(Action onDone)
     {
-        if (!busy) StartCoroutine(OutRoutine(onDone));
+        // Se e' occupata NON usciamo in silenzio: invochiamo comunque la callback,
+        // altrimenti la catena delle transizioni si spezza e il gioco si blocca.
+        if (busy)
+        {
+            Debug.LogWarning("[CellularTransition] PlayOut ignorata: transizione gia' in corso.");
+            if (onDone != null) onDone();
+            return;
+        }
+        StartCoroutine(OutRoutine(onDone));
     }
 
     public void PlayIn(Action onDone)
     {
-        if (!busy) StartCoroutine(InRoutine(onDone));
+        if (busy)
+        {
+            Debug.LogWarning("[CellularTransition] PlayIn ignorata: transizione gia' in corso.");
+            if (onDone != null) onDone();
+            return;
+        }
+        StartCoroutine(InRoutine(onDone));
     }
 
     IEnumerator OutRoutine(Action onDone)
@@ -100,14 +115,20 @@ public class SimpleCellularTransition : MonoBehaviour
         }
         foreach (var rt in circles) rt.localScale = new Vector3(targetScale, targetScale, 1f);
 
-        // Invoca l'azione e SI FERMA (lasciando lo schermo coperto di bolle)
-        if (onDone != null) onDone();
+        // Sblocca PRIMA di invocare la callback: se la callback avvia
+        // un'altra transizione non deve trovare 'busy' ancora true.
         busy = false;
+        if (onDone != null) onDone();
     }
 
     IEnumerator InRoutine(Action onDone)
     {
         busy = true;
+
+        // Le bolle devono partire grandi: se OutRoutine non e' mai stata
+        // eseguita, forziamo lo stato coperto prima di aprire.
+        canvas.gameObject.SetActive(true);
+
         float maxDim = Mathf.Max(Screen.width, Screen.height);
         float targetScale = (maxDim / 100f) * 3.5f;
 
@@ -125,7 +146,7 @@ public class SimpleCellularTransition : MonoBehaviour
 
         // Spegne il nero e sblocca
         canvas.gameObject.SetActive(false);
-        if (onDone != null) onDone();
         busy = false;
+        if (onDone != null) onDone();
     }
 }
