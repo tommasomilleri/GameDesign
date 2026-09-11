@@ -10,19 +10,21 @@ public class MenuManager : MonoBehaviour
     public GameObject TutorialPage;
     public GameObject PlayerSelectPage;
 
+    [Header("Story Page Extras")]
+    [Tooltip("Bottone 'Skip' dentro la StoryPage: visibile solo se la storia è già stata letta")]
+    public GameObject storySkipButton;
+
     [Header("Levels")]
     public GameObject Lvl1;
 
     void Start()
     {
-        // 1. Nasconde il Quality Meter appena si apre il menu usando il NUOVO GameManager
         if (GameManager.instance != null && GameManager.instance.qualityBarContainer != null)
         {
             GameManager.instance.qualityBarContainer.SetActive(false);
         }
         Time.timeScale = 1.0f;
 
-        // 2. FORZATURA DI SICUREZZA: Assicura che al riavvio della scena ci sia solo lo StartMenu
         if (StartPage != null) StartPage.SetActive(true);
         if (StoryPage != null) StoryPage.SetActive(false);
         if (TutorialPage != null) TutorialPage.SetActive(false);
@@ -35,25 +37,21 @@ public class MenuManager : MonoBehaviour
     {
         if (StartPage != null) StartPage.SetActive(false);
 
-        // AGGIORNAMENTO H5: Salto della storia per chi ha già giocato
-        if (PlayerPrefs.GetInt("storySeen", 0) == 1)
-        {
-            if (PlayerSelectPage != null) PlayerSelectPage.SetActive(true);
-        }
-        else
-        {
-            if (StoryPage != null) StoryPage.SetActive(true);
-        }
+        // FIX: la storia si mostra SEMPRE. Chi l'ha già letta vede il bottone Skip.
+        // (Prima l'auto-salto la nascondeva per sempre dopo la prima run.)
+        if (StoryPage != null) StoryPage.SetActive(true);
+        if (storySkipButton != null)
+            storySkipButton.SetActive(PlayerPrefs.GetInt("storySeen", 0) == 1);
     }
 
-    // NEXT BUTTON ON STORY PAGE
+    // NEXT BUTTON ON STORY PAGE (e anche il bottone Skip: stessa funzione)
     public void GoToPlayerSelection()
     {
         if (StoryPage != null) StoryPage.SetActive(false);
         if (PlayerSelectPage != null) PlayerSelectPage.SetActive(true);
 
-        // Salva in memoria che il giocatore ha letto la storia
         PlayerPrefs.SetInt("storySeen", 1);
+        PlayerPrefs.Save();   // scrittura su disco esplicita
     }
 
     // TUTORIAL BUTTON
@@ -83,21 +81,30 @@ public class MenuManager : MonoBehaviour
     {
         Debug.Log("Player 2 (Chef) selected. Starting Level 1...");
 
-        if (PlayerSelectPage != null)
+        if (Lvl1 == null)
         {
-            PlayerSelectPage.SetActive(false);
+            Debug.LogWarning("Lvl1 is missing! Drag it into the MenuManager Inspector.");
+            return;
         }
 
-        if (Lvl1 != null)
+        // FIX PRINCIPALE: si passa dal flusso ufficiale del GameManager.
+        // TransitionIntoFirstLevel fa: gameplayActive = true (sblocca i click
+        // sulle mucche!), unlockedStation = 0, transizione cellulare + loading
+        // screen, e spegne LUI il PlayerSelectPage al momento giusto.
+        // NON spegnere PlayerSelectPage qui: sparirebbe prima della transizione.
+        if (GameManager.instance != null)
         {
-            Lvl1.SetActive(true);
+            GameManager.instance.TransitionIntoFirstLevel(PlayerSelectPage, Lvl1);
         }
         else
         {
-            Debug.LogWarning("Lvl1 is missing! Drag it into the MenuManager Inspector.");
+            // Fallback d'emergenza senza GameManager
+            if (PlayerSelectPage != null) PlayerSelectPage.SetActive(false);
+            Lvl1.SetActive(true);
         }
 
-        // Riaccende la barra della qualità usando il NUOVO GameManager
+        // Barra qualità e pausa si abilitano subito (la barra è overlay,
+        // il loading la copre comunque)
         if (GameManager.instance != null && GameManager.instance.qualityBarContainer != null)
         {
             GameManager.instance.qualityBarContainer.SetActive(true);
@@ -106,15 +113,12 @@ public class MenuManager : MonoBehaviour
         {
             PauseMenuManager.Instance.canPause = true;
         }
-
     }
 
-    // AGGIORNAMENTO I1: Sostituito PDF con il sito web locale
     void OpenPlayer1Manual()
     {
         try
         {
-            // Cerca il file index.html dentro la cartella "manual" in StreamingAssets
             string manualPath = Path.Combine(Application.streamingAssetsPath, "manual/index.html");
             string manualURL = new Uri(manualPath).AbsoluteUri;
             Application.OpenURL(manualURL);

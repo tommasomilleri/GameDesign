@@ -8,12 +8,15 @@ public class StationActivator : MonoBehaviour
 
     void OnEnable()
     {
-        Debug.Log("[STATION ACTIVATOR] La postazione " + gameObject.name + " è ATTIVA. Avviso il Regista!");
-
-        // Invece di accendere la camera a mano, diciamo al Regista globale di andarci dolcemente!
-        if (CameraDirector.Instance != null)
-        {
-            CameraDirector.Instance.GoTo(stationIndex);
-        }
+        StartCoroutine(NotifyDirector());
     }
+
+    System.Collections.IEnumerator NotifyDirector()
+    {
+        // aspetta che il Regista esista (race di Awake al primo load)
+        while (CameraDirector.Instance == null) yield return null;
+        Debug.Log("[STATION ACTIVATOR] " + gameObject.name + " → GoTo(" + stationIndex + ")");
+        CameraDirector.Instance.GoTo(stationIndex);
+    }
+
 }

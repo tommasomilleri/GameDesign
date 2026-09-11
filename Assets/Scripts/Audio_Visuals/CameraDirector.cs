@@ -13,9 +13,13 @@ public class CameraDirector : MonoBehaviour
 
     public void GoTo(int i)
     {
-        if (i < 0 || i >= cams.Length) return;
+        if (i < 0 || i >= cams.Length)
+        { Debug.LogWarning($"[CameraDirector] indice {i} fuori range"); return; }
         if (GameManager.instance != null &&
-            i > GameManager.instance.unlockedStation) return;
+            i > GameManager.instance.unlockedStation)
+        { Debug.LogWarning($"[CameraDirector] GoTo({i}) RIFIUTATO: unlockedStation={GameManager.instance.unlockedStation}"); return; }
+        Debug.Log($"[CameraDirector] vado a station {i}");
+
 
         Current = i;
         for (int k = 0; k < cams.Length; k++)

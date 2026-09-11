@@ -16,6 +16,14 @@ public class Interactor : MonoBehaviour
 
         // Se il gioco è in pausa, disabilita i click
         if (PauseMenuManager.Instance != null && PauseMenuManager.Instance.isPaused) return;
+        // Mai raycast nel mondo se il click è su un elemento UI
+        if (UnityEngine.EventSystems.EventSystem.current != null &&
+            UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+            return;
+        // Mai raycast se il gameplay non è iniziato (siamo nei menu)
+        if (GameManager.instance == null || !GameManager.instance.gameplayActive)
+            return;
+
 
         Ray r = cam.ScreenPointToRay(Input.mousePosition);
 
