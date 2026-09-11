@@ -19,8 +19,9 @@ public class RotateKnobMouseButtons : MonoBehaviour
     public GameObject blueMouse;
     public GameObject yellowMouse;
     public GameObject redMouse;
-
     [Header("UI & Level Management")]
+    public GameObject level2InterfaceContainer; // Il contenitore stile Wax per Orologio e Termometro nel 3D
+    public GameObject globalCanvasLevel2; // NUOVO: Il contenitore per la roba UI del livello 2 nel Canvas Generale
     public GameObject NextLevel;
     public GameObject CurrentLevel;
     public GameObject foam;
@@ -68,6 +69,27 @@ public class RotateKnobMouseButtons : MonoBehaviour
 
     private bool levelCompleted = false;
     private bool hasStarted = false;
+
+    // =========================================================
+    // NUOVO: GESTIONE ACCENSIONE/SPEGNIMENTO INTERFACCIA (Stile Livello 4)
+    // =========================================================
+    void OnEnable()
+    {
+        // Accende termometro e orologio OGNI VOLTA che questo livello viene attivato
+        if (level2InterfaceContainer != null) level2InterfaceContainer.SetActive(true);
+        if (globalCanvasLevel2 != null) globalCanvasLevel2.SetActive(true); // Accende la UI globale
+    }
+
+    void OnDisable()
+    {
+        // Spegne tutto quando questo livello si disattiva o viene completato
+        if (level2InterfaceContainer != null) level2InterfaceContainer.SetActive(false);
+        if (globalCanvasLevel2 != null) globalCanvasLevel2.SetActive(false); // Spegne la UI globale
+
+        // Stoppiamo anche i suoni per massima sicurezza!
+        if (audioSource != null) audioSource.Stop();
+        if (clockAudioSource != null) clockAudioSource.Stop();
+    }
 
     void Start()
     {
