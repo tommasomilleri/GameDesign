@@ -21,6 +21,13 @@ public class QualityBar : MonoBehaviour
 
     public void SetQuality(int quality)
     {
+        /*
+        if (!gameObject.activeInHierarchy)
+        {
+            if (moldFillImage != null) moldFillImage.fillAmount = 1f - (float)quality / maxQuality;   // <-- usa il TUO campo (slider/fillImage)
+            return;
+        }*/
+
         StopAllCoroutines(); // Ferma animazioni precedenti
         StartCoroutine(AnimateMoldVisual(quality));
     }

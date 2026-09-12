@@ -8,52 +8,109 @@ public class PhysicsGrabber : MonoBehaviour
     public float maxThrowSpeed = 3f;
 
     [Header("Profondita' (rotella mouse)")]
+    [Tooltip("Velocita' della rotella. SCALA della scena: se gli oggetti sono a 150m, mettila a ~40")]
     public float scrollSpeed = 2f;
-    public float minDepth = 0.8f;     // mai attaccato alla lente
-    public float maxDepth = 6f;       // mai oltre il set (tarare dopo il punto 1!)
+    [Tooltip("Distanza minima dalla camera. Tarare sulla scala della scena!")]
+    public float minDepth = 0.8f;
+    [Tooltip("Distanza massima. Regola: distanza camera-pentolone + margine")]
+    public float maxDepth = 6f;
 
     [Header("Stabilita'")]
-    [Tooltip("Sotto questa distanza dal target l'oggetto si ferma (no orbita)")]
+    [Tooltip("Sotto questa distanza dal target si ferma. Su scene grandi: ~1.0")]
     public float deadZone = 0.05f;
 
+    [Header("Debug")]
+    public bool debugLogs = true;
+
     public bool IsHolding { get; private set; }
+    public void ConfigureDepth(float newMinDepth, float newMaxDepth, float newScrollSpeed)
+    {
+        minDepth = newMinDepth;
+        maxDepth = newMaxDepth;
+        scrollSpeed = newScrollSpeed;
+        // Se stiamo gia' tenendo qualcosa, riclampa subito
+        currentDepth = Mathf.Clamp(currentDepth, minDepth, maxDepth);
+    }
 
     Camera cam;
     Rigidbody held;
-    float currentDepth;               // distanza dalla camera, variabile con la rotella
+    float currentDepth;
 
-    void Awake() { cam = GetComponent<Camera>(); }
+    void Awake()
+    {
+        cam = GetComponent<Camera>();
+        if (cam == null)
+            Debug.LogError("[Grabber] Nessuna Camera su '" + name +
+                           "'. Mettilo sulla Main Camera!", this);
+    }
 
     void Update()
     {
-        // Pausa o menu: rilascio forzato e stop
-        bool blocked =
-            (PauseMenuManager.Instance != null && PauseMenuManager.Instance.isPaused) ||
-            (GameManager.instance != null && !GameManager.instance.gameplayActive);
-        if (blocked) { if (held != null) Release(); return; }
+        if (cam == null) return;
 
-        // 1. AFFERRA
+        bool paused = PauseMenuManager.Instance != null &&
+                      PauseMenuManager.Instance.isPaused;
+        bool noGameplay = GameManager.instance == null ||
+                          !GameManager.instance.gameplayActive;
+        bool changing = GameManager.instance != null &&
+                        GameManager.instance.IsChangingLevel;
+        bool blocked = paused || noGameplay || changing;
+
+        if (blocked)
+        {
+            if (debugLogs && Input.GetMouseButtonDown(0))
+                Debug.Log("[Grabber] BLOCCATO: paused=" + paused +
+                          " gameplayActive=" + !noGameplay +
+                          " isChangingLevel=" + changing);
+            if (held != null) Release();
+            return;
+        }
+
+        // ---- 1. AFFERRA ----
         if (Input.GetMouseButtonDown(0) && held == null)
         {
-            // Mai afferrare attraverso la UI
             if (UnityEngine.EventSystems.EventSystem.current != null &&
                 UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
                 return;
 
             Ray r = cam.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(r, out RaycastHit hit, 100f) &&
-                hit.rigidbody != null && hit.rigidbody.CompareTag("Grabbable"))
+            // RAGGIO INFINITO: su scene fuori scala 100m non bastavano
+            if (Physics.Raycast(r, out RaycastHit hit, Mathf.Infinity))
             {
-                held = hit.rigidbody;
-                held.useGravity = false;
-                held.linearDamping = 10f;
-                // La profondita' iniziale e' quella dell'oggetto al grab
-                currentDepth = Vector3.Distance(cam.transform.position, held.position);
-                IsHolding = true;
+                if (hit.rigidbody != null && hit.rigidbody.CompareTag("Grabbable"))
+                {
+                    held = hit.rigidbody;
+                    held.useGravity = false;
+                    held.linearDamping = 10f;
+                    currentDepth = Mathf.Clamp(
+                        Vector3.Distance(cam.transform.position, held.position),
+                        minDepth, maxDepth);
+                    IsHolding = true;
+                }
+                else if (debugLogs)
+                {
+                    if (hit.rigidbody == null)
+                        Debug.Log("[Grabber] colpito '" + hit.collider.name +
+                                  "' a distanza " + hit.distance.ToString("F1") +
+                                  " ma NON ha Rigidbody (etichetta/prop con " +
+                                  "collider davanti alla fiala?)");
+                    else
+                        Debug.Log("[Grabber] colpito '" + hit.rigidbody.name +
+                                  "' a distanza " + hit.distance.ToString("F1") +
+                                  " ma il tag e' '" + hit.rigidbody.tag +
+                                  "'. Il tag Grabbable va sul GameObject " +
+                                  "che ha il RIGIDBODY!");
+                }
+            }
+            else if (debugLogs)
+            {
+                Debug.Log("[Grabber] il raycast non ha colpito NULLA " +
+                          "(nemmeno tavolo o muri: fiale/scena SENZA " +
+                          "collider attivi)");
             }
         }
 
-        // 2. ROTELLA: avvicina/allontana lungo lo sguardo
+        // ---- 2. ROTELLA ----
         if (held != null)
         {
             float scroll = Input.GetAxis("Mouse ScrollWheel");
@@ -62,19 +119,20 @@ public class PhysicsGrabber : MonoBehaviour
                                            minDepth, maxDepth);
         }
 
-        // 3. RILASCIA
+        // ---- 3. RILASCIA ----
         if (Input.GetMouseButtonUp(0) && held != null) Release();
     }
 
     void Release()
     {
-        held.useGravity = true;
-        held.linearDamping = 0f;
-        // FIX "scivolano via": velocita' di trascinamento ridotta all'80%
-        // e rotazione azzerata. L'oggetto CADE dove lo molli, non vola.
-        held.linearVelocity = Vector3.ClampMagnitude(held.linearVelocity * 0.2f,
-                                                     maxThrowSpeed);
-        held.angularVelocity = Vector3.zero;
+        if (held != null)
+        {
+            held.useGravity = true;
+            held.linearDamping = 0f;
+            held.linearVelocity = Vector3.ClampMagnitude(
+                held.linearVelocity * 0.2f, maxThrowSpeed);
+            held.angularVelocity = Vector3.zero;
+        }
         held = null;
         IsHolding = false;
     }
@@ -82,20 +140,21 @@ public class PhysicsGrabber : MonoBehaviour
     void FixedUpdate()
     {
         if (held == null) return;
-        // La fiala giusta viene disattivata dal Level3Manager mentre
-        // magari la stiamo ancora tenendo: rilascio pulito.
-        if (!held.gameObject.activeInHierarchy) { held = null; IsHolding = false; return; }
 
+        if (!held.gameObject.activeInHierarchy)
+        {
+            held = null;
+            IsHolding = false;
+            return;
+        }
 
-        // Target = punto sul raggio del mouse ALLA PROFONDITA' corrente
-        // (niente piu' Plane fisso: la rotella muove currentDepth)
         Ray r = cam.ScreenPointToRay(Input.mousePosition);
         Vector3 target = r.GetPoint(currentDepth);
 
         Vector3 dir = target - held.position;
-        // Dead zone: vicino al target si ferma invece di orbitare
         held.linearVelocity = dir.magnitude < deadZone
             ? Vector3.zero
             : dir * grabSpeed;
     }
 }
+

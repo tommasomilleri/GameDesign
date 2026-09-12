@@ -28,6 +28,13 @@ public class Level3Manager : MonoBehaviour
 
     [Header("Penalty Settings")]
     public int wrongAnswerPenalty = 20;
+    [Header("Grab Tuning (fiale)")]
+    [Tooltip("Distanza MINIMA della fiala dalla camera: ALZALA se la fiala copre lo schermo!")]
+    public float vialMinDepth = 2.5f;
+    [Tooltip("Distanza massima (deve coprire il pentolone)")]
+    public float vialMaxDepth = 8f;
+    [Tooltip("Sensibilita' della rotella: piu' alto = avvicinamento piu' rapido")]
+    public float vialScrollSensitivity = 2f;
 
     void Start()
     {
@@ -37,7 +44,13 @@ public class Level3Manager : MonoBehaviour
     void OnEnable()
     {
         levelCompleted = false;   // reset per il Replay
+
+        // Applica al grabber la taratura specifica di QUESTO livello
+        var grabber = FindFirstObjectByType<PhysicsGrabber>();
+        if (grabber != null)
+            grabber.ConfigureDepth(vialMinDepth, vialMaxDepth, vialScrollSensitivity);
     }
+
 
     // --- NUOVA FIRMA FISICA: Usa l'ID e il Rigidbody 3D ---
     public void CheckIngredient(IngredientID ingredient, Rigidbody rb)

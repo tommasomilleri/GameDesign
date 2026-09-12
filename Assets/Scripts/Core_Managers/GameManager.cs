@@ -287,7 +287,9 @@ public class GameManager : MonoBehaviour
             if (debugGoSTSequence[i] != null && debugGoSTSequence[i].activeInHierarchy)
             {
                 Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+                gameplayActive = true;   // il cheat salta il menu: attiva il gameplay
                 TransitionToNextLevel(debugGoSTSequence[i], debugGoSTSequence[i + 1]);
+
                 return;
             }
         }

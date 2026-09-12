@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class PotTrigger : MonoBehaviour
@@ -6,17 +7,12 @@ public class PotTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        // 1. Cerca il TUO componente IngredientID sulla fiala che è appena entrata
+        // Filtro rapido: senza Rigidbody non e' un oggetto di gioco
+        if (other.attachedRigidbody == null) return;
+
         var ingredient = other.GetComponentInParent<IngredientID>();
+        if (ingredient == null || manager == null) return;
 
-        // 2. Prende anche il Rigidbody della fiala (ci serve per il rimbalzo!)
-        var rb = other.GetComponentInParent<Rigidbody>();
-
-        // 3. Se è davvero un ingrediente e il manager è collegato...
-        if (ingredient != null && manager != null)
-        {
-            // ...chiama la TUA funzione passando l'ID e la fisica!
-            manager.CheckIngredient(ingredient, rb);
-        }
+        manager.CheckIngredient(ingredient, other.attachedRigidbody);
     }
 }

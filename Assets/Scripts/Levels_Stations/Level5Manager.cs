@@ -18,8 +18,14 @@ public class Level5Manager : MonoBehaviour
 
     public void CheckPosition(int slotNumber)
     {
-        // Lucchetto: dopo la vittoria niente piu' valutazioni
         if (levelCompleted) return;
+
+        // Il formaggio che tocca uno slot al load della scena NON
+        // deve costare qualita': si valuta solo a partita in corso.
+        if (GameManager.instance == null ||
+            !GameManager.instance.gameplayActive) return;
+
+
 
         if (slotNumber == correctSlot)
         {
