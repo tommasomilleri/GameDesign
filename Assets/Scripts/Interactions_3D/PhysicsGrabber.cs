@@ -1,40 +1,42 @@
-
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PhysicsGrabber : MonoBehaviour
 {
     [Header("Impostazioni Presa")]
     public float grabSpeed = 15f;
     public float maxThrowSpeed = 3f;
+    [Tooltip("VELOCITA' MASSIMA di traino: il tetto che impedisce il tunneling!")]
+    public float maxPullSpeed = 12f;
 
     [Header("Profondita' (rotella mouse)")]
-    [Tooltip("Velocita' della rotella. SCALA della scena: se gli oggetti sono a 150m, mettila a ~40")]
+    [Tooltip("Velocita' della rotella. Scala della scena: oggetti a 150m → ~40")]
     public float scrollSpeed = 2f;
-    [Tooltip("Distanza minima dalla camera. Tarare sulla scala della scena!")]
     public float minDepth = 0.8f;
-    [Tooltip("Distanza massima. Regola: distanza camera-pentolone + margine")]
     public float maxDepth = 6f;
+    [Tooltip("Velocita' con cui la profondita' rientra nel range se afferri un oggetto fuori range (m/s). NIENTE piu' strattone al grab!")]
+    public float depthAdjustSpeed = 3f;
 
     [Header("Stabilita'")]
-    [Tooltip("Sotto questa distanza dal target si ferma. Su scene grandi: ~1.0")]
     public float deadZone = 0.05f;
 
     [Header("Debug")]
     public bool debugLogs = true;
 
     public bool IsHolding { get; private set; }
+
     public void ConfigureDepth(float newMinDepth, float newMaxDepth, float newScrollSpeed)
     {
         minDepth = newMinDepth;
         maxDepth = newMaxDepth;
         scrollSpeed = newScrollSpeed;
-        // Se stiamo gia' tenendo qualcosa, riclampa subito
-        currentDepth = Mathf.Clamp(currentDepth, minDepth, maxDepth);
+        // NON riclampiamo currentDepth di colpo: ci pensa il
+        // riavvicinamento morbido in FixedUpdate.
     }
 
     Camera cam;
     Rigidbody held;
     float currentDepth;
+    CollisionDetectionMode heldOriginalMode;   // per ripristinarla al rilascio
 
     void Awake()
     {
@@ -74,7 +76,6 @@ public class PhysicsGrabber : MonoBehaviour
                 return;
 
             Ray r = cam.ScreenPointToRay(Input.mousePosition);
-            // RAGGIO INFINITO: su scene fuori scala 100m non bastavano
             if (Physics.Raycast(r, out RaycastHit hit, Mathf.Infinity))
             {
                 if (hit.rigidbody != null && hit.rigidbody.CompareTag("Grabbable"))
@@ -82,9 +83,18 @@ public class PhysicsGrabber : MonoBehaviour
                     held = hit.rigidbody;
                     held.useGravity = false;
                     held.linearDamping = 10f;
-                    currentDepth = Mathf.Clamp(
-                        Vector3.Distance(cam.transform.position, held.position),
-                        minDepth, maxDepth);
+
+                    // ANTI-TUNNEL: fisica continua mentre e' in mano
+                    heldOriginalMode = held.collisionDetectionMode;
+                    held.collisionDetectionMode =
+                        CollisionDetectionMode.ContinuousDynamic;
+
+                    // FIX STRATTONE: si parte dalla distanza VERA
+                    // dell'oggetto, SENZA clamp. Il rientro nel range
+                    // avviene morbido in FixedUpdate.
+                    currentDepth = Vector3.Distance(
+                        cam.transform.position, held.position);
+
                     IsHolding = true;
                 }
                 else if (debugLogs)
@@ -92,21 +102,16 @@ public class PhysicsGrabber : MonoBehaviour
                     if (hit.rigidbody == null)
                         Debug.Log("[Grabber] colpito '" + hit.collider.name +
                                   "' a distanza " + hit.distance.ToString("F1") +
-                                  " ma NON ha Rigidbody (etichetta/prop con " +
-                                  "collider davanti alla fiala?)");
+                                  " ma NON ha Rigidbody");
                     else
                         Debug.Log("[Grabber] colpito '" + hit.rigidbody.name +
                                   "' a distanza " + hit.distance.ToString("F1") +
-                                  " ma il tag e' '" + hit.rigidbody.tag +
-                                  "'. Il tag Grabbable va sul GameObject " +
-                                  "che ha il RIGIDBODY!");
+                                  " ma il tag e' '" + hit.rigidbody.tag + "'");
                 }
             }
             else if (debugLogs)
             {
-                Debug.Log("[Grabber] il raycast non ha colpito NULLA " +
-                          "(nemmeno tavolo o muri: fiale/scena SENZA " +
-                          "collider attivi)");
+                Debug.Log("[Grabber] il raycast non ha colpito NULLA");
             }
         }
 
@@ -129,6 +134,7 @@ public class PhysicsGrabber : MonoBehaviour
         {
             held.useGravity = true;
             held.linearDamping = 0f;
+            held.collisionDetectionMode = heldOriginalMode;   // ripristina
             held.linearVelocity = Vector3.ClampMagnitude(
                 held.linearVelocity * 0.2f, maxThrowSpeed);
             held.angularVelocity = Vector3.zero;
@@ -148,13 +154,23 @@ public class PhysicsGrabber : MonoBehaviour
             return;
         }
 
+        // Rientro MORBIDO nel range: se hai afferrato un oggetto piu'
+        // lontano di maxDepth (o piu' vicino di minDepth), la
+        // profondita' scivola verso il range invece di scattare.
+        float clamped = Mathf.Clamp(currentDepth, minDepth, maxDepth);
+        currentDepth = Mathf.MoveTowards(currentDepth, clamped,
+                                         depthAdjustSpeed * Time.fixedDeltaTime);
+
         Ray r = cam.ScreenPointToRay(Input.mousePosition);
         Vector3 target = r.GetPoint(currentDepth);
 
         Vector3 dir = target - held.position;
+
+        // ANTI-TUNNEL parte 2: velocita' di traino LIMITATA.
+        // dir * grabSpeed puo' esplodere se il target e' lontano:
+        // il tetto maxPullSpeed impedisce di saltare i collider.
         held.linearVelocity = dir.magnitude < deadZone
             ? Vector3.zero
-            : dir * grabSpeed;
+            : Vector3.ClampMagnitude(dir * grabSpeed, maxPullSpeed);
     }
 }
-

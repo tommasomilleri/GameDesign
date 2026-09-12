@@ -1,13 +1,14 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class RotateKnobMouseButtons : MonoBehaviour
 {
     private static readonly int[,] TargetTable = {
-        {2, 0, 1},
-        {1, 2, 0},
-        {0, 1, 2}
+        {2, 0, 1},   
+        {1, 2, 0},  
+        {2, 2, 1}   
     };
+
 
     [Header("Visual Settings (Termometro Realistico)")]
     public Gradient gradient;
@@ -249,13 +250,20 @@ public class RotateKnobMouseButtons : MonoBehaviour
                 audioSource.Play();
             }
         }
-
         int startingColumn = 0;
         if (currentFillAmount <= 0.33f) startingColumn = 0;
         else if (currentFillAmount <= 0.66f) startingColumn = 1;
         else startingColumn = 2;
 
         targetZone = TargetTable[potState, startingColumn];
+
+        if (targetZone == startingColumn)
+            targetZone = (startingColumn + 1) % 3;
+
+        Debug.Log("[Knob] potState=" + potState +
+                  " partenza=zona " + startingColumn +
+                  " → TARGET=zona " + targetZone);
+
     }
 
     public void ClickLeft() { HandleClick(-1); }
