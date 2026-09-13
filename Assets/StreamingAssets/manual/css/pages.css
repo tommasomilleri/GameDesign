@@ -1,0 +1,301 @@
+/* ============================================================
+   PAGES.CSS — layer delle pagine vive + tipografia enigmi.
+   L'overlay si allinea alla geometria carta delle texture:
+   x: 5.1% → 94.9%   y: 21.8% → 78.2%   (come in pages.js)
+   ============================================================ */
+
+/* font locali */
+@font-face{ font-family:'LetteraDecorata'; src:url('../fonts/MiddleAgesDeco_PERSONAL_USE.ttf') format('truetype'); }
+@font-face{ font-family:'Monaco';          src:url('../fonts/lazymonkdemo.ttf') format('truetype'); }
+@font-face{ font-family:'AntroVectra';     src:url('../fonts/Antro_Vectra.otf') format('opentype'); }
+@font-face{ font-family:'BiroScript';      src:url('../fonts/Biro_Script_reduced.ttf') format('truetype'); }
+
+/* ===== il layer vivo ===== */
+.live-layer{
+  position:absolute; inset:0; z-index:70;   /* sopra .sb-zone (60) */
+  pointer-events:none;
+  opacity:1; transition:opacity .18s ease;
+}
+.live-layer.hidden{ opacity:0; }
+
+/* zone pagina: trasparenti agli eventi; interattivi solo i contenuti */
+.live-zone{ position:absolute; pointer-events:none; }
+.live-zone.left { left:5.1%;  top:21.8%; width:44.9%; height:56.4%; }
+.live-zone.right{ left:50%;   top:21.8%; width:44.9%; height:56.4%; }
+
+/* contenitore trasparente al drag pagina, figli interattivi */
+.live-content{
+  width:100%; height:100%; box-sizing:border-box;
+  padding:6% 8%; overflow:hidden;
+  font-family:Georgia,serif; color:#3d2314;
+  display:flex; flex-direction:column; align-items:center;
+  font-size:clamp(10px,1.15vw,16px);
+  pointer-events:none;
+}
+.live-content > *{ pointer-events:auto; }
+
+/* ===== tipografia ===== */
+.live-content h3{
+  font-family:Georgia,serif; font-weight:normal; font-size:1.9em;
+  color:#3d2314; text-align:center; margin:0 0 .5em; width:100%;
+  border-bottom:2px solid rgba(139,90,43,.4); padding-bottom:.25em;
+}
+.live-content .note{ font-style:italic; color:#5c3a21; text-align:center; }
+.stanza{ margin-bottom:1em; font-style:italic; line-height:1.7; }
+.stanza:first-letter{
+  font-family:'LetteraDecorata',serif; font-size:3em; color:#8b0000;
+  float:left; margin-right:.15em; line-height:.8; font-style:normal;
+}
+.keyword{ font-weight:bold; color:#4a2e15; text-transform:uppercase; }
+
+/* ===== componenti enigmi ===== */
+.calc-container{ width:100%; margin-top:.6em; }
+.calc-container label{ font-weight:bold; font-size:.95em; }
+.calc-container input{
+  width:100%; padding:.45em; margin:.3em 0 .8em; box-sizing:border-box;
+  background:rgba(255,255,255,.35); border:1px solid #8b5a2b; border-radius:4px;
+  font:inherit; color:#3d2314;
+}
+.calc-container input[type=range]{ padding:0; }
+.result-box{
+  background:rgba(139,90,43,.13); border:2px dashed #8b5a2b; border-radius:4px;
+  padding:.8em; text-align:center; width:100%; box-sizing:border-box; font-size:1.05em;
+}
+
+/* ===== TOMO — serif leggibile, gotico SOLO capolettera ===== */
+.tomo{ overflow:hidden; }
+.tomo h3{
+  font-family:Georgia,'Times New Roman',serif !important; font-weight:normal; font-size:1.6em;
+  color:#3d2314; border-bottom:2px solid #8b5a2b; padding-bottom:.3em;
+  margin:0 0 .6em; text-align:center; width:100%;
+}
+.tomo .poem{
+  font-family:Georgia,'Times New Roman',serif !important;
+  font-size:.92em; line-height:1.7; font-style:italic; position:relative; width:100%;
+}
+.tomo .stanza{ margin-bottom:1em; }
+.tomo .stanza:first-letter{
+  font-family:'LetteraDecorata',serif; font-size:2.6em; color:#8b0000;
+  float:left; margin-right:.2em; line-height:.85; padding-top:.08em; font-style:normal;
+}
+.tomo .first-word:first-letter{
+  font-family:'LetteraDecorata',serif; font-size:1.5em; color:#8b0000;
+  line-height:.7; font-style:normal;
+}
+.tomo .keyword{ font-style:normal; color:#4a2e15; text-transform:uppercase; letter-spacing:.04em; }
+.tomo .first-word{ font-style:normal; color:#8b0000; font-weight:bold; text-transform:uppercase; letter-spacing:.03em; }
+
+.tomo .let{ color:#8b0000; text-transform:uppercase; font-weight:bold; font-style:normal; }
+
+/* ===== B1: la scrittura appare alla PRIMA visita dello spread =====
+   Due maschere intersecate: una banda verticale che scorre da sinistra
+   a destra, e un pettine orizzontale che scandisce le righe. Il testo
+   sembra tracciato riga per riga invece che sfumato in blocco. */
+.ink-reveal{
+  -webkit-mask-image:
+    linear-gradient(90deg, #000 0 42%, rgba(0,0,0,.35) 52%, transparent 62%),
+    repeating-linear-gradient(180deg, #000 0 1.7em, rgba(0,0,0,.92) 1.7em 3.4em);
+  mask-image:
+    linear-gradient(90deg, #000 0 42%, rgba(0,0,0,.35) 52%, transparent 62%),
+    repeating-linear-gradient(180deg, #000 0 1.7em, rgba(0,0,0,.92) 1.7em 3.4em);
+  -webkit-mask-composite:source-in; mask-composite:intersect;
+  -webkit-mask-size:400% 100%, 100% 100%;
+  mask-size:400% 100%, 100% 100%;
+  -webkit-mask-repeat:no-repeat, repeat;
+  mask-repeat:no-repeat, repeat;
+  animation:ink-write 1.4s cubic-bezier(.35,.1,.3,1) forwards;
+}
+@keyframes ink-write{
+  from{ -webkit-mask-position:-300% 0, 0 0; mask-position:-300% 0, 0 0; }
+  to  { -webkit-mask-position:    0 0, 0 0; mask-position:    0 0, 0 0; }
+}
+/* ===== B2: iniziale miniata =====
+   Il capolettera diventa un <span class="minia">: solo così si può
+   dargli una cornice (::first-letter non accetta pseudo-elementi).
+   La cornice è un SVG data-URI: nessun file, nessuna richiesta. */
+.minia{
+  display:inline-block; float:left;
+  font-family:'LetteraDecorata',serif; font-size:2.6em; color:#8b0000;
+  font-style:normal; line-height:.85;
+  margin:.02em .22em 0 0; padding:.06em .12em;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%238b5a2b' stroke-width='1.1' stroke-linecap='round'><path d='M2 7V3h4'/><path d='M18 3h4v4'/><path d='M22 17v4h-4'/><path d='M6 21H2v-4'/><path d='M2 3c4 1 4 5 1 5'/><path d='M22 3c-4 1-4 5-1 5'/><path d='M22 21c-4-1-4-5-1-5'/><path d='M2 21c4-1 4-5 1-5'/></svg>");
+  background-repeat:no-repeat; background-position:center; background-size:100% 100%;
+}
+/* dove c'è .minia il capolettera automatico va spento, altrimenti
+   la prima lettera verrebbe ingrandita DUE volte */
+.stanza:has(.minia):first-letter,
+.tomo .stanza:has(.minia):first-letter{
+  font-family:inherit; font-size:inherit; color:inherit;
+  float:none; margin:0; line-height:inherit; font-style:inherit;
+}
+
+@media (prefers-reduced-motion:reduce){
+  .ink-reveal{ animation:none; -webkit-mask-image:none; mask-image:none; }
+}
+
+/* ===== INDICE — voci vive dello spread 1 ===== */
+/* ===== INDICE — voci vive dello spread 1 ===== */
+/* ===== INDICE — voci vive dello spread 1 =====
+   Il titolo "The Five Steps" è DIPINTO nella texture (pages.js, Y0+140):
+   la lista deve scendere sotto di esso, non partire dal bordo alto della
+   live-zone. Il 26% è misurato sulla geometria carta (Y0..Y1). */
+.index-page{ justify-content:flex-start; padding-top:26% !important; }
+.idx-list{
+  list-style:none; margin:0; padding:0 6%; width:100%;
+  display:flex; flex-direction:column; gap:.5em;
+}
+.idx-list li{ width:100%; }
+.idx-link{
+  display:flex; align-items:baseline; gap:.4em;
+  width:100%; padding:.18em .2em .3em; margin:0;
+  background:transparent; border:0;
+  border-bottom:1px dotted rgba(139,90,43,.45);
+  font-family:Georgia,serif; font-style:italic; font-size:1.15em;
+  color:#5c3a21; text-align:left; cursor:pointer;
+  transition:color .15s ease, border-color .15s ease, transform .15s ease;
+}
+.idx-title{ flex:1 1 auto; }
+.idx-link:hover{
+  color:#8b0000; border-bottom-color:rgba(139,0,0,.6);
+  transform:translateX(3px);
+}
+.idx-link:active{ transform:translateX(1px); }
+.idx-link:focus-visible{ outline:2px solid rgba(139,0,0,.5); outline-offset:2px; }
+.idx-link.done{ color:#4a2e15; }
+.idx-seal{ flex:0 0 auto; line-height:0; }
+.idx-seal canvas{
+  width:20px; height:20px; display:block;
+  filter:drop-shadow(1px 1px 1px rgba(0,0,0,.35));
+  transform:rotate(-8deg);
+}
+
+/* velo breve durante il salto da indice: il cambio spread non deve
+   essere uno stacco secco */
+.sb-3d.jumping{ opacity:.6; transition:opacity .12s ease; }
+
+/* ===== CAP. II — puzzle strappato (blocco unico) ===== */
+/* ===== STEP III — le quattro fiale ===== */
+.vials-page .note{ margin-top:.6em; }
+.vials-row{
+  display:flex; gap:14px; justify-content:center; align-items:flex-end;
+  width:100%; margin-top:.4em;
+}
+.vial-cell{
+  display:flex; flex-direction:column; align-items:center; gap:.35em;
+  cursor:default;
+}
+.vial-cv{ width:54px; height:92px; }
+.vial-label{
+  font-size:.72em; font-style:italic; color:#5c3a21; text-align:center;
+  max-width:64px; line-height:1.15;
+}
+.puzzle-page{ padding:4% 5% !important; }
+.puzzle-page .note{ font-style:italic; text-align:center; margin:.2em 0 .5em; }
+/* titolo e nota non bloccano il flip della pagina */
+.puzzle-page h3, .puzzle-page .note{ pointer-events:none; }
+.puzzle-field{
+  position:relative; width:100%; flex:1; min-height:220px;
+  touch-action:none; overflow:visible;
+  pointer-events:none;                      /* campo trasparente: la pagina gira */
+}
+.puzzle-field > .ppiece{ pointer-events:auto; }  /* solo i pezzi afferrano */
+.ppiece{
+  position:absolute; width:86px; height:64px;
+  background-repeat:no-repeat;
+  filter:url(#torn-edges) drop-shadow(2px 3px 3px rgba(0,0,0,.35));
+  transform:rotate(var(--rot,0deg));
+  cursor:grab; transition:transform .25s ease;
+  user-select:none; -webkit-user-select:none; touch-action:none;
+}
+.ppiece.held{
+  cursor:grabbing;
+  filter:url(#torn-edges) drop-shadow(4px 8px 8px rgba(0,0,0,.45));
+  transform:rotate(var(--rot,0deg)) scale(1.06);
+  transition:none;                          /* niente lag durante il drag */
+}
+/* ===== STEP II — tavola dei topi ===== */
+.mice-page .note{ margin:.2em 0 .6em; }
+.mice-wrap{ width:100%; flex:1; display:flex; align-items:center; justify-content:center; }
+.mice-table{ width:100%; height:auto; max-height:100%; cursor:pointer; touch-action:none; }
+
+/* ===== STEP IV — la pressa ===== */
+.press-page .note{ margin:.2em 0 .6em; }
+.press-wrap{ width:100%; flex:1; display:flex; align-items:center; justify-content:center; }
+.press-cv{ width:100%; height:auto; max-height:100%; cursor:pointer; touch-action:none; }
+
+/* ===== STEP V — stagionatura ===== */
+.age-page .note{ margin:.2em 0 .5em; }
+.age-wrap{ width:100%; flex:1; display:flex; align-items:center; justify-content:center; }
+.age-cv{ width:auto; height:100%; max-width:100%; cursor:grab; touch-action:none; }
+.age-cv:active{ cursor:grabbing; }
+
+/* i titoli non bloccano il flip */
+.mice-page h3, .mice-page .note,
+.press-page h3, .press-page .note,
+.age-page h3,  .age-page .note,
+.knight-page h3{ pointer-events:none; }
+
+/* ===== STEP V — The Errant Knight (riusa tipografia .tomo) ===== */
+/* ===== STEP V — The Errant Knight (riusa tipografia .tomo) ===== */
+.knight-page .poem{ position:relative; width:100%; }
+.knight-page .stanza{ margin-bottom:1em; }
+.knight-page .stain-wrap{ position:relative; display:inline-block; white-space:nowrap; }
+
+/* ===== G3 — COLOPHON: la firma sul retro ===== */
+.sign-page{ justify-content:flex-start; }
+.sign-page h3, .sign-page .note{ pointer-events:none; }
+.sign-page .note{ margin:.2em 0 .8em; }
+.sig-wrap{
+  position:relative; width:92%; flex:0 0 auto;
+  border-bottom:1.5px solid rgba(139,90,43,.5);
+  margin-bottom:.4em;
+}
+.sig-cv{
+  display:block; width:100%; height:auto;
+  touch-action:none; cursor:inherit;
+}
+.sig-hint{ font-size:.82em; opacity:.7; }/* ===== A3: respiro della carta (solo lo spread fermo) ===== */
+@keyframes paper-breath{
+  0%,100%{ transform:scale(1); }
+  50%    { transform:scale(1.0015); }
+}
+.sb-full img{
+  transform-origin:50% 50%;      /* il dorso è al centro dello spread */
+  animation:paper-breath 8s ease-in-out infinite;
+}
+
+/* ===== A5: segnalibro di stoffa ===== */
+.sb-ribbon{
+  position:absolute; z-index:5; pointer-events:none;
+  top:21.8%; height:70%;
+  left:var(--ribbon-x,50%);
+  width:22px; margin-left:-11px;
+  transform:rotate(1.5deg); transform-origin:50% 0;
+  background:
+    linear-gradient(90deg,
+      #5c0e0e 0 18%, #7a1414 18% 38%,
+      #a11c1c 38% 50%, #8b0000 50% 78%, #5c0e0e 78% 100%);
+  clip-path:polygon(0 0,100% 0,100% 100%,50% 82%,0 100%);
+  box-shadow:2px 3px 6px rgba(0,0,0,.45);
+  opacity:.9;
+  transition:left .6s cubic-bezier(.22,.61,.36,1), opacity .3s ease;
+}
+.sb-3d.on-cover .sb-ribbon{ opacity:0; }
+
+/* ===== A6: riflesso vivo sulle borchie (solo copertina/retro) ===== */
+.sb-studs-glint{
+  position:absolute; inset:0; z-index:5; pointer-events:none;
+  opacity:0; transition:opacity .3s ease;
+  background:
+    radial-gradient(circle 5px at 12% 26%, rgba(255,248,225,.9), transparent 70%),
+    radial-gradient(circle 5px at 88% 26%, rgba(255,248,225,.9), transparent 70%),
+    radial-gradient(circle 5px at 12% 74%, rgba(255,248,225,.9), transparent 70%),
+    radial-gradient(circle 5px at 88% 74%, rgba(255,248,225,.9), transparent 70%);
+  mix-blend-mode:screen;
+}
+.sb-3d.on-cover .sb-studs-glint{ opacity:calc(.15 + var(--glint,0)); }
+
+@media (prefers-reduced-motion:reduce){
+  .sb-full img{ animation:none; }
+  .sb-ribbon{ transition:none; }
+}

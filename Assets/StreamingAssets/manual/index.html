@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0f0a06">
+<title>The Ancient Cheese Ledger</title>
+
+<!-- i font sono usati solo dai capitoli: precaricarli evita il salto
+     tipografico quando si arriva allo spread 3 -->
+<link rel="preload" href="fonts/MiddleAgesDeco_PERSONAL_USE.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="fonts/Antro_Vectra.otf"                as="font" type="font/otf" crossorigin>
+<link rel="preload" href="fonts/Biro_Script_reduced.ttf"         as="font" type="font/ttf" crossorigin>
+
+<link rel="stylesheet" href="css/book.css">
+<link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/tools.css">
+<link rel="stylesheet" href="css/cursors.css">
+<link rel="stylesheet" href="css/loupe.css">
+<link rel="stylesheet" href="css/ripostiglio.css">
+<link rel="stylesheet" href="css/ambient.css">
+<!-- perf.css deve stare per ULTIMO: contiene solo hint al compositor -->
+<link rel="stylesheet" href="css/perf.css">
+</head>
+<body>
+<canvas id="plantsCv" class="plants-cv" aria-hidden="true"></canvas>
+<canvas id="dustCv"   class="dust-cv"   aria-hidden="true"></canvas>
+
+<main class="hero" id="heroBook">
+  <div class="sb-stage" id="sbStage">
+        <button class="sb-arrow left" id="sbLeft" type="button" aria-label="pagina precedente">
+      <svg viewBox="0 0 14 44" width="14" height="44" fill="none" aria-hidden="true"><polyline points="11,3 3,22 11,41" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="sb-3d" id="sb3d">
+      <div class="sb-tilt" id="sbTilt">
+        <div class="sb-cast ambient" aria-hidden="true"></div>
+        <div class="sb-cast contact" aria-hidden="true"></div>
+        <div class="sb-cast hair"    aria-hidden="true"></div>
+        <div class="sb-reflect" aria-hidden="true"></div>
+        <div class="sb-book" id="sbBook"></div>
+        <div class="live-layer" id="liveLayer"></div>
+        <div class="sb-ribbon" aria-hidden="true"></div>
+        <div class="sb-studs-glint" aria-hidden="true"></div>
+      </div>
+      <div class="zoomwrap" id="zoomWrap" aria-hidden="true"><div class="zoominner" id="zoomInner"></div></div>
+      <div class="loupe" id="loupe" aria-hidden="true"><span class="grip"></span><span class="ring"><span class="lens" id="loupeLens"></span></span></div>
+    </div>
+    <button class="sb-arrow right" id="sbRight" type="button" aria-label="pagina successiva">
+      <svg viewBox="0 0 14 44" width="14" height="44" fill="none" aria-hidden="true"><polyline points="3,3 11,22 3,41" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+  <div class="toolbox" id="toolbox">
+    <span class="empty-inv">L'inventario è vuoto. Esplora il ripostiglio!</span>
+  </div>
+  <p class="sb-hint" id="sbHint">Trascina la pagina · trascina la lente sul foglio · 🚪 per il ripostiglio</p>
+</main>
+
+<button class="closet-btn" id="closetBtn" type="button">Ripostiglio</button>
+<div class="world" id="worldRipostiglio" hidden>
+  <div class="rip-frame">
+    <canvas id="ripCv"    width="900" height="560"></canvas>
+    <canvas id="ripLight" width="900" height="560"></canvas>
+  </div>
+  <button class="closet-btn back" id="backBtn" type="button">Torna al libro</button>
+</div>
+
+<!-- ORDINE DI CARICAMENTO (le dipendenze sono reali, non cosmetiche):
+     raf      → scheduler unico, usato da particles/plants/ripostiglio/loupe
+     matter   → richiesto da ripostiglio
+     pages    → definisce SPREADS, richiesto da engine
+     state    → definisce State, richiesto da ch03 e ripostiglio
+     audio    → definisce Sfx, richiesto da ch02/ch03/ripostiglio
+     live     → definisce Book.register, richiesto dai capitoli
+     capitoli → si registrano PRIMA che engine emetta il primo book:settle
+     engine   → dipinge e fa partire tutto
+     loupe    → si aggancia agli eventi del libro                          -->
+<script src="js/boot.js"></script>
+<script src="js/raf.js"></script>
+<script src="lib/matter.min.js"></script>
+<script src="js/pages.js"></script>
+<script src="js/state.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/live.js"></script>
+<!-- ambient definisce Ink.firstVisit: DEVE precedere i capitoli -->
+<script src="js/ambient.js"></script>
+<script src="chapters/indice.js"></script>
+<script src="chapters/step1-mucca.js"></script>
+<script src="chapters/step2-topi.js"></script>
+<script src="chapters/step3-dosaggio.js"></script>
+<script src="chapters/step3-poema.js"></script>
+<script src="chapters/step4-pressa.js"></script>
+<script src="chapters/step5-poema.js"></script>
+<script src="js/cerimonia.js"></script>
+
+<script src="js/engine.js"></script>
+<script src="js/loupe.js"></script>
+<script src="js/particles.js"></script>
+<script src="js/plants.js"></script>
+<script src="js/candela.js"></script>
+
+<script src="worlds/ripostiglio/ripostiglio.js"></script>
+</body>
+</html>

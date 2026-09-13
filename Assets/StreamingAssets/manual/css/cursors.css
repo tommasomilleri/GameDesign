@@ -1,0 +1,104 @@
+/* ============================================================
+   CURSORS.CSS — cursori disegnati a mano in SVG data-URI.
+   Autorità: piuma d'oca ovunque, zampina di topo sugli elementi
+   interattivi. NON tocca i cursori-strumento di tools.css
+   (body.tool-sponge / .tool-candle / .tool-pencil), che devono
+   vincere quando uno strumento è in mano.
+   Caricare DOPO tools.css e PRIMA di perf.css.
+
+   Vincoli: bitmap ≤ 32×32 (limite pratico dei browser), hotspot
+   sulla punta, sempre un fallback dopo la virgola.
+   ============================================================ */
+
+:root{
+  /* piuma d'oca inclinata: punta in basso a sinistra → hotspot 2 30 */
+  --cur-quill:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><path d='M3 29 L10 22' stroke='%232b1f1a' stroke-width='1.6' stroke-linecap='round' fill='none'/><path d='M9 23 C13 12 20 5 28 3 C29 11 24 20 14 24 C12 24.8 10.2 24.4 9 23 Z' fill='%23f2ead6' stroke='%235c3a21' stroke-width='1.3' stroke-linejoin='round'/><path d='M11 22 C16 14 21 9 27 5' stroke='%238a6b42' stroke-width='1' fill='none' stroke-linecap='round'/><path d='M14 21 L18 21 M16 18 L20 18 M18 15 L22 15' stroke='%23a8987a' stroke-width='.8' stroke-linecap='round'/></svg>") 2 30;
+
+  /* piuma leggermente più eretta: sulle zone di sfoglio */
+  --cur-quill-page:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><g transform='rotate(-12 16 16)'><path d='M3 29 L10 22' stroke='%232b1f1a' stroke-width='1.6' stroke-linecap='round' fill='none'/><path d='M9 23 C13 12 20 5 28 3 C29 11 24 20 14 24 C12 24.8 10.2 24.4 9 23 Z' fill='%23f2ead6' stroke='%235c3a21' stroke-width='1.3' stroke-linejoin='round'/><path d='M11 22 C16 14 21 9 27 5' stroke='%238a6b42' stroke-width='1' fill='none' stroke-linecap='round'/></g></svg>") 3 29;
+
+  /* zampina di topo: quattro dita + palmo, hotspot al centro palmo */
+  --cur-paw:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'><g fill='%238b2020' stroke='%23f6f3ec' stroke-width='1'><ellipse cx='14' cy='18' rx='7' ry='5.6'/><ellipse cx='6.5' cy='11.5' rx='2.7' ry='3.4' transform='rotate(-22 6.5 11.5)'/><ellipse cx='11' cy='8' rx='2.6' ry='3.5'/><ellipse cx='17' cy='8' rx='2.6' ry='3.5'/><ellipse cx='21.5' cy='11.5' rx='2.7' ry='3.4' transform='rotate(22 21.5 11.5)'/></g><g fill='rgba(255,235,235,.5)'><ellipse cx='12' cy='17' rx='2.4' ry='1.6'/></g></svg>") 14 18;
+}
+
+/* ---- default del sito ---- */
+body{ cursor:var(--cur-quill), auto; }
+
+/* ---- pagina sfogliabile ---- */
+.sb-zone{ cursor:var(--cur-quill-page), grab; }
+.sb-zone:active{ cursor:var(--cur-quill-page), grabbing; }
+
+/* ---- elementi interattivi: zampina ---- */
+.idx-link,
+.tool-btn,
+.closet-btn,
+.sb-arrow,
+.mice-table,
+.press-cv,
+.vial-cell,
+.ppiece{
+  cursor:var(--cur-paw), pointer;
+}
+.ppiece{ cursor:var(--cur-paw), grab; }
+.ppiece.held{ cursor:var(--cur-paw), grabbing; }
+
+/* ---- eccezioni: la lente resta a mano aperta/chiusa ---- */
+.loupe .ring,
+.loupe .grip{ cursor:grab; }
+.loupe.held .ring,
+.loupe.held .grip{ cursor:grabbing; }
+
+/* ---- ripostiglio: la scena fisica usa la zampina ---- */
+#ripCv{ cursor:var(--cur-paw), grab; }
+#ripCv:active{ cursor:var(--cur-paw), grabbing; }
+
+/* ============================================================
+   PRIORITÀ SUGLI STRUMENTI
+   Quando uno strumento è equipaggiato, State aggiunge la classe
+   .tool-* su <body>: quei cursori (definiti in tools.css) devono
+   vincere ovunque, anche sopra le regole qui sopra. Ripetuti qui
+   con selettore più specifico invece di !important, così tools.css
+   resta l'unica fonte del disegno... ma la SPECIFICITÀ vive qui.
+   ============================================================ */
+body.tool-sponge,
+body.tool-sponge .sb-zone,
+body.tool-sponge .idx-link,
+body.tool-sponge .tool-btn,
+body.tool-sponge .ppiece,
+body.tool-sponge .mice-table,
+body.tool-sponge .press-cv,
+body.tool-sponge .vial-cell{
+  cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><text y='24' font-size='24'>🧽</text></svg>") 12 12, auto;
+}
+body.tool-candle,
+body.tool-candle .sb-zone,
+body.tool-candle .idx-link,
+body.tool-candle .tool-btn,
+body.tool-candle .ppiece,
+body.tool-candle .mice-table,
+body.tool-candle .press-cv,
+body.tool-candle .vial-cell{
+  cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><text y='24' font-size='24'>🕯️</text></svg>") 12 12, auto;
+}
+body.tool-pencil,
+body.tool-pencil .sb-zone,
+body.tool-pencil .idx-link,
+body.tool-pencil .tool-btn,
+body.tool-pencil .ppiece,
+body.tool-pencil .mice-table,
+body.tool-pencil .press-cv,
+body.tool-pencil .vial-cell{
+  cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><text y='24' font-size='24'>✏️</text></svg>") 0 24, auto;
+}
+
+/* la lente non cambia mai: è un oggetto, non una superficie di lavoro */
+body.tool-sponge .loupe .ring, body.tool-candle .loupe .ring, body.tool-pencil .loupe .ring,
+body.tool-sponge .loupe .grip, body.tool-candle .loupe .grip, body.tool-pencil .loupe .grip{
+  cursor:grab;
+}
+
+@media (pointer:coarse){
+  /* su touch il cursore non esiste: niente costo, niente sorprese */
+  body, .sb-zone, .idx-link, .tool-btn, .closet-btn, .sb-arrow,
+  .mice-table, .press-cv, .vial-cell, .ppiece, #ripCv{ cursor:auto; }
+}

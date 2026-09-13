@@ -1,0 +1,26 @@
+.plants-cv,.dust-cv{position:fixed;inset:0;pointer-events:none;z-index:1}
+.dust-cv{z-index:200}
+.hero{position:relative;z-index:10}
+
+.closet-btn{
+  position:fixed; top:22px; right:30px; z-index:300;
+  display:flex; align-items:center; gap:10px;
+  padding:12px 22px; font-family:Georgia,serif; font-style:italic; font-size:1.1em;
+  background:linear-gradient(180deg,#9c6631,#7a4d22);
+  color:#fffbdf; border:2px solid #4a2e15; border-radius:10px;
+  cursor:pointer; box-shadow:0 4px 0 #3a2211, 0 8px 18px rgba(0,0,0,.6);
+  transition:transform .1s, box-shadow .1s;
+}
+.closet-btn:hover{ background:linear-gradient(180deg,#ab7238,#8a5a2a); }
+.closet-btn:active{ transform:translateY(3px); box-shadow:0 1px 0 #3a2211, 0 3px 8px rgba(0,0,0,.6); }
+.closet-btn.back{ top:auto; bottom:24px; right:auto; left:50%; transform:translateX(-50%); }
+.closet-btn.back:active{ transform:translateX(-50%) translateY(3px); }
+.world{
+  position:fixed;inset:0;z-index:250;background:#0f0a06;
+  display:flex;align-items:center;justify-content:center;
+}
+.world[hidden]{ display:none; }   /* <-- l'attributo hidden torna a vincere */
+.rip-frame{position:relative;border:10px solid #1a100a;border-radius:10px;
+  box-shadow:inset 0 0 100px rgba(0,0,0,.8),0 0 60px rgba(0,0,0,.9)}
+#ripCv{display:block;background:linear-gradient(to bottom,#2b1b15,#110905)}
+#ripLight{position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply}

@@ -1,0 +1,40 @@
+/* ============================================================
+   PERF.CSS — SOLO hint al compositor. Nessun effetto sulla resa.
+   Va caricato per ULTIMO.
+   ============================================================ */
+
+/* Il foglio in volo. will-change vive DENTRO .curl, che esiste solo
+   durante il giro (buildCurl la crea, paint() la distrugge): il costo
+   in memoria video è transitorio per costruzione. */
+.curl{ will-change: transform; }
+.curl .strip{ will-change: transform; }
+.curl .face{ will-change: opacity; }
+
+/* Il tilt: promosso solo quando il puntatore è sul palco */
+.sb-stage:hover .sb-tilt{ will-change: transform; }
+
+/* Le ombre cambiano solo opacity: non rifare il blur a ogni frame */
+.sb-cast{ will-change: opacity; contain: layout paint; }
+
+/* Layer ambientali isolati dal layout del resto */
+#dustCv, #plantsCv{ contain: layout paint; pointer-events: none; }
+
+/* La lente non deve far ricalcolare il libro */
+.loupe.on{ will-change: transform; }
+.zoomwrap{ contain: layout paint; }
+
+/* Il fade del layer vivo non deve toccare il libro sotto */
+.live-layer{ will-change: opacity; contain: layout paint; }
+.secret-layer{ will-change: mask-position, mask-size; }
+/* Il ripostiglio: due canvas 900×560 in blend */
+.world{ contain: layout paint; }
+
+/* Immagini delle pagine: mai trascinabili né cliccabili */
+.sb-full img, .sb-half-img{
+  -webkit-user-drag: none; user-drag: none; pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce){
+  #dustCv, #plantsCv{ display: none; }
+  .sb-tilt{ transform: none !important; }
+}

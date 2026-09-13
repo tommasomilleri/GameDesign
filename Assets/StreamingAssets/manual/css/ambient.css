@@ -1,0 +1,219 @@
+/* ============================================================
+   AMBIENT.CSS — layer di vita ambientale (schizzi, e in Fase D
+   topi/briciole/monitor). Nessuno di questi elementi cattura
+   eventi: il libro sotto deve restare sfogliabile.
+   ============================================================ */
+
+/* ---- B4: schizzi d'inchiostro ---- */
+.ink-spatter{
+  position:absolute; inset:0; z-index:71;   /* sopra il live-layer (70) */
+  pointer-events:none; contain:layout paint;
+}
+.ink-dot{
+  position:absolute; display:block;
+  width:var(--s,2px); height:var(--s,2px);
+  margin:calc(var(--s,2px) / -2);
+  border-radius:50%;
+  background:#3d2314; opacity:.5;
+  animation:ink-fade .6s ease-out forwards;
+}
+@keyframes ink-fade{
+  0%  { opacity:.5;  transform:scale(.4); }
+  22% { opacity:.5;  transform:scale(1); }
+  100%{ opacity:0;   transform:scale(1.25); }
+}
+@media (prefers-reduced-motion:reduce){ .ink-spatter{ display:none; } }
+
+/* ============================================================
+   C1/C2 — CANDELA DA TAVOLO
+   Vive fuori dal libro (position:fixed): non deve mai finire
+   nell'area di flip né nel clone della lente.
+   ============================================================ */
+.table-candle{
+  position:fixed; right:clamp(12px,3.2vw,54px); bottom:clamp(10px,4vh,60px);
+  width:clamp(74px,7vw,120px); aspect-ratio:120/190;
+  z-index:95; pointer-events:none;
+  filter:drop-shadow(0 10px 16px rgba(0,0,0,.55));
+}
+.table-candle[hidden]{ display:none; }
+.table-candle-cv{ width:100%; height:100%; display:block; }
+/* il bersaglio del click è solo la candela, non tutto il riquadro */
+.table-candle-hit{
+  position:absolute; left:22%; top:0; width:56%; height:62%;
+  border:0; background:transparent; padding:0;
+  pointer-events:auto; cursor:var(--cur-paw), pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.table-candle-hit:focus-visible{ outline:2px solid rgba(255,190,110,.7); outline-offset:4px; }
+/* accesa: la luce si sente anche fuori dal canvas */
+.table-candle.lit{
+  filter:drop-shadow(0 10px 16px rgba(0,0,0,.55))
+         drop-shadow(0 -6px 34px rgba(255,170,70,.35));
+}
+
+/* ============================================================
+   C3 — NOTTE NELLA HERO
+   --daylight (0..1) lo scrive candela.js a 2fps. Il fondale vira
+   al blu di notte; con la candela accesa il buio si scalda.
+   ============================================================ */
+body{
+  background:radial-gradient(circle at 50% 40%,
+      color-mix(in srgb, #3a2318 calc(var(--daylight,1) * 100%), #140d18) 0%,
+      color-mix(in srgb, #0f0a06 calc(var(--daylight,1) * 100%), #05040a) 100%);
+  transition:background 2s linear;
+}
+html.candle-lit body{
+  background:radial-gradient(circle at 50% 40%,
+      color-mix(in srgb, #3a2318 calc(var(--daylight,1) * 100%), #2a1a10) 0%,
+      color-mix(in srgb, #0f0a06 calc(var(--daylight,1) * 100%), #0d0705) 100%);
+}
+
+/* ============================================================
+   C4 — RIFLESSO DEL LIBRO SUL TAVOLO
+   Puramente decorativo: copia sfumata e capovolta sotto il libro.
+   ============================================================ */
+.sb-reflect{
+  position:absolute; left:6%; right:6%; top:100%; height:12%;
+  pointer-events:none; z-index:0;
+  background:linear-gradient(180deg,
+    rgba(230,211,186,.55) 0%, rgba(230,211,186,.12) 45%, rgba(230,211,186,0) 100%);
+  transform:scaleY(-1); transform-origin:top center;
+  filter:blur(6px);
+  opacity:calc(.06 + (1 - var(--daylight,1)) * .04);
+  transition:opacity 2s linear, filter .4s ease;
+}
+html.candle-lit .sb-reflect{
+  opacity:.11;
+  filter:blur(6px) sepia(.55) saturate(1.4) hue-rotate(-8deg);
+}
+
+@media (prefers-reduced-motion:reduce){
+  body, html.candle-lit body{ transition:none; }
+  .sb-reflect{ transition:none; }
+}
+
+/* ============================================================
+   FASE D — VITA
+   Tutti i canvas sono decorativi: pointer-events:none sempre,
+   contain per non far ricalcolare il layout del libro.
+   ============================================================ */
+
+/* D1: topo passante — striscia in fondo allo schermo, sotto la hero */
+.amb-runner{
+  position:fixed; left:0; bottom:0; width:100vw; height:90px;
+  z-index:5; pointer-events:none; contain:layout paint;
+}
+
+/* D2: orme sulla carta — dentro .sb-tilt, sotto il live-layer (70) */
+.amb-paws{
+  position:absolute; inset:0; width:100%; height:100%;
+  z-index:4; pointer-events:none; contain:layout paint;
+}
+
+/* D4: topo osservatore — angolo basso a sinistra, immobile */
+.amb-watcher{
+  position:fixed; left:clamp(10px,2.6vw,42px); bottom:clamp(8px,3vh,44px);
+  width:90px; height:90px;
+  z-index:6; pointer-events:none;
+  filter:drop-shadow(0 4px 6px rgba(0,0,0,.5));
+}
+
+/* D6: briciole sparse sul tavolo */
+.amb-crumbs{
+  position:fixed; inset:0; width:100vw; height:100vh;
+  z-index:4; pointer-events:none; contain:layout paint;
+}
+
+@media (prefers-reduced-motion:reduce){
+  .amb-runner, .amb-paws, .amb-watcher, .amb-crumbs{ display:none; }
+}
+@media (pointer:coarse){
+  /* su touch non c'è cursore: osservatore e briciole perdono senso */
+  .amb-watcher, .amb-crumbs{ display:none; }
+}
+
+/* ============================================================
+   FASE E — CERIMONIA DEL SIGILLO
+   Il palco vive dentro .sb-tilt, sopra il live-layer: il sigillo
+   si stampa SULLA pagina, non dietro di essa.
+   ============================================================ */
+.seal-stage{
+  position:absolute; left:50%; top:50%;
+  width:200px; height:200px; margin:-100px 0 0 -100px;
+  z-index:78; pointer-events:none;
+  filter:drop-shadow(2px 4px 5px rgba(0,0,0,.42));
+  opacity:1; transition:opacity .3s ease;
+}
+.seal-stage.gone{ opacity:0; }
+
+/* ============================================================
+   FASE F — APERTURA
+   L'overlay copre TUTTO, ripostiglio compreso: finché le texture
+   non ci sono, non c'è niente da guardare.
+   ============================================================ */
+.boot-veil{
+  position:fixed; inset:0; z-index:9999;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:18px; background:#0f0a06;
+  opacity:1; transition:opacity .6s ease;
+}
+.boot-veil.gone{ opacity:0; pointer-events:none; }
+.boot-mouse{ width:120px; height:120px; display:block; }
+.boot-text{
+  margin:0; font-family:Georgia,serif; font-style:italic;
+  font-size:clamp(13px,1.5vw,17px); letter-spacing:.06em;
+  color:rgba(230,211,186,.55);
+  animation:boot-pulse 2.4s ease-in-out infinite;
+}
+@keyframes boot-pulse{ 0%,100%{opacity:.45} 50%{opacity:.85} }
+
+/* il libro sta fuori scena finché non parte la cinematica */
+html.booting .sb-3d{
+  transform:translateX(62vw) rotate(4deg);
+  opacity:0;
+}
+html.boot-slide .sb-3d{
+  transform:translateX(0) rotate(0deg);
+  opacity:1;
+  transition:transform .9s cubic-bezier(.2,.8,.3,1), opacity .5s ease-out;
+}
+/* la toolbox e i suggerimenti entrano dopo, senza rubare la scena */
+html.booting .toolbox, html.booting .sb-hint, html.booting .closet-btn{ opacity:0; }
+html.boot-done .toolbox, html.boot-done .sb-hint, html.boot-done .closet-btn{
+  opacity:1; transition:opacity .6s ease .25s;
+}
+
+@media (prefers-reduced-motion:reduce){
+  html.booting .sb-3d{ transform:none; }
+  html.boot-slide .sb-3d{ transition:opacity .4s ease; }
+  .boot-text{ animation:none; }
+}
+
+/* ============================================================
+   G1 — IL LIBRO CHE DORME
+   Il pennacchio di polvere sale dal centro del libro chiuso.
+   ============================================================ */
+.amb-zzz{
+  position:absolute; left:50%; top:12%;
+  width:160px; height:200px; margin-left:-80px;
+  z-index:8; pointer-events:none;
+  opacity:0; transition:opacity .8s ease;
+}
+.amb-zzz.on{ opacity:1; }
+
+@media (prefers-reduced-motion:reduce){ .amb-zzz{ display:none; } }
+
+/* ============================================================
+   H3 — MONITOR DI SVILUPPO
+   Sopra qualunque cosa, boot compreso: serve proprio a misurare
+   i momenti in cui il resto dello schermo è occupato.
+   ============================================================ */
+.dev-monitor{
+  position:fixed; left:10px; top:10px; z-index:10000;
+  margin:0; padding:8px 12px;
+  font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color:#9fe8a0; background:rgba(6,10,6,.86);
+  border:1px solid rgba(159,232,160,.32); border-radius:6px;
+  white-space:pre; pointer-events:none;
+  text-shadow:0 0 6px rgba(120,255,140,.25);
+}

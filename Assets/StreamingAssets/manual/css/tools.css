@@ -1,0 +1,89 @@
+/* ============================================================
+   TOOLS.CSS — inventario, cursori strumento, elementi del tomo
+   ============================================================ */
+
+/* ===== inventario ===== */
+.toolbox{
+  display:flex; gap:18px; background:linear-gradient(180deg,#241710,#1a100a);
+  padding:12px 26px; border-radius:12px; border:2px solid #4a2e15;
+  box-shadow:inset 0 2px 8px rgba(0,0,0,.6), 0 6px 16px rgba(0,0,0,.5);
+  min-height:64px; align-items:center; justify-content:center; z-index:90;
+}
+.empty-inv{ color:#7a5a34; font-style:italic; font-size:1em; font-family:Georgia,serif; }
+.tool-btn{
+  width:64px; height:64px; padding:6px; cursor:pointer;
+  background:radial-gradient(circle at 35% 30%, #3a2820, #241710);
+  border-radius:10px; border:2px solid #5c3a21; transition:all .2s;
+  display:flex; align-items:center; justify-content:center;
+}
+.tool-btn:hover{ border-color:#8b5a2b; transform:translateY(-2px); }
+.tool-btn.active{
+  background:radial-gradient(circle at 35% 30%, #8b5a2b, #5c3a21);
+  box-shadow:0 0 14px rgba(139,90,43,.8); transform:scale(1.08);
+}
+.tool-btn canvas{ width:100%; height:100%; }
+/* ===== cursori strumento ===== */
+body.tool-sponge{ cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><text y='24' font-size='24'>🧽</text></svg>") 12 12, auto; }
+body.tool-candle{ cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><text y='24' font-size='24'>🕯️</text></svg>") 12 12, auto; }
+body.tool-pencil{ cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><text y='24' font-size='24'>✏️</text></svg>") 0 24, auto; }
+
+/* ===== macchia d'inchiostro (spugna) ===== */
+.stain-wrap{ position:relative; display:inline-block; white-space:nowrap; }
+.ink-canvas{
+  position:absolute; top:-8px; left:-10px;
+  width:calc(100% + 20px); height:calc(100% + 16px);
+  filter:blur(1.5px) contrast(1.2); z-index:10;
+  pointer-events:auto;
+}
+
+/* ===== frottage (matita) ===== */
+.rub-wrap{ position:relative; width:88%; height:58px; margin-top:auto; transform:rotate(-2deg); }
+.rub-wrap canvas{ position:absolute; inset:0; width:100%; height:100%; z-index:1; border-radius:5px; }
+.debossed{
+  position:relative; z-index:2; pointer-events:none;
+  font-family:'BiroScript',cursive; font-size:1.15em; line-height:1.2;
+  color:transparent;
+  text-shadow:-1px -1px 0 rgba(0,0,0,.05), 1px 1px 0 rgba(255,255,255,.15);
+}
+
+/* ===== inchiostro invisibile (candela) ===== */
+/* ===== inchiostro invisibile (candela) ===== */
+.secret-layer{
+  position:absolute; inset:0; pointer-events:none; z-index:20;
+  -webkit-mask-image:radial-gradient(circle closest-side at 50% 50%, black 0%, transparent 100%);
+  mask-image:radial-gradient(circle closest-side at 50% 50%, black 0%, transparent 100%);
+  -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+  -webkit-mask-size:var(--d,260px) var(--d,260px);
+  mask-size:var(--d,260px) var(--d,260px);
+  -webkit-mask-position:var(--mx,-999px) var(--my,-999px);
+  mask-position:var(--mx,-999px) var(--my,-999px);
+  transition:-webkit-mask-size .5s ease, mask-size .5s ease;
+}
+
+/* C2: candela DA TAVOLO accesa → la pagina è illuminata tutta.
+   La maschera si allarga e si centra: niente più torcia da
+   inseguire. Vince sulle scritture inline di --mx/--my dei
+   capitoli grazie alla specificità di html.candle-lit. */
+html.candle-lit .secret-layer{
+  -webkit-mask-size:900px 900px !important; mask-size:900px 900px !important;
+  -webkit-mask-position:center !important; mask-position:center !important;
+}
+/* B5: con la stanza illuminata la filigrana emerge dal fondo */
+html.candle-lit .sb-full img,
+html.candle-lit .sb-half-img{ filter:contrast(1.12) brightness(1.04); }
+
+@media (prefers-reduced-motion:reduce){
+  .secret-layer{ transition:none; }
+}
+.secret-note{
+  position:absolute; top:50%; left:15%; transform:rotate(-3deg);
+  font-family:'AntroVectra',cursive; font-size:1.6em; line-height:1.3;
+  color:#d35400; text-shadow:0 0 8px rgba(211,84,0,.5);
+}
+/* B6: nessuna mano scrive due righe parallele. Le righe sono
+   <span class="sline">: ognuna ha inclinazione, rientro e spaziatura
+   propri, ciclati a gruppi di tre. */
+.secret-note .sline{ display:block; transform-origin:left center; }
+.secret-note .sline:nth-child(3n+1){ transform:rotate(-2.5deg);                    letter-spacing:.020em; }
+.secret-note .sline:nth-child(3n+2){ transform:rotate(-3.5deg) translateX(.18em);  letter-spacing:.035em; }
+.secret-note .sline:nth-child(3n+3){ transform:rotate(-1.5deg) translateX(-.10em); letter-spacing:.015em; }
