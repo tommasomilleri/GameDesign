@@ -23,7 +23,8 @@ public class PhysicsGrabber : MonoBehaviour
     public bool debugLogs = true;
 
     public bool IsHolding { get; private set; }
-
+    // Aggiungi questa variabile pubblica
+    public Rigidbody HeldRigidbody => held;
     public void ConfigureDepth(float newMinDepth, float newMaxDepth, float newScrollSpeed)
     {
         minDepth = newMinDepth;
@@ -36,6 +37,7 @@ public class PhysicsGrabber : MonoBehaviour
     Camera cam;
     Rigidbody held;
     float currentDepth;
+    Vector3 grabOffset;
     CollisionDetectionMode heldOriginalMode;   // per ripristinarla al rilascio
 
     void Awake()
@@ -94,7 +96,10 @@ public class PhysicsGrabber : MonoBehaviour
                     // avviene morbido in FixedUpdate.
                     currentDepth = Vector3.Distance(
                         cam.transform.position, held.position);
+                    currentDepth = Vector3.Distance(cam.transform.position, held.position);
 
+                    // AGGIUNGI QUESTA RIGA: Calcola la distanza tra il centro dell'oggetto e il punto esatto che hai cliccato
+                    grabOffset = held.position - r.GetPoint(currentDepth);
                     IsHolding = true;
                 }
                 else if (debugLogs)
@@ -142,7 +147,7 @@ public class PhysicsGrabber : MonoBehaviour
         held = null;
         IsHolding = false;
     }
-
+    /*
     void FixedUpdate()
     {
         if (held == null) return;
@@ -172,5 +177,34 @@ public class PhysicsGrabber : MonoBehaviour
         held.linearVelocity = dir.magnitude < deadZone
             ? Vector3.zero
             : Vector3.ClampMagnitude(dir * grabSpeed, maxPullSpeed);
+    }*/
+    void FixedUpdate()
+    {
+        if (held == null) return;
+
+        if (!held.gameObject.activeInHierarchy)
+        {
+            held = null;
+            IsHolding = false;
+            return;
+        }
+
+        // 1. Rientro MORBIDO ma ISTANTANEO: usiamo Lerp per coprire
+        // le grandi distanze in una frazione di secondo.
+        float clamped = Mathf.Clamp(currentDepth, minDepth, maxDepth);
+        currentDepth = Mathf.Lerp(currentDepth, clamped, 15f * Time.fixedDeltaTime);
+
+        Ray r = cam.ScreenPointToRay(Input.mousePosition);
+        Vector3 target = r.GetPoint(currentDepth) + grabOffset;
+        Vector3 dir = target - held.position;
+
+        // 2. ANTI-TUNNEL DINAMICO: Se la fiala è lontanissima (sullo scaffale),
+        // ignoriamo il tetto di 12f per farla arrivare subito alla camera.
+        // Se è vicina (distanza < 5), riattiviamo il tuo maxPullSpeed per precisione.
+        float dynamicMaxSpeed = dir.magnitude > 5f ? (dir.magnitude * 50f) : maxPullSpeed;
+
+        held.linearVelocity = dir.magnitude < deadZone
+            ? Vector3.zero
+            : Vector3.ClampMagnitude(dir * grabSpeed, dynamicMaxSpeed);
     }
 }

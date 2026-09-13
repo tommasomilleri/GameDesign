@@ -97,13 +97,13 @@ public class Level3Manager : MonoBehaviour
                 }
             }
 
-
+            ingredient.ResetPosition(rb);
             // Effetto Rimbalzo Fisico: la pentola lo respinge in aria!
-            if (rb != null)
+            /*if (rb != null)
             {
                 rb.linearVelocity = Vector3.zero; // Ferma la caduta
                 rb.AddForce(Vector3.up * 8f + Random.onUnitSphere * 2f, ForceMode.Impulse);
-            }
+            }*/
         }
     }
 

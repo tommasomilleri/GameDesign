@@ -32,7 +32,10 @@ public class Level4Manager : MonoBehaviour
 
     private bool isAnimating = false;
     private bool levelCompleted = false;
-
+    /*void Awake()
+    {
+        if (waxContainer != null) waxContainer.SetActive(false);
+    }*/
     void OnEnable()
     {
         levelCompleted = false;   // reset per il Replay
@@ -41,9 +44,26 @@ public class Level4Manager : MonoBehaviour
 
         UpdateLights(true);
     }
+    void LateUpdate()
+    {
+        bool levelActive = (CurrentLevel != null) ? CurrentLevel.activeInHierarchy : false;
+        bool show = levelActive && !levelCompleted;
 
+        if (GameManager.instance != null && GameManager.instance.IsChangingLevel)
+            show = false;
+
+        if (waxContainer != null && waxContainer.activeSelf != show)
+        {
+            waxContainer.SetActive(show);
+        }
+    }
     public void ClickProcess(string process)
     {
+        // AUTO-SVEGLIA: Accende il manager (GoST4) se clicchi uno strumento per testare
+        if (CurrentLevel != null && !CurrentLevel.activeInHierarchy)
+        {
+            CurrentLevel.SetActive(true);
+        }
         if (levelCompleted) return;
         if (isAnimating) return;
 
@@ -312,7 +332,6 @@ public class Level4Manager : MonoBehaviour
 
     void OnDisable()
     {
-        // Spegne i timbri quando questo livello si disattiva o viene completato
         if (waxContainer != null) waxContainer.SetActive(false);
         StopAllCoroutines();
     }
