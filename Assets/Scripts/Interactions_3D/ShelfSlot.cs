@@ -18,9 +18,7 @@ public class Shelfslot : MonoBehaviour
     {
         if (other.GetComponentInParent<CheeseTag>() == null) return;
         if (level5Manager == null) return;
-
-        // Anti-spam: il formaggio che rotola/rimbalza sul trigger
-        // non deve mitragliare penalita' a ogni contatto
+        
         if (Time.time - lastTriggerTime < retriggerCooldown) return;
         lastTriggerTime = Time.time;
 

@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenuManager : MonoBehaviour
 {
-    // Singleton per accedervi facilmente da ovunque
+    
     public static PauseMenuManager Instance { get; private set; }
 
     [Header("UI References")]
@@ -25,7 +25,7 @@ public class PauseMenuManager : MonoBehaviour
 
     void Awake()
     {
-        // Crea il Singleton in modo sicuro
+        
         if (Instance == null)
         {
             Instance = this;
@@ -61,7 +61,7 @@ public class PauseMenuManager : MonoBehaviour
 
     void Update()
     {
-        // ORA LEGGE ESC SOLO SE CANPAUSE È TRUE!
+        
         if (canPause && Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
@@ -87,7 +87,7 @@ public class PauseMenuManager : MonoBehaviour
         pauseMenuContainer.SetActive(true);
         Time.timeScale = 0f;
 
-        // Mette in pausa la musica di sottofondo
+        
         if (ProceduralMusicManager.instance != null)
         {
             ProceduralMusicManager.instance.PauseMusic();
@@ -95,8 +95,7 @@ public class PauseMenuManager : MonoBehaviour
 
         if (GameManager.instance != null && GameManager.instance.qualityBarContainer != null)
         {
-            GameManager.instance.qualityBarContainer.SetActive(false); // Scompare in pausa
-        }
+            GameManager.instance.qualityBarContainer.SetActive(false);         }
 
         if (slideCoroutine != null) StopCoroutine(slideCoroutine);
         slideCoroutine = StartCoroutine(SlideMenu(visibleYPos, false));
@@ -107,15 +106,14 @@ public class PauseMenuManager : MonoBehaviour
         isPaused = false;
         Time.timeScale = 1f;
 
-        // Fa ripartire la musica dal punto esatto in cui si era fermata
-        if (ProceduralMusicManager.instance != null)
+                if (ProceduralMusicManager.instance != null)
         {
             ProceduralMusicManager.instance.ResumeMusic();
         }
 
         if (GameManager.instance != null && GameManager.instance.qualityBarContainer != null)
         {
-            GameManager.instance.qualityBarContainer.SetActive(true); // <-- CORRETTO: Ricompare!
+            GameManager.instance.qualityBarContainer.SetActive(true); 
         }
 
         if (menuPanel == null)
@@ -131,18 +129,16 @@ public class PauseMenuManager : MonoBehaviour
     public void QuitToMainMenu()
     {
         Time.timeScale = 1f;
-        // 1. Riporta il tempo alla normalità, altrimenti la nuova scena si caricherebbe in pausa!
-        if (GameManager.instance != null) GameManager.instance.ResetQuality();
+                if (GameManager.instance != null) GameManager.instance.ResetQuality();
         canPause = false;
         isPaused = false;
 
-        // 2. Ricarica la scena attuale da zero usando il suo Index
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private IEnumerator SlideMenu(float targetY, bool isSlidingOut)
     {
-        if (menuPanel == null) yield break; // LUCCHETTO 1: Previene l'errore se manca la UI
+        if (menuPanel == null) yield break; 
 
         float elapsedTime = 0f;
         Vector2 startPos = menuPanel.anchoredPosition;
@@ -150,7 +146,7 @@ public class PauseMenuManager : MonoBehaviour
 
         while (elapsedTime < slideDuration)
         {
-            if (menuPanel == null) yield break; // LUCCHETTO 2: Previene l'errore se la UI sparisce durante l'animazione
+            if (menuPanel == null) yield break; 
 
             float t = elapsedTime / slideDuration;
             float smoothStep = t * t * (3f - 2f * t);
@@ -188,8 +184,7 @@ public class PauseMenuManager : MonoBehaviour
 
         if (activeLevelGO != null)
         {
-            // Sblocca eventuali transizioni rimaste appese
-            if (GameManager.instance != null)
+                        if (GameManager.instance != null)
                 GameManager.instance.NotifyTransitionFinished();
 
             activeLevelGO.SetActive(false);

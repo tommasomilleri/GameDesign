@@ -43,52 +43,41 @@ public class Level3Manager : MonoBehaviour
     }
     void OnEnable()
     {
-        levelCompleted = false;   // reset per il Replay
-
-        // Applica al grabber la taratura specifica di QUESTO livello
-        var grabber = FindFirstObjectByType<PhysicsGrabber>();
+        levelCompleted = false;   
+                var grabber = FindFirstObjectByType<PhysicsGrabber>();
         if (grabber != null)
             grabber.ConfigureDepth(vialMinDepth, vialMaxDepth, vialScrollSensitivity);
     }
 
 
-    // --- NUOVA FIRMA FISICA: Usa l'ID e il Rigidbody 3D ---
-    public void CheckIngredient(IngredientID ingredient, Rigidbody rb)
+        public void CheckIngredient(IngredientID ingredient, Rigidbody rb)
     {
         if (levelCompleted) return;
         if (currentStep >= correctOrder.Length) return;
         if (ingredient == null) return;
 
 
-        // --- SE L'INGREDIENTE � CORRETTO ---
-        if (ingredient.ingredientName == correctOrder[currentStep])
+                if (ingredient.ingredientName == correctOrder[currentStep])
         {
             Debug.Log("Correct ingredient: " + ingredient.ingredientName);
 
-            // 1. Aumenta il contatore
-            currentStep++;
+                        currentStep++;
 
-            // 2. Magia Visiva: aggiorna l'immagine della pentola
-            UpdatePotVisuals();
+                        UpdatePotVisuals();
 
-            // 3. Fai sparire la boccetta usata e aggiorna il testo
-            ingredient.gameObject.SetActive(false);
+                        ingredient.gameObject.SetActive(false);
             UpdateText();
 
-            // 4. Controlla la vittoria
-            if (currentStep == correctOrder.Length)
+                        if (currentStep == correctOrder.Length)
             {
                 LevelComplete();
             }
         }
-        // --- SE L'INGREDIENTE � SBAGLIATO ---
-        else
+                else
         {
             Debug.Log("Wrong ingredient! Viene sputato via.");
 
-            // Cooldown: la stessa fiala che rimbalza e ricade nel
-            // trigger non deve mitragliare penalita' (-20,-20,-20...)
-            if (Time.time - lastPenaltyTime >= penaltyCooldown)
+                                    if (Time.time - lastPenaltyTime >= penaltyCooldown)
             {
                 lastPenaltyTime = Time.time;
                 if (GameManager.instance != null)
@@ -98,11 +87,9 @@ public class Level3Manager : MonoBehaviour
             }
 
             ingredient.ResetPosition(rb);
-            // Effetto Rimbalzo Fisico: la pentola lo respinge in aria!
-            /*if (rb != null)
+                        /*if (rb != null)
             {
-                rb.linearVelocity = Vector3.zero; // Ferma la caduta
-                rb.AddForce(Vector3.up * 8f + Random.onUnitSphere * 2f, ForceMode.Impulse);
+                rb.linearVelocity = Vector3.zero;                 rb.AddForce(Vector3.up * 8f + Random.onUnitSphere * 2f, ForceMode.Impulse);
             }*/
         }
     }
@@ -142,8 +129,7 @@ public class Level3Manager : MonoBehaviour
     {
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
 
-        // Usa il ponte universale del GameManager per le transizioni
-        if (GameManager.instance != null)
+                if (GameManager.instance != null)
         {
             GameManager.instance.TransitionToNextLevel(CurrentLevel, NextLevel);
         }

@@ -8,15 +8,13 @@ public class BackgroundManager : MonoBehaviour
 
     void Awake()
     {
-        // Singleton per renderlo rintracciabile da chiunque
-        if (instance == null) instance = this;
+                if (instance == null) instance = this;
         else { Destroy(gameObject); return; }
 
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // Funzione pubblica per cambiare l'immagine
-    public void ChangeBackground(Sprite newSprite)
+        public void ChangeBackground(Sprite newSprite)
     {
         if (spriteRenderer != null && newSprite != null)
         {

@@ -3,37 +3,11 @@ using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-
-/// <summary>
-/// Pan della camera spingendo il cursore contro i bordi dello schermo.
-///
-/// Agisce sul LookTarget, non sulla camera: Cinemachine in modalita' Composer
-/// lo segue con lo sguardo, quindi posizione, distanza e rotazione di base
-/// restano quelle impostate nella virtual camera.
-///
-/// COMPORTAMENTO
-///   - Cursore contro un bordo: la camera accelera in quella direzione.
-///   - Continuando a spingere rallenta avvicinandosi al limite, senza mai
-///     fermarsi di colpo.
-///   - Allontanando il cursore decelera e dopo una breve pausa rientra al
-///     centro con un movimento morbido.
-///
-/// ANTEPRIMA
-///   Seleziona questo oggetto: in fondo all'Inspector compare cosa vede la
-///   camera in tempo reale, anche senza premere Play. Con "Preview Offset"
-///   puoi spingere l'inquadratura agli estremi e verificare i limiti.
-///
-/// Solo caratteri ASCII. Salvare il file come UTF-8.
-/// </summary>
 [ExecuteAlways]
 [DisallowMultipleComponent]
 [AddComponentMenu("Camera/Edge Look")]
 public class EdgeLook : MonoBehaviour
 {
-    // ====================================================================
-    //  TIPI
-    // ====================================================================
-
     [System.Serializable]
     public class TargetSettings
     {
@@ -57,10 +31,6 @@ public class EdgeLook : MonoBehaviour
                  "Utile per primi piani o inquadrature fisse.")]
         public bool lockPan = false;
     }
-
-    // ====================================================================
-    //  ISPETTORE
-    // ====================================================================
 
     [Header("Bersagli")]
     [Tooltip("I LookTarget, nello stesso ordine delle virtual camera.")]
@@ -164,13 +134,9 @@ public class EdgeLook : MonoBehaviour
     [Tooltip("Disegna nella Scene view il volume inquadrato ai limiti del pan.")]
     public bool drawFrustumGizmo = true;
 
-    // ====================================================================
-    //  STATO INTERNO
-    // ====================================================================
-
     Vector3[] basePos;
-    Vector2 offset;          // posizione corrente in unita' di scena
-    Vector2 velocity;        // velocita' corrente in unita' al secondo
+    Vector2 offset;
+    Vector2 velocity;
     Vector2 shakeOffset;
     float shakeAmplitude, shakeDecay;
     float idleTimer;
@@ -181,10 +147,6 @@ public class EdgeLook : MonoBehaviour
     PhysicsGrabber grabber;
     bool grabberSearched;
 
-    // ====================================================================
-    //  CICLO DI VITA
-    // ====================================================================
-
     void OnEnable()
     {
         swaySeed = Random.Range(0f, 100f);
@@ -194,7 +156,6 @@ public class EdgeLook : MonoBehaviour
 
     void OnDisable()
     {
-        // lasciare un target spostato significa camera storta alla riattivazione
         RestoreAllTargets();
         offset = Vector2.zero;
         velocity = Vector2.zero;
@@ -221,8 +182,6 @@ public class EdgeLook : MonoBehaviour
 
         return anyValid;
     }
-
-    // ====================================================================
     void LateUpdate()
     {
         if (!ready)
@@ -230,21 +189,15 @@ public class EdgeLook : MonoBehaviour
             ready = Initialize();
             if (!ready) return;
         }
-
-        // ---- modalita' editor -------------------------------------------
         if (!Application.isPlaying)
         {
             if (livePreview) ApplyPreview();
             return;
         }
 
-        // unscaledDeltaTime: la camera resta reattiva anche con timeScale
-        // modificato da slow motion o effetti
         float dt = Time.unscaledDeltaTime;
         if (dt <= 0f) return;
 
-        // clamp contro gli hitch: dopo un caricamento dt puo' valere mezzo
-        // secondo e la camera farebbe un salto
         dt = Mathf.Min(dt, 0.05f);
 
         if (IsBlocked()) ReturnToCenter(dt, holdReturnSpeed);
@@ -253,11 +206,6 @@ public class EdgeLook : MonoBehaviour
         UpdateShake(dt);
         ApplyToTarget();
     }
-
-    // ====================================================================
-    //  INPUT E MOVIMENTO
-    // ====================================================================
-
     void UpdatePan(float dt)
     {
         int index = GetActiveIndex();
@@ -268,25 +216,18 @@ public class EdgeLook : MonoBehaviour
         float limX = GetMaxPanX(index);
         float limY = GetMaxPanY(index);
 
-        // ---- accelerazione o decelerazione --------------------------------
         Vector2 desired = input * panSpeed;
 
-        // Frenata morbida vicino ai limiti: senza, la camera arriva a piena
-        // velocita' contro il muro e si blocca di scatto.
         desired.x *= LimitBrake(offset.x, limX, desired.x);
         desired.y *= LimitBrake(offset.y, limY, desired.y);
 
         bool pushing = input.sqrMagnitude > 0.0001f;
         float rate = pushing ? acceleration : deceleration;
-
-        // Interpolazione esponenziale: indipendente dal framerate. Lerp con
-        // dt cambia comportamento tra 30 e 144 fps, questa no.
         float k = 1f - Mathf.Exp(-rate * dt);
         velocity = Vector2.Lerp(velocity, desired, k);
 
         offset += velocity * dt;
 
-        // ---- rientro automatico -------------------------------------------
         if (pushing)
         {
             idleTimer = 0f;
@@ -300,18 +241,12 @@ public class EdgeLook : MonoBehaviour
                 float ck = 1f - Mathf.Exp(-centerReturnSpeed * dt);
                 offset = Vector2.Lerp(offset, Vector2.zero, ck);
 
-                // senza azzerare anche la velocita' il rientro la
-                // ricombatterebbe e il movimento diventerebbe elastico
                 velocity = Vector2.Lerp(velocity, Vector2.zero, ck);
             }
         }
-
-        // ---- limite rigido di sicurezza ------------------------------------
         offset.x = Mathf.Clamp(offset.x, -limX, limX);
         offset.y = Mathf.Clamp(offset.y, -limY, limY);
 
-        // Contro il limite la velocita' va azzerata, altrimenti resta
-        // "carica" e alla prossima inversione la camera parte di scatto.
         if (limX > 0f && Mathf.Abs(offset.x) >= limX - 0.0001f &&
             Mathf.Sign(velocity.x) == Mathf.Sign(offset.x)) velocity.x = 0f;
 
@@ -323,8 +258,6 @@ public class EdgeLook : MonoBehaviour
     {
         Vector3 mouse = Input.mousePosition;
 
-        // Fuori dalla finestra non c'e' spinta: altrimenti alt-tab o un
-        // secondo monitor darebbero valori assurdi.
         if (mouse.x < 0f || mouse.y < 0f ||
             mouse.x > Screen.width || mouse.y > Screen.height)
             return Vector2.zero;
@@ -335,14 +268,8 @@ public class EdgeLook : MonoBehaviour
             AxisInput(mouse.x / Screen.width),
             AxisInput(mouse.y / Screen.height));
     }
-
-    /// <summary>
-    /// Converte una coordinata normalizzata 0..1 in una spinta -1..1.
-    /// Zero al centro, cresce entrando nella zona di bordo.
-    /// </summary>
     float AxisInput(float n)
     {
-        // zona morta centrale contro il tremolio
         if (Mathf.Abs(n - 0.5f) < deadZone * 0.5f) return 0f;
 
         float zone = Mathf.Clamp(edgeZone, 0.005f, 0.45f);
@@ -361,12 +288,6 @@ public class EdgeLook : MonoBehaviour
 
         return 0f;
     }
-
-    /// <summary>
-    /// Fattore di frenata 0..1 vicino al limite. Vale 1 lontano, scende a 0
-    /// sul limite, ma SOLO per il movimento che ci va contro: allontanarsi
-    /// dal limite resta sempre libero e immediato.
-    /// </summary>
     float LimitBrake(float current, float max, float direction)
     {
         if (max <= 0f) return 0f;
@@ -403,20 +324,12 @@ public class EdgeLook : MonoBehaviour
         velocity = Vector2.Lerp(velocity, Vector2.zero, k);
         idleTimer = 0f;
     }
-
-    // ====================================================================
-    //  RESPIRO E SCOSSA
-    // ====================================================================
-
     Vector2 GetSway()
     {
         if (!idleSway || swayAmount <= 0f) return Vector2.zero;
 
         float t = (Application.isPlaying ? Time.unscaledTime : 0f)
                   / Mathf.Max(0.01f, swayPeriod);
-
-        // Due rumori con periodi diversi e non commensurabili: il movimento
-        // non si ripete mai in modo riconoscibile.
         float x = (Mathf.PerlinNoise(t, swaySeed) - 0.5f) * 2f;
         float y = (Mathf.PerlinNoise(t * 1.37f, swaySeed + 41f) - 0.5f) * 2f;
 
@@ -439,19 +352,11 @@ public class EdgeLook : MonoBehaviour
         shakeAmplitude = Mathf.Max(0f, shakeAmplitude - shakeDecay * dt);
     }
 
-    /// <summary>
-    /// Scossa breve della camera. Utile per impatti, porte che sbattono,
-    /// oggetti pesanti che cadono.
-    /// </summary>
     public void Shake(float amplitude, float duration)
     {
         shakeAmplitude = Mathf.Max(shakeAmplitude, amplitude);
         shakeDecay = amplitude / Mathf.Max(0.05f, duration);
     }
-
-    // ====================================================================
-    //  APPLICAZIONE
-    // ====================================================================
 
     void ApplyToTarget()
     {
@@ -480,11 +385,6 @@ public class EdgeLook : MonoBehaviour
         targets[index].target.localPosition =
             basePos[index] + new Vector3(p.x, p.y, 0f);
     }
-
-    /// <summary>
-    /// Al cambio di inquadratura il target precedente va riportato alla sua
-    /// posizione originale, altrimenti resta storto per sempre.
-    /// </summary>
     void HandleCameraSwitch(int index)
     {
         if (lastIndex >= 0 && lastIndex != index &&
@@ -510,21 +410,6 @@ public class EdgeLook : MonoBehaviour
             if (targets[i] != null && targets[i].target != null)
                 targets[i].target.localPosition = basePos[i];
     }
-
-    // ====================================================================
-    //  CAMPO VISIVO
-    // ====================================================================
-
-    /// <summary>
-    /// Applica il campo visivo alla camera attiva.
-    ///
-    /// L'accesso a Cinemachine avviene per RIFLESSIONE e non con un
-    /// riferimento diretto: il namespace e i nomi dei campi cambiano tra
-    /// Cinemachine 2 (Cinemachine.CinemachineVirtualCamera, campo m_Lens) e
-    /// Cinemachine 3 (Unity.Cinemachine.CinemachineCamera, campo Lens).
-    /// Con la riflessione lo stesso script compila con entrambi, e anche
-    /// senza Cinemachine installato.
-    /// </summary>
     public void ApplyFieldOfView()
     {
         float fov = fieldOfView;
@@ -540,10 +425,8 @@ public class EdgeLook : MonoBehaviour
 
         if (!apply) return;
 
-        // 1) prova con la virtual camera attiva di Cinemachine
         if (TrySetCinemachineFov(fov)) return;
 
-        // 2) ripiega sulla camera principale
         Camera cam = GetPreviewCamera();
         if (cam == null) return;
 
@@ -587,31 +470,21 @@ public class EdgeLook : MonoBehaviour
         }
 
         if (!changed) return false;
-
-        // LensSettings e' una struct: va riscritta nel campo dopo la modifica
         lensField.SetValue(vcam, lens);
         return true;
     }
-
-    /// <summary>
-    /// Cerca la virtual camera associata al target attivo, risalendo la
-    /// gerarchia. Evita di dover assegnare a mano i riferimenti.
-    /// </summary>
     Component FindActiveVirtualCamera()
     {
         int index = GetActiveIndex();
         if (index < 0) return null;
 
         Transform t = targets[index].target;
-
-        // il LookTarget di solito e' figlio o fratello della vcam
         Transform search = t;
         for (int depth = 0; depth < 4 && search != null; depth++)
         {
             Component c = FindVcamOn(search.gameObject);
             if (c != null) return c;
 
-            // guarda anche tra i fratelli
             if (search.parent != null)
             {
                 for (int i = 0; i < search.parent.childCount; i++)
@@ -640,8 +513,6 @@ public class EdgeLook : MonoBehaviour
         }
         return null;
     }
-
-    /// <summary>Camera usata per l'anteprima nell'Inspector.</summary>
     public Camera GetPreviewCamera()
     {
         Camera cam = Camera.main;
@@ -657,11 +528,6 @@ public class EdgeLook : MonoBehaviour
 
         return null;
     }
-
-    // ====================================================================
-    //  HELPER
-    // ====================================================================
-
     int GetActiveIndex()
     {
         if (targets == null || targets.Length == 0) return -1;
@@ -695,9 +561,6 @@ public class EdgeLook : MonoBehaviour
             return true;
 
         if (!lockWhileHolding) return false;
-
-        // FindFirstObjectByType e' costoso: una sola chiamata, poi si riprova
-        // solo se il riferimento e' andato perso
         if (grabber == null)
         {
             if (!grabberSearched)
@@ -710,14 +573,8 @@ public class EdgeLook : MonoBehaviour
 
         return grabber.IsHolding;
     }
-
-    // ====================================================================
-    //  API PUBBLICA
-    // ====================================================================
-
     public Vector2 CurrentOffset { get { return offset; } }
 
-    /// <summary>Riporta l'inquadratura al centro immediatamente.</summary>
     public void SnapToCenter()
     {
         offset = Vector2.zero;
@@ -726,22 +583,12 @@ public class EdgeLook : MonoBehaviour
         idleTimer = 0f;
         ApplyToTarget();
     }
-
-    /// <summary>
-    /// Rilegge le posizioni base dei target. Chiamalo se li sposti da script
-    /// dopo l'avvio, altrimenti il pan partirebbe dal punto sbagliato.
-    /// </summary>
     public void RecaptureBasePositions()
     {
         RestoreAllTargets();
         ready = Initialize();
         SnapToCenter();
     }
-
-    // ====================================================================
-    //  EDITOR
-    // ====================================================================
-
 #if UNITY_EDITOR
     void OnValidate()
     {
@@ -755,8 +602,6 @@ public class EdgeLook : MonoBehaviour
         previewOffset.x = Mathf.Clamp(previewOffset.x, -1f, 1f);
         previewOffset.y = Mathf.Clamp(previewOffset.y, -1f, 1f);
 
-        // OnValidate non puo' toccare la gerarchia direttamente: Unity lo
-        // vieta e stampa un errore. Si rimanda al prossimo tick dell'editor.
         if (!Application.isPlaying)
         {
             EditorApplication.delayCall += DelayedEditorRefresh;
@@ -788,8 +633,6 @@ public class EdgeLook : MonoBehaviour
 
         float lx = GetMaxPanX(index);
         float ly = GetMaxPanY(index);
-
-        // rettangolo entro cui si muove il target
         Matrix4x4 old = Gizmos.matrix;
         Gizmos.matrix = t.parent != null
             ? Matrix4x4.TRS(center, t.parent.rotation, Vector3.one)
@@ -803,7 +646,6 @@ public class EdgeLook : MonoBehaviour
 
         Gizmos.matrix = old;
 
-        // posizione corrente
         Gizmos.color = Color.cyan;
         Gizmos.DrawSphere(t.position, Mathf.Max(lx, ly) * 0.06f);
     }

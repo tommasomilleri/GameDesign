@@ -52,17 +52,14 @@ public class FakeLoadingScreen : MonoBehaviour
             ForceGoToNextLevel();
         }
     }
-
     void OnEnable()
     {
         ResetAndRun();
     }
-
     void OnDisable()
     {
         StopAllCoroutines();
     }
-
     private void LockLoadingBar()
     {
         if (loadingBar == null) return;
@@ -78,7 +75,6 @@ public class FakeLoadingScreen : MonoBehaviour
         if (loadingBar.handleRect != null)
             loadingBar.handleRect.gameObject.SetActive(false);
     }
-
     private void ResetAndRun()
     {
         isLoaded = false;
@@ -94,7 +90,6 @@ public class FakeLoadingScreen : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(FakeLoadRoutine());
     }
-
     void Update()
     {
         if (isTransitioning) return;
@@ -108,7 +103,6 @@ public class FakeLoadingScreen : MonoBehaviour
             else TriggerExitTransition();
         }
     }
-
     IEnumerator FakeLoadRoutine()
     {
         float elapsed = 0f;
@@ -140,7 +134,6 @@ public class FakeLoadingScreen : MonoBehaviour
             }
         }
     }
-
     void ShowNextTip()
     {
         if (cheeseTips == null || cheeseTips.Length == 0) return;
@@ -156,7 +149,6 @@ public class FakeLoadingScreen : MonoBehaviour
             if (tipText != null) tipText.text = cheeseTips[currentTipIndex];
         }
     }
-
     void TriggerExitTransition()
     {
         if (isTransitioning) return;
@@ -182,7 +174,6 @@ public class FakeLoadingScreen : MonoBehaviour
 
         if (GameManager.instance != null)
         {
-            // Accensione rimandata di 1 frame: il click non viene riletto dal pannello
             GameManager.instance.ActivatePanelNextFrame(target);
         }
         else
@@ -192,7 +183,6 @@ public class FakeLoadingScreen : MonoBehaviour
                 SimpleCellularTransition.Instance.PlayIn(null);
         }
     }
-
     private void ForceGoToNextLevel()
     {
         if (nextLevelPanel != null) nextLevelPanel.SetActive(true);

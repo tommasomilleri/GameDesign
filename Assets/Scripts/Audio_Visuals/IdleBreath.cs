@@ -12,8 +12,7 @@ public class IdleBreath : MonoBehaviour
     void Awake()
     {
         originalScale = transform.localScale;
-        // Assegna a ogni mucca un ritmo leggermente sfasato per non farle sembrare cloni
-        phaseOffset = Random.Range(0f, 100f);
+                phaseOffset = Random.Range(0f, 100f);
     }
 
     void Update()

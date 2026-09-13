@@ -32,52 +32,42 @@ public class MenuManager : MonoBehaviour
         if (Lvl1 != null) Lvl1.SetActive(false);
     }
 
-    // START BUTTON
-    public void StartGame()
+        public void StartGame()
     {
         if (StartPage != null) StartPage.SetActive(false);
 
-        // FIX: la storia si mostra SEMPRE. Chi l'ha già letta vede il bottone Skip.
-        // (Prima l'auto-salto la nascondeva per sempre dopo la prima run.)
-        if (StoryPage != null) StoryPage.SetActive(true);
+                        if (StoryPage != null) StoryPage.SetActive(true);
         if (storySkipButton != null)
             storySkipButton.SetActive(PlayerPrefs.GetInt("storySeen", 0) == 1);
     }
 
-    // NEXT BUTTON ON STORY PAGE (e anche il bottone Skip: stessa funzione)
-    public void GoToPlayerSelection()
+        public void GoToPlayerSelection()
     {
         if (StoryPage != null) StoryPage.SetActive(false);
         if (PlayerSelectPage != null) PlayerSelectPage.SetActive(true);
 
         PlayerPrefs.SetInt("storySeen", 1);
-        PlayerPrefs.Save();   // scrittura su disco esplicita
-    }
+        PlayerPrefs.Save();       }
 
-    // TUTORIAL BUTTON
-    public void OpenTutorial()
+        public void OpenTutorial()
     {
         if (StartPage != null) StartPage.SetActive(false);
         if (TutorialPage != null) TutorialPage.SetActive(true);
     }
 
-    // BACK BUTTON ON TUTORIAL
-    public void BackToStart()
+        public void BackToStart()
     {
         if (TutorialPage != null) TutorialPage.SetActive(false);
         if (StartPage != null) StartPage.SetActive(true);
     }
 
-    // PLAYER 1 (The Reader)
-    public void SelectPlayer1()
+        public void SelectPlayer1()
     {
         Debug.Log("Player 1 (Reader) selected. Opening HTML Manual...");
         OpenPlayer1Manual();
-        // IMPORTANT: We deliberately DO NOT hide the PlayerSelectPage here!
-    }
+            }
 
-    // PLAYER 2 (The Chef)
-    public void SelectPlayer2()
+        public void SelectPlayer2()
     {
         Debug.Log("Player 2 (Chef) selected. Starting Level 1...");
 
@@ -87,25 +77,17 @@ public class MenuManager : MonoBehaviour
             return;
         }
 
-        // FIX PRINCIPALE: si passa dal flusso ufficiale del GameManager.
-        // TransitionIntoFirstLevel fa: gameplayActive = true (sblocca i click
-        // sulle mucche!), unlockedStation = 0, transizione cellulare + loading
-        // screen, e spegne LUI il PlayerSelectPage al momento giusto.
-        // NON spegnere PlayerSelectPage qui: sparirebbe prima della transizione.
-        if (GameManager.instance != null)
+                                                if (GameManager.instance != null)
         {
             GameManager.instance.TransitionIntoFirstLevel(PlayerSelectPage, Lvl1);
         }
         else
         {
-            // Fallback d'emergenza senza GameManager
-            if (PlayerSelectPage != null) PlayerSelectPage.SetActive(false);
+                        if (PlayerSelectPage != null) PlayerSelectPage.SetActive(false);
             Lvl1.SetActive(true);
         }
 
-        // Barra qualità e pausa si abilitano subito (la barra è overlay,
-        // il loading la copre comunque)
-        if (GameManager.instance != null && GameManager.instance.qualityBarContainer != null)
+                        if (GameManager.instance != null && GameManager.instance.qualityBarContainer != null)
         {
             GameManager.instance.qualityBarContainer.SetActive(true);
         }
@@ -129,8 +111,7 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    // EXIT BUTTON
-    public void ExitGame()
+        public void ExitGame()
     {
         Debug.Log("Exiting game...");
         Application.Quit();

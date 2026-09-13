@@ -18,8 +18,7 @@ public class GameManager : MonoBehaviour
     [Header("3D Stations")]
     public int unlockedStation = 0;
 
-    // FIX A: il flag che spegne l'Interactor nei menu (era nel piano, mancava qui)
-    [Header("Stato Gameplay")]
+        [Header("Stato Gameplay")]
     [Tooltip("True solo tra SelectPlayer2 e l'ending: l'Interactor raycasta solo se true")]
     public bool gameplayActive = false;
 
@@ -44,16 +43,14 @@ public class GameManager : MonoBehaviour
     [Tooltip("Trascina qui tutti i GoST in ordine (GoST1, GoST2, GoST3...)")]
     public GameObject[] debugGoSTSequence;
 
-    // FIX B: durata sblocco esposta invece del magic number 1.2f
-    [Header("Transition Unlock")]
+        [Header("Transition Unlock")]
     [Tooltip("Tempo dopo il PlayIn oltre il quale la transizione si considera conclusa")]
     public float transitionUnlockDelay = 1.2f;
 
     private bool isChangingLevel = false;
     public bool IsChangingLevel { get { return isChangingLevel; } }
 
-    // FIX C: l'ending non deve poter scattare due volte (spam di errori a quality 0)
-    private bool endingTriggered = false;
+        private bool endingTriggered = false;
 
     void Awake()
     {
@@ -79,14 +76,12 @@ public class GameManager : MonoBehaviour
             globalQualityBar.SetQuality(currentQuality);
             globalQualityBar.gameObject.SetActive(false);
         }
-        // FIX D: all'avvio anche il CONTAINER va spento (bug container/figlia già visto)
-        if (qualityBarContainer != null) qualityBarContainer.SetActive(false);
+                if (qualityBarContainer != null) qualityBarContainer.SetActive(false);
     }
 
     public void DecreaseGlobalQuality(int damage)
     {
-        // FIX C: dopo l'ending, gli errori residui (trigger fisici ecc.) non contano più
-        if (endingTriggered) return;
+                if (endingTriggered) return;
 
         currentQuality -= damage;
         if (currentLevel >= 1 && currentLevel <= 5)
@@ -104,8 +99,7 @@ public class GameManager : MonoBehaviour
         {
             currentQuality = 0;
             if (globalQualityBar != null)
-                globalQualityBar.SetQuality(0);   // FIX E: mostra lo zero PRIMA di nascondere
-            TriggerEnding();
+                globalQualityBar.SetQuality(0);               TriggerEnding();
         }
         else
         {
@@ -116,10 +110,8 @@ public class GameManager : MonoBehaviour
 
     public void TriggerEnding()
     {
-        if (endingTriggered) return;              // FIX C
-        endingTriggered = true;
-        gameplayActive = false;                   // FIX A: il mondo torna sordo ai click
-
+        if (endingTriggered) return;                      endingTriggered = true;
+        gameplayActive = false;                   
         if (endingPanel != null) endingPanel.SetActive(true);
         if (qualityBarContainer != null) qualityBarContainer.SetActive(false);
         if (globalQualityBar != null) globalQualityBar.gameObject.SetActive(false);
@@ -133,17 +125,14 @@ public class GameManager : MonoBehaviour
         currentLevel = 1;
         unlockedStation = 0;
         isChangingLevel = false;
-        endingTriggered = false;                  // FIX C
-        gameplayActive = false;                   // FIX A
-
+        endingTriggered = false;                          gameplayActive = false;                   
         if (globalQualityBar != null)
         {
             globalQualityBar.SetMaxQuality(maxQuality);
             globalQualityBar.SetQuality(currentQuality);
             globalQualityBar.gameObject.SetActive(false);
         }
-        if (qualityBarContainer != null) qualityBarContainer.SetActive(false);  // FIX D
-        if (endingPanel != null) endingPanel.SetActive(false);
+        if (qualityBarContainer != null) qualityBarContainer.SetActive(false);          if (endingPanel != null) endingPanel.SetActive(false);
     }
 
     public void NotifyTransitionFinished()
@@ -165,9 +154,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // FIX F: il parametro si chiamava 'currentLevel' e OSCURAVA il campo int
-    // 'currentLevel' delle statistiche: refuso pronto a mordere. Rinominato.
-    public void TransitionToNextLevel(GameObject fromPanel, GameObject targetLevel)
+            public void TransitionToNextLevel(GameObject fromPanel, GameObject targetLevel)
     {
         if (isChangingLevel)
         {
@@ -206,8 +193,7 @@ public class GameManager : MonoBehaviour
 
         isChangingLevel = true;
         unlockedStation = 0;
-        gameplayActive = true;                    // FIX A: il gameplay inizia QUI
-        endingTriggered = false;
+        gameplayActive = true;                            endingTriggered = false;
 
         StartLoadingSequence(currentPanel, firstLevel);
     }
@@ -257,8 +243,7 @@ public class GameManager : MonoBehaviour
         if (SimpleCellularTransition.Instance != null)
             SimpleCellularTransition.Instance.PlayIn(null);
 
-        yield return new WaitForSecondsRealtime(transitionUnlockDelay);  // FIX B
-        isChangingLevel = false;
+        yield return new WaitForSecondsRealtime(transitionUnlockDelay);          isChangingLevel = false;
     }
 
     private IEnumerator SwapAfterDelay(GameObject current, GameObject next, float delay)
@@ -287,8 +272,7 @@ public class GameManager : MonoBehaviour
             if (debugGoSTSequence[i] != null && debugGoSTSequence[i].activeInHierarchy)
             {
                 Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
-                gameplayActive = true;   // il cheat salta il menu: attiva il gameplay
-                TransitionToNextLevel(debugGoSTSequence[i], debugGoSTSequence[i + 1]);
+                gameplayActive = true;                   TransitionToNextLevel(debugGoSTSequence[i], debugGoSTSequence[i + 1]);
 
                 return;
             }

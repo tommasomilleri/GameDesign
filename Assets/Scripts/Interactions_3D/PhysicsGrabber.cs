@@ -23,22 +23,22 @@ public class PhysicsGrabber : MonoBehaviour
     public bool debugLogs = true;
 
     public bool IsHolding { get; private set; }
-    // Aggiungi questa variabile pubblica
+    
     public Rigidbody HeldRigidbody => held;
     public void ConfigureDepth(float newMinDepth, float newMaxDepth, float newScrollSpeed)
     {
         minDepth = newMinDepth;
         maxDepth = newMaxDepth;
         scrollSpeed = newScrollSpeed;
-        // NON riclampiamo currentDepth di colpo: ci pensa il
-        // riavvicinamento morbido in FixedUpdate.
+        
+        
     }
 
     Camera cam;
     Rigidbody held;
     float currentDepth;
     Vector3 grabOffset;
-    CollisionDetectionMode heldOriginalMode;   // per ripristinarla al rilascio
+    CollisionDetectionMode heldOriginalMode;   
 
     void Awake()
     {
@@ -47,7 +47,6 @@ public class PhysicsGrabber : MonoBehaviour
             Debug.LogError("[Grabber] Nessuna Camera su '" + name +
                            "'. Mettilo sulla Main Camera!", this);
     }
-
     void Update()
     {
         if (cam == null) return;
@@ -70,7 +69,7 @@ public class PhysicsGrabber : MonoBehaviour
             return;
         }
 
-        // ---- 1. AFFERRA ----
+        // AFFERRA
         if (Input.GetMouseButtonDown(0) && held == null)
         {
             if (UnityEngine.EventSystems.EventSystem.current != null &&
@@ -86,19 +85,19 @@ public class PhysicsGrabber : MonoBehaviour
                     held.useGravity = false;
                     held.linearDamping = 10f;
 
-                    // ANTI-TUNNEL: fisica continua mentre e' in mano
+                    
                     heldOriginalMode = held.collisionDetectionMode;
                     held.collisionDetectionMode =
                         CollisionDetectionMode.ContinuousDynamic;
 
-                    // FIX STRATTONE: si parte dalla distanza VERA
-                    // dell'oggetto, SENZA clamp. Il rientro nel range
-                    // avviene morbido in FixedUpdate.
+                    
+                    
+                    
                     currentDepth = Vector3.Distance(
                         cam.transform.position, held.position);
                     currentDepth = Vector3.Distance(cam.transform.position, held.position);
 
-                    // AGGIUNGI QUESTA RIGA: Calcola la distanza tra il centro dell'oggetto e il punto esatto che hai cliccato
+                    
                     grabOffset = held.position - r.GetPoint(currentDepth);
                     IsHolding = true;
                 }
@@ -120,7 +119,7 @@ public class PhysicsGrabber : MonoBehaviour
             }
         }
 
-        // ---- 2. ROTELLA ----
+        
         if (held != null)
         {
             float scroll = Input.GetAxis("Mouse ScrollWheel");
@@ -129,7 +128,7 @@ public class PhysicsGrabber : MonoBehaviour
                                            minDepth, maxDepth);
         }
 
-        // ---- 3. RILASCIA ----
+        
         if (Input.GetMouseButtonUp(0) && held != null) Release();
     }
 
@@ -139,7 +138,7 @@ public class PhysicsGrabber : MonoBehaviour
         {
             held.useGravity = true;
             held.linearDamping = 0f;
-            held.collisionDetectionMode = heldOriginalMode;   // ripristina
+            held.collisionDetectionMode = heldOriginalMode;   
             held.linearVelocity = Vector3.ClampMagnitude(
                 held.linearVelocity * 0.2f, maxThrowSpeed);
             held.angularVelocity = Vector3.zero;
@@ -159,9 +158,9 @@ public class PhysicsGrabber : MonoBehaviour
             return;
         }
 
-        // Rientro MORBIDO nel range: se hai afferrato un oggetto piu'
-        // lontano di maxDepth (o piu' vicino di minDepth), la
-        // profondita' scivola verso il range invece di scattare.
+        
+        
+        
         float clamped = Mathf.Clamp(currentDepth, minDepth, maxDepth);
         currentDepth = Mathf.MoveTowards(currentDepth, clamped,
                                          depthAdjustSpeed * Time.fixedDeltaTime);
@@ -171,9 +170,9 @@ public class PhysicsGrabber : MonoBehaviour
 
         Vector3 dir = target - held.position;
 
-        // ANTI-TUNNEL parte 2: velocita' di traino LIMITATA.
-        // dir * grabSpeed puo' esplodere se il target e' lontano:
-        // il tetto maxPullSpeed impedisce di saltare i collider.
+        
+        
+        
         held.linearVelocity = dir.magnitude < deadZone
             ? Vector3.zero
             : Vector3.ClampMagnitude(dir * grabSpeed, maxPullSpeed);
@@ -189,8 +188,8 @@ public class PhysicsGrabber : MonoBehaviour
             return;
         }
 
-        // 1. Rientro MORBIDO ma ISTANTANEO: usiamo Lerp per coprire
-        // le grandi distanze in una frazione di secondo.
+        
+        
         float clamped = Mathf.Clamp(currentDepth, minDepth, maxDepth);
         currentDepth = Mathf.Lerp(currentDepth, clamped, 15f * Time.fixedDeltaTime);
 
@@ -198,9 +197,9 @@ public class PhysicsGrabber : MonoBehaviour
         Vector3 target = r.GetPoint(currentDepth) + grabOffset;
         Vector3 dir = target - held.position;
 
-        // 2. ANTI-TUNNEL DINAMICO: Se la fiala è lontanissima (sullo scaffale),
-        // ignoriamo il tetto di 12f per farla arrivare subito alla camera.
-        // Se è vicina (distanza < 5), riattiviamo il tuo maxPullSpeed per precisione.
+        
+        
+        
         float dynamicMaxSpeed = dir.magnitude > 5f ? (dir.magnitude * 50f) : maxPullSpeed;
 
         held.linearVelocity = dir.magnitude < deadZone

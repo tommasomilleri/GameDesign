@@ -15,13 +15,14 @@ public class Level5Manager : MonoBehaviour
     public AudioClip errorClip;
 
     private bool levelCompleted = false;
-
+    public float penaltyCooldown = 1.5f;
+    private float lastPenaltyTime = -99f;
     public void CheckPosition(int slotNumber)
     {
         if (levelCompleted) return;
 
-        // Il formaggio che tocca uno slot al load della scena NON
-        // deve costare qualita': si valuta solo a partita in corso.
+        
+        
         if (GameManager.instance == null ||
             !GameManager.instance.gameplayActive) return;
 
@@ -32,7 +33,7 @@ public class Level5Manager : MonoBehaviour
             Debug.Log("Correct shelf position!");
             levelCompleted = true;
 
-            // FIX: il successClip prima non veniva MAI suonato
+            
             if (audioSource != null && successClip != null)
             {
                 audioSource.pitch = 1f;
@@ -43,15 +44,21 @@ public class Level5Manager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Wrong shelf position!");
-            if (audioSource != null && errorClip != null)
+            
+            if (Time.time - lastPenaltyTime >= penaltyCooldown)
             {
-                audioSource.pitch = Random.Range(0.9f, 1.1f);
-                audioSource.PlayOneShot(errorClip);
-            }
+                lastPenaltyTime = Time.time;
+                Debug.Log("Wrong shelf position!");
 
-            if (GameManager.instance != null)
-                GameManager.instance.DecreaseGlobalQuality(wrongShelfPenalty);
+                if (audioSource != null && errorClip != null)
+                {
+                    audioSource.pitch = Random.Range(0.9f, 1.1f);
+                    audioSource.PlayOneShot(errorClip);
+                }
+
+                if (GameManager.instance != null)
+                    GameManager.instance.DecreaseGlobalQuality(wrongShelfPenalty);
+            }
         }
     }
 

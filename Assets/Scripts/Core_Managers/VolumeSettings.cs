@@ -7,14 +7,12 @@ public class VolumeSettings : MonoBehaviour
     [SerializeField] private AudioMixer myMixer;
 
     [Header("Sliders (Collega qui i tuoi UI Slider)")]
-    [SerializeField] private Slider masterSlider; // NOVITÀ: Controlla tutto assieme!
-    [SerializeField] private Slider musicSlider;
+    [SerializeField] private Slider masterSlider;     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider sfxSlider;
 
     private void Start()
     {
-        // Carica i volumi salvati, oppure imposta a metà (0.5) di default
-        if (PlayerPrefs.HasKey("musicVolume"))
+                if (PlayerPrefs.HasKey("musicVolume"))
         {
             LoadVolume();
         }
@@ -45,7 +43,6 @@ public class VolumeSettings : MonoBehaviour
             PlayerPrefs.SetFloat("musicVolume", volume);
         }
     }
-
     public void SetSFXVolume()
     {
         if (sfxSlider != null)
@@ -55,7 +52,6 @@ public class VolumeSettings : MonoBehaviour
             PlayerPrefs.SetFloat("sfxVolume", volume);
         }
     }
-
     private void LoadVolume()
     {
         if (masterSlider != null) masterSlider.value = PlayerPrefs.GetFloat("masterVolume", 1f);

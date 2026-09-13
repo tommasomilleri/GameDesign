@@ -26,8 +26,6 @@ public class ButtonFeedback : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     [Header("VFX Settings")]
     public GameObject clickVFXPrefab;
-
-    // Variabili di memoria
     private Vector2 originalPosition;
     private Vector3 originalScale;
     private RectTransform rectTransform;
@@ -37,8 +35,6 @@ public class ButtonFeedback : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();
-
-        // Salva le posizioni iniziali
         if (rectTransform != null)
         {
             originalPosition = rectTransform.anchoredPosition;
@@ -53,14 +49,11 @@ public class ButtonFeedback : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     void Update()
     {
-        // Gestisce la rotazione fluida se è stata assegnata un'icona
         if (iconToRotate != null)
         {
             Quaternion targetRotation = isHovering
                 ? originalIconRotation * Quaternion.Euler(0, 0, hoverRotationAngle)
                 : originalIconRotation;
-
-            // Early-out: ruota solo se c'è una differenza visibile (risparmia performance!)
             if (Quaternion.Angle(iconToRotate.localRotation, targetRotation) > 0.1f)
             {
                 iconToRotate.localRotation = Quaternion.Lerp(
@@ -70,27 +63,21 @@ public class ButtonFeedback : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         }
     }
 
-    // 1. Mouse entra
     public void OnPointerEnter(PointerEventData eventData)
     {
         isHovering = true;
         PlaySoundWithRandomPitch(hoverSound);
     }
 
-    // 2. Mouse esce
     public void OnPointerExit(PointerEventData eventData)
     {
         isHovering = false;
-
-        // Se il giocatore preme ma sposta il mouse fuori dal bottone, resetta la posizione fisica per sicurezza
         if (rectTransform != null)
         {
             rectTransform.anchoredPosition = originalPosition;
             transform.localScale = originalScale;
         }
     }
-
-    // 3. Click premuto (scende fisicamente)
     public void OnPointerDown(PointerEventData eventData)
     {
         if (rectTransform != null)
@@ -99,8 +86,6 @@ public class ButtonFeedback : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             transform.localScale = originalScale * pressScale;
         }
     }
-
-    // 4. Click rilasciato (torna su)
     public void OnPointerUp(PointerEventData eventData)
     {
         if (rectTransform != null)
@@ -109,8 +94,6 @@ public class ButtonFeedback : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             transform.localScale = originalScale;
         }
     }
-
-    // 5. Click completo registrato
     public void OnPointerClick(PointerEventData eventData)
     {
         PlaySoundWithRandomPitch(clickSound);
@@ -125,7 +108,6 @@ public class ButtonFeedback : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             audioSource.PlayOneShot(clip);
         }
     }
-
     private void SpawnVFX()
     {
         if (clickVFXPrefab != null)

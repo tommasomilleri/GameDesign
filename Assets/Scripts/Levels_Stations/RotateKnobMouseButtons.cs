@@ -8,8 +8,6 @@ public class RotateKnobMouseButtons : MonoBehaviour
         {1, 2, 0},  
         {2, 2, 1}   
     };
-
-
     [Header("Visual Settings (Termometro Realistico)")]
     public Gradient gradient;
     public Image thermometerFill;
@@ -76,7 +74,7 @@ public class RotateKnobMouseButtons : MonoBehaviour
 
     void OnEnable()
     {
-        // Non forziamo l'accensione qui, lasciamo fare al LateUpdate!
+        // Non si forza l'accensione qui, lasciar fare al LateUpdate!
     }
 
     void OnDisable()
@@ -89,13 +87,13 @@ public class RotateKnobMouseButtons : MonoBehaviour
 
     void LateUpdate()
     {
-        // 1. Spia l'interruttore del livello (GoST2) per sapere se siamo nel Livello 2
+        
         bool levelActive = (CurrentLevel != null) ? CurrentLevel.activeInHierarchy : false;
 
-        // 2. Mostra l'UI solo se siamo attivi e non abbiamo ancora vinto
+        
         bool show = levelActive && !levelCompleted;
 
-        // 3. Nascondi tutto durante le bolle di caricamento!
+        
         if (GameManager.instance != null && GameManager.instance.IsChangingLevel)
             show = false;
 
@@ -265,10 +263,8 @@ public class RotateKnobMouseButtons : MonoBehaviour
                   " → TARGET=zona " + targetZone);
 
     }
-
     public void ClickLeft() { HandleClick(-1); }
     public void ClickRight() { HandleClick(1); }
-
     private void HandleClick(int dir)
     {
         if (levelCompleted || check.activeSelf) return;
@@ -283,7 +279,6 @@ public class RotateKnobMouseButtons : MonoBehaviour
             audioSource.PlayOneShot(knobClickSound);
         }
     }
-
     void UpdateMiceVisuals()
     {
         if (blueMouse != null) blueMouse.SetActive(currentZone == 0);

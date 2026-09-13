@@ -5,7 +5,6 @@ public class Clickable3D : MonoBehaviour
 {
     public UnityEvent onLeftClick;
     public UnityEvent onRightClick;
-
     public void Click(int button)
     {
         if (button == 0) onLeftClick?.Invoke();

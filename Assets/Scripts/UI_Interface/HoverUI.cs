@@ -11,7 +11,6 @@ public class HoverUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        // Ora usa l'hotSpot personalizzabile invece del rigido Vector2.zero
         Cursor.SetCursor(customeCursor, hotSpot, CursorMode.Auto);
     }
 

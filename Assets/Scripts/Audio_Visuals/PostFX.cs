@@ -16,27 +16,19 @@ public class PostFX : MonoBehaviour
     private Image tintImage;
 
     private Texture2D noiseTex;
-
     void Awake()
     {
-        // Singleton pattern
         if (instance == null) instance = this;
         else { Destroy(gameObject); return; }
 
         Canvas rootCanvas = GetComponentInParent<Canvas>();
         if (rootCanvas == null) rootCanvas = FindFirstObjectByType<Canvas>();
-
-        // 1. LIVELLO COLORE (Per colorare la stanza a seconda del livello)
         tintImage = CreateOverlayImage("PostFX_Tint", rootCanvas.transform);
         tintImage.color = new Color(0, 0, 0, 0);
-
-        // 2. LIVELLO VIGNETTA (Angoli bui generati matematicamente)
         vignetteImage = CreateOverlayImage("PostFX_Vignette", rootCanvas.transform);
         Texture2D vigTex = GenerateVignette();
         vignetteImage.sprite = Sprite.Create(vigTex, new Rect(0, 0, 256, 256), Vector2.zero);
         vignetteImage.color = new Color(0, 0, 0, vignetteIntensity);
-
-        // 3. LIVELLO GRANA/PULVISCOLO (Vecchia pellicola)
         noiseImage = CreateOverlayImage("PostFX_Noise", rootCanvas.transform);
         noiseTex = GenerateNoise();
         noiseImage.sprite = Sprite.Create(noiseTex, new Rect(0, 0, 128, 128), Vector2.zero);
@@ -51,10 +43,10 @@ public class PostFX : MonoBehaviour
     {
         GameObject go = new GameObject(objName);
         go.transform.SetParent(parent, false);
-        go.transform.SetAsLastSibling(); // Mette la grafica in primissimo piano
+        go.transform.SetAsLastSibling();
 
         Image img = go.AddComponent<Image>();
-        img.raycastTarget = false; // CRITICO: Non blocca i click del giocatore!
+        img.raycastTarget = false;
 
         RectTransform rt = go.GetComponent<RectTransform>();
         rt.anchorMin = Vector2.zero;
@@ -103,15 +95,13 @@ public class PostFX : MonoBehaviour
         WaitForSecondsRealtime wait = new WaitForSecondsRealtime(1f / noiseSpeed);
         while (true)
         {
-            // Fa tremare la grana costantemente
-            rt.anchoredPosition = new Vector2(Random.Range(-4f, 4f), Random.Range(-4f, 4f));
+                        rt.anchoredPosition = new Vector2(Random.Range(-4f, 4f), Random.Range(-4f, 4f));
             rt.localScale = new Vector3(Random.value > 0.5f ? 1 : -1, Random.value > 0.5f ? 1 : -1, 1);
             yield return wait;
         }
     }
 
-    // Questa funzione può essere chiamata da qualsiasi livello per cambiare il colore dell'aria!
-    public void SetLevelTint(Color targetColor, float duration = 1.2f)
+        public void SetLevelTint(Color targetColor, float duration = 1.2f)
     {
         StopAllCoroutines();
         StartCoroutine(AnimateNoise());

@@ -3,43 +3,13 @@ using UnityEngine;
 
 namespace Atmosphere
 {
-    /// <summary>
-    /// Nebbia e foschia volumetrica per interi ambienti.
-    ///
-    /// Il realismo qui dipende da tre scelte, tutte controintuitive:
-    ///
-    ///   1) i banchi sono ENORMI e con opacita' quasi nulla. La densita' nasce
-    ///      dalla sovrapposizione di molti strati impercettibili, mai
-    ///      dall'opacita' del singolo;
-    ///   2) sono pochi. Molti banchi piccoli mostrano la forma del billboard,
-    ///      pochi banchi giganti no, e costano meno in overdraw;
-    ///   3) le soft particles li fondono con la geometria. Senza, ogni banco
-    ///      taglia il pavimento con una linea dritta.
-    ///
-    /// USO: GameObject vuoto nella stanza, Add Component.
-    /// </summary>
     [AddComponentMenu("Atmosphere/Ambient Mist")]
     public class AmbientMist : AtmosphereVolume
     {
         public enum MistStyle
         {
-            /// <summary>
-            /// Lenzuolo basso e filamentoso che striscia al suolo.
-            /// Alpha blended: la nebbia densa OCCLUDE cio' che c'e' dietro.
-            /// </summary>
             GroundFog,
-
-            /// <summary>
-            /// Foschia diffusa che riempie tutto il volume in modo uniforme.
-            /// Alpha blended. E' l'aria pesante di una cantina o di un magazzino.
-            /// </summary>
             Haze,
-
-            /// <summary>
-            /// Foschia additiva, illuminata. Non occlude: aggiunge luce.
-            /// E' l'alone soffuso che si vede in una stanza con luce forte e
-            /// aria polverosa. Da usare dove c'e' una sorgente luminosa.
-            /// </summary>
             LitHaze
         }
 
@@ -102,8 +72,6 @@ namespace Atmosphere
 
             ParticleSystem.ColorOverLifetimeModule col = ps.colorOverLifetime;
             col.enabled = true;
-            // dissolvenza lunga: nessun banco deve MAI apparire o sparire in
-            // modo percepibile, altrimenti l'occhio individua il singolo quad
             col.color = FadeGradient(0.28f, 0.74f);
 
             ParticleSystem.SizeOverLifetimeModule sz = ps.sizeOverLifetime;
@@ -117,9 +85,6 @@ namespace Atmosphere
 
             if (ground && clampToGround)
             {
-                // La nebbia bassa che si alza smette di essere nebbia bassa.
-                // Limitiamo la componente verticale della velocita' molto piu'
-                // delle altre due: e' cio' che la tiene incollata al suolo.
                 ParticleSystem.LimitVelocityOverLifetimeModule lim =
                     ps.limitVelocityOverLifetime;
                 lim.enabled = true;
@@ -129,18 +94,9 @@ namespace Atmosphere
                 lim.limitZ = new ParticleSystem.MinMaxCurve(3f);
                 lim.dampen = 0.3f;
             }
-
-            // Alpha blended richiede l'ordinamento per distanza, altrimenti i
-            // banchi si compongono nell'ordine sbagliato. L'additivo no: la
-            // somma e' commutativa, quindi si risparmia il sort.
             psr.sortMode = additive
                 ? ParticleSystemSortMode.None
                 : ParticleSystemSortMode.Distance;
-
-            // I banchi sono enormi: due che si compenetrano hanno il centro
-            // molto vicino e l'ordinamento si inverte a ogni piccolo movimento
-            // della camera, producendo uno sfarfallio molto visibile.
-            // sortingFudge sposta artificialmente la profondita' e lo elimina.
             psr.sortingFudge = ground ? 45f : 25f;
 
             psr.maxParticleSize = 4f;
@@ -150,10 +106,7 @@ namespace Atmosphere
         {
             bool ground = style == MistStyle.GroundFog;
             bool additive = style == MistStyle.LitHaze;
-
             float soft = AtmosphereQuality.SoftParticles ? softDistance : 0f;
-
-            // GroundFog usa la texture filamentosa, gli altri quella tondeggiante
             return AtmosphereTextures.CreateMistMaterial(ground, additive, soft);
         }
 

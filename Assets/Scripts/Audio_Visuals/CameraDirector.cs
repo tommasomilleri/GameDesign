@@ -1,13 +1,10 @@
 using UnityEngine;
-using Unity.Cinemachine; // <- IL NUOVO NAMESPACE DI CINEMACHINE 3
-
+using Unity.Cinemachine; 
 public class CameraDirector : MonoBehaviour
 {
     public static CameraDirector Instance;
 
-    // Nelle nuove versioni non è più VirtualCamera, ma CinemachineCamera
-    public CinemachineCamera[] cams;   // VC_ST1..5 in ordine
-    public int Current { get; private set; }
+        public CinemachineCamera[] cams;       public int Current { get; private set; }
 
     void Awake() { Instance = this; }
 

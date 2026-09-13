@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
 public class SimpleCellularTransition : MonoBehaviour
 {
     public static SimpleCellularTransition Instance;
@@ -43,7 +42,6 @@ public class SimpleCellularTransition : MonoBehaviour
         canvas.sortingOrder = 999;
         go.AddComponent<GraphicRaycaster>();
 
-        // Crea le bolle sparse casualmente per lo schermo
         for (int i = 0; i < numberOfCircles; i++)
         {
             GameObject imgGO = new GameObject("Bubble_" + i);
@@ -51,11 +49,8 @@ public class SimpleCellularTransition : MonoBehaviour
             Image circle = imgGO.AddComponent<Image>();
             circle.color = circleColor;
             circle.sprite = circleSprite;
-            circle.raycastTarget = true; // Blocca i click
-
+            circle.raycastTarget = true; 
             RectTransform rt = circle.rectTransform;
-
-            // Posiziona il centro del cerchio in un punto a caso dello schermo
             float randX = UnityEngine.Random.Range(0f, 1f);
             float randY = UnityEngine.Random.Range(0f, 1f);
 
@@ -64,7 +59,7 @@ public class SimpleCellularTransition : MonoBehaviour
             rt.pivot = new Vector2(0.5f, 0.5f);
             rt.anchoredPosition = Vector2.zero;
             rt.sizeDelta = new Vector2(100f, 100f);
-            rt.localScale = Vector3.zero; // Partono invisibili
+            rt.localScale = Vector3.zero; 
 
             circles.Add(rt);
         }
@@ -74,8 +69,6 @@ public class SimpleCellularTransition : MonoBehaviour
 
     public void PlayOut(Action onDone)
     {
-        // Se e' occupata NON usciamo in silenzio: invochiamo comunque la callback,
-        // altrimenti la catena delle transizioni si spezza e il gioco si blocca.
         if (busy)
         {
             Debug.LogWarning("[CellularTransition] PlayOut ignorata: transizione gia' in corso.");
@@ -95,7 +88,6 @@ public class SimpleCellularTransition : MonoBehaviour
         }
         StartCoroutine(InRoutine(onDone));
     }
-
     IEnumerator OutRoutine(Action onDone)
     {
         busy = true;
@@ -103,8 +95,6 @@ public class SimpleCellularTransition : MonoBehaviour
 
         float maxDim = Mathf.Max(Screen.width, Screen.height);
         float targetScale = (maxDim / 100f) * 3.5f;
-
-        // Le bolle crescono
         float t = 0f;
         while (t < duration)
         {
@@ -116,8 +106,6 @@ public class SimpleCellularTransition : MonoBehaviour
         }
         foreach (var rt in circles) rt.localScale = new Vector3(targetScale, targetScale, 1f);
 
-        // Sblocca PRIMA di invocare la callback: se la callback avvia
-        // un'altra transizione non deve trovare 'busy' ancora true.
         busy = false;
         if (onDone != null) onDone();
     }
@@ -125,15 +113,10 @@ public class SimpleCellularTransition : MonoBehaviour
     IEnumerator InRoutine(Action onDone)
     {
         busy = true;
-
-        // Le bolle devono partire grandi: se OutRoutine non e' mai stata
-        // eseguita, forziamo lo stato coperto prima di aprire.
         canvas.gameObject.SetActive(true);
 
         float maxDim = Mathf.Max(Screen.width, Screen.height);
         float targetScale = (maxDim / 100f) * 3.5f;
-
-        // Le bolle si rimpiccioliscono
         float t = 0f;
         while (t < duration)
         {
@@ -144,8 +127,6 @@ public class SimpleCellularTransition : MonoBehaviour
             yield return null;
         }
         foreach (var rt in circles) rt.localScale = Vector3.zero;
-
-        // Spegne il nero e sblocca
         canvas.gameObject.SetActive(false);
         busy = false;
         if (onDone != null) onDone();
