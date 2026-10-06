@@ -10,11 +10,19 @@ public class StationActivator : MonoBehaviour
     {
         StartCoroutine(NotifyDirector());
     }
+
     System.Collections.IEnumerator NotifyDirector()
     {
         while (CameraDirector.Instance == null) yield return null;
         Debug.Log("[STATION ACTIVATOR] " + gameObject.name + " → GoTo(" + stationIndex + ")");
-        CameraDirector.Instance.GoTo(stationIndex);
-    }
 
+        // La station 0 passa prima dalla carrellata introduttiva.
+        // Versione a prova di bug visivo: non usa < e >
+        var intro = (IntroDolly)FindFirstObjectByType(typeof(IntroDolly));
+
+        if (stationIndex == 0 && intro != null)
+            intro.PlayIntro();                 // fara' lui GoTo(0) alla fine
+        else
+            CameraDirector.Instance.GoTo(stationIndex);
+    }
 }
