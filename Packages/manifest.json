@@ -10,6 +10,7 @@
     "com.unity.2d.tooling": "1.0.3",
     "com.unity.ai.assistant": "2.18.0-pre.2",
     "com.unity.ai.inference": "2.6.1",
+    "com.unity.ai.navigation": "2.0.15",
     "com.unity.cinemachine": "3.1.7",
     "com.unity.cloud.gltfast": "6.20.0",
     "com.unity.collab-proxy": "2.12.4",
