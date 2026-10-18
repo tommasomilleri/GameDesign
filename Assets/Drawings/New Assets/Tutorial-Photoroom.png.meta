@@ -1,0 +1,1846 @@
+fileFormatVersion: 2
+guid: 524082621baaef34cb621c6bc5d4778f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7090885066215197947
+    second: Tutorial-Photoroom_0
+  - first:
+      213: -1012783628435263502
+    second: Tutorial-Photoroom_1
+  - first:
+      213: 799390530971088334
+    second: Tutorial-Photoroom_2
+  - first:
+      213: -3995208062716131678
+    second: Tutorial-Photoroom_3
+  - first:
+      213: -1521487072700002548
+    second: Tutorial-Photoroom_4
+  - first:
+      213: 8124212093880614111
+    second: Tutorial-Photoroom_5
+  - first:
+      213: 5864609802101448669
+    second: Tutorial-Photoroom_6
+  - first:
+      213: 8102692564545453914
+    second: Tutorial-Photoroom_7
+  - first:
+      213: -1563770178237428355
+    second: Tutorial-Photoroom_8
+  - first:
+      213: -1432481609415571734
+    second: Tutorial-Photoroom_9
+  - first:
+      213: 8099607245709176950
+    second: Tutorial-Photoroom_10
+  - first:
+      213: -7811211733699736276
+    second: Tutorial-Photoroom_11
+  - first:
+      213: 2452898563984402425
+    second: Tutorial-Photoroom_12
+  - first:
+      213: 8052233547675867962
+    second: Tutorial-Photoroom_13
+  - first:
+      213: -7805791895065472191
+    second: Tutorial-Photoroom_14
+  - first:
+      213: -8775868863740068736
+    second: Tutorial-Photoroom_15
+  - first:
+      213: -6104289230742283503
+    second: Tutorial-Photoroom_16
+  - first:
+      213: -5131576250199229332
+    second: Tutorial-Photoroom_17
+  - first:
+      213: 1373282367982719594
+    second: Tutorial-Photoroom_18
+  - first:
+      213: 1358624398438118297
+    second: Tutorial-Photoroom_19
+  - first:
+      213: 4035695494298550762
+    second: Tutorial-Photoroom_20
+  - first:
+      213: -4132410954918793747
+    second: Tutorial-Photoroom_21
+  - first:
+      213: -3364943548122511752
+    second: Tutorial-Photoroom_22
+  - first:
+      213: -1371443432207133268
+    second: Tutorial-Photoroom_23
+  - first:
+      213: 6938737362764983652
+    second: Tutorial-Photoroom_24
+  - first:
+      213: 2426898169123307761
+    second: Tutorial-Photoroom_25
+  - first:
+      213: 8863828380249574371
+    second: Tutorial-Photoroom_26
+  - first:
+      213: -4726108823628811011
+    second: Tutorial-Photoroom_27
+  - first:
+      213: -3422658258094193743
+    second: Tutorial-Photoroom_28
+  - first:
+      213: -8229305264773109779
+    second: Tutorial-Photoroom_29
+  - first:
+      213: -7086742478325869483
+    second: Tutorial-Photoroom_30
+  - first:
+      213: -6496885518216094810
+    second: Tutorial-Photoroom_31
+  - first:
+      213: -8875338896847805789
+    second: Tutorial-Photoroom_32
+  - first:
+      213: -8339582067787317590
+    second: Tutorial-Photoroom_33
+  - first:
+      213: 8640223470325117381
+    second: Tutorial-Photoroom_34
+  - first:
+      213: 5994442322469282074
+    second: Tutorial-Photoroom_35
+  - first:
+      213: -7279035565926610368
+    second: Tutorial-Photoroom_36
+  - first:
+      213: 5251736360035978313
+    second: Tutorial-Photoroom_37
+  - first:
+      213: 3392236061260026938
+    second: Tutorial-Photoroom_38
+  - first:
+      213: 2695605843901380071
+    second: Tutorial-Photoroom_39
+  - first:
+      213: -2231565024312380368
+    second: Tutorial-Photoroom_40
+  - first:
+      213: 5399881435728343370
+    second: Tutorial-Photoroom_41
+  - first:
+      213: 8889070227021663273
+    second: Tutorial-Photoroom_42
+  - first:
+      213: 784638506254558575
+    second: Tutorial-Photoroom_43
+  - first:
+      213: -8261311191169725543
+    second: Tutorial-Photoroom_44
+  - first:
+      213: 7049824297296320777
+    second: Tutorial-Photoroom_45
+  - first:
+      213: -7957464915297043340
+    second: Tutorial-Photoroom_46
+  - first:
+      213: -219990756490955122
+    second: Tutorial-Photoroom_47
+  - first:
+      213: 6157897097753703968
+    second: Tutorial-Photoroom_48
+  - first:
+      213: 8933049204704955133
+    second: Tutorial-Photoroom_49
+  - first:
+      213: -4183015811614110569
+    second: Tutorial-Photoroom_50
+  - first:
+      213: 4430861871607912881
+    second: Tutorial-Photoroom_51
+  - first:
+      213: 9092770995525261896
+    second: Tutorial-Photoroom_52
+  - first:
+      213: 5397958212219642316
+    second: Tutorial-Photoroom_53
+  - first:
+      213: -5590093179276905802
+    second: Tutorial-Photoroom_54
+  - first:
+      213: -9101469843759339075
+    second: Tutorial-Photoroom_55
+  - first:
+      213: 1393064352986038110
+    second: Tutorial-Photoroom_56
+  - first:
+      213: -1225152929059357087
+    second: Tutorial-Photoroom_57
+  - first:
+      213: -2915527995422141023
+    second: Tutorial-Photoroom_58
+  - first:
+      213: -9015959106610973232
+    second: Tutorial-Photoroom_59
+  - first:
+      213: 9016329668344669543
+    second: Tutorial-Photoroom_60
+  - first:
+      213: 1783025730436291679
+    second: Tutorial-Photoroom_61
+  - first:
+      213: -4280437670338906273
+    second: Tutorial-Photoroom_62
+  - first:
+      213: 1850082718159083372
+    second: Tutorial-Photoroom_63
+  - first:
+      213: -3568851570206200029
+    second: Tutorial-Photoroom_64
+  - first:
+      213: -1402612775418805968
+    second: Tutorial-Photoroom_65
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 2400
+        height: 965
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bfc01ea0662e76260800000000000000
+      internalID: 7090885066215197947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 708
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ffe8c8e7aed1f1f0800000000000000
+      internalID: -1012783628435263502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_2
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 660
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec5b75bd371081b00800000000000000
+      internalID: 799390530971088334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_3
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 650
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a6470a3f6b2e88c0800000000000000
+      internalID: -3995208062716131678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_4
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 626
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0f0e5d819792eae0800000000000000
+      internalID: -1521487072700002548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_5
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 603
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdcbfaffadffeb070800000000000000
+      internalID: 8124212093880614111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_6
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 593
+        width: 19
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ddfd7800b87436150800000000000000
+      internalID: 5864609802101448669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_7
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 554
+        width: 10
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5f3ee125fb827070800000000000000
+      internalID: 8102692564545453914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_8
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 544
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7d0fcfde4f5c4ae0800000000000000
+      internalID: -1563770178237428355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_9
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 538
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae6418bd09dce1ce0800000000000000
+      internalID: -1432481609415571734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_10
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 527
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 670fcac50e5976070800000000000000
+      internalID: 8099607245709176950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_11
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 511
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2dc6735050099390800000000000000
+      internalID: -7811211733699736276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_12
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 497
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f72b587f327a0220800000000000000
+      internalID: 2452898563984402425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_13
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 482
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3b14b1cfb74fbf60800000000000000
+      internalID: 8052233547675867962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_14
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 457
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 143dff7d0a14ca390800000000000000
+      internalID: -7805791895065472191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_15
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 446
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08cbc55d3c9d53680800000000000000
+      internalID: -8775868863740068736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_16
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 439
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11b1d5b5945394ba0800000000000000
+      internalID: -6104289230742283503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_17
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 431
+        width: 17
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6c3b05b69af8c8b0800000000000000
+      internalID: -5131576250199229332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_18
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 415
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a62dae7a901ee0310800000000000000
+      internalID: 1373282367982719594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_19
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 424
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 993351c21bdcad210800000000000000
+      internalID: 1358624398438118297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_20
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 392
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae14f478baba10830800000000000000
+      internalID: 4035695494298550762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_21
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 354
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dede126812ab6a6c0800000000000000
+      internalID: -4132410954918793747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_22
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 363
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8764ae4dba15d41d0800000000000000
+      internalID: -3364943548122511752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_23
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 342
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca550c1f677a7fce0800000000000000
+      internalID: -1371443432207133268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_24
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 333
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46d66515ed85b4060800000000000000
+      internalID: 6938737362764983652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_25
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 314
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f004acc6031ea120800000000000000
+      internalID: 2426898169123307761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_26
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 297
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3eb4dc203f4a20b70800000000000000
+      internalID: 8863828380249574371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_27
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 305
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df4f3cd901d796eb0800000000000000
+      internalID: -4726108823628811011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_28
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 292
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b30db2c2764080d0800000000000000
+      internalID: -3422658258094193743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_29
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 275
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de762f06672abcd80800000000000000
+      internalID: -8229305264773109779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_30
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 264
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55417bc5345d6ad90800000000000000
+      internalID: -7086742478325869483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_31
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 263
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ab995c0b0d66d5a0800000000000000
+      internalID: -6496885518216094810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_32
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 251
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a2ed200c4674d480800000000000000
+      internalID: -8875338896847805789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_33
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 233
+        width: 23
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aaeb15a5b4ad34c80800000000000000
+      internalID: -8339582067787317590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_34
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 196
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c1b8b8e77d38e770800000000000000
+      internalID: 8640223470325117381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_35
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 206
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1169594889803350800000000000000
+      internalID: 5994442322469282074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_36
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 190
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04a828108bbabfa90800000000000000
+      internalID: -7279035565926610368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_37
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 159
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94c82f1056ae1e840800000000000000
+      internalID: 5251736360035978313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_38
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 131
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a349ca199b4a31f20800000000000000
+      internalID: 3392236061260026938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_39
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 117
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e5753cab37b86520800000000000000
+      internalID: 2695605843901380071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_40
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 17
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 034bca80f63e701e0800000000000000
+      internalID: -2231565024312380368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_41
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 16
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4170d55e8b30fa40800000000000000
+      internalID: 5399881435728343370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_42
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 20
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92c802176425c5b70800000000000000
+      internalID: 8889070227021663273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_43
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 20
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f656562709893ea00800000000000000
+      internalID: 784638506254558575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_44
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 19
+        width: 13
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99b8e5fed3de95d80800000000000000
+      internalID: -8261311191169725543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_45
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 21
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 909d349c8d106d160800000000000000
+      internalID: 7049824297296320777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_46
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 17
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47cf51be1d7619190800000000000000
+      internalID: -7957464915297043340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_47
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 15
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e86bc71929f62fcf0800000000000000
+      internalID: -219990756490955122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_48
+      rect:
+        serializedVersion: 2
+        x: 397
+        y: 17
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 026b403d8ce357550800000000000000
+      internalID: 6157897097753703968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_49
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 13
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfa468f1ce098fb70800000000000000
+      internalID: 8933049204704955133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_50
+      rect:
+        serializedVersion: 2
+        x: 442
+        y: 17
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79c06ea2841f2f5c0800000000000000
+      internalID: -4183015811614110569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_51
+      rect:
+        serializedVersion: 2
+        x: 497
+        y: 14
+        width: 16
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b9130285659d7d30800000000000000
+      internalID: 4430861871607912881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_52
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 15
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84a124c7b03003e70800000000000000
+      internalID: 9092770995525261896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_53
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 14
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc121c7f46669ea40800000000000000
+      internalID: 5397958212219642316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_54
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 18
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b2bddbfedffb62b0800000000000000
+      internalID: -5590093179276905802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_55
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 15
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db96bc4166511b180800000000000000
+      internalID: -9101469843759339075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_56
+      rect:
+        serializedVersion: 2
+        x: 697
+        y: 16
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5ffdf4f5a8255310800000000000000
+      internalID: 1393064352986038110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_57
+      rect:
+        serializedVersion: 2
+        x: 781
+        y: 20
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16e33e3f6e16ffee0800000000000000
+      internalID: -1225152929059357087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_58
+      rect:
+        serializedVersion: 2
+        x: 857
+        y: 17
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a5182c3cb6f987d0800000000000000
+      internalID: -2915527995422141023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_59
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 20
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d5310d06f0e0e280800000000000000
+      internalID: -9015959106610973232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_60
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 8
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 765ef731010702d70800000000000000
+      internalID: 9016329668344669543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_61
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 7
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5c590874749eb810800000000000000
+      internalID: 1783025730436291679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_62
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 5
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f57bf381e94d894c0800000000000000
+      internalID: -4280437670338906273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_63
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 4
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6716f41e60dca910800000000000000
+      internalID: 1850082718159083372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_64
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 3
+        width: 15
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32fa3cdc764e87ec0800000000000000
+      internalID: -3568851570206200029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tutorial-Photoroom_65
+      rect:
+        serializedVersion: 2
+        x: 569
+        y: 4
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 031ccb3bc1be88ce0800000000000000
+      internalID: -1402612775418805968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Tutorial-Photoroom_0: 7090885066215197947
+      Tutorial-Photoroom_1: -1012783628435263502
+      Tutorial-Photoroom_10: 8099607245709176950
+      Tutorial-Photoroom_11: -7811211733699736276
+      Tutorial-Photoroom_12: 2452898563984402425
+      Tutorial-Photoroom_13: 8052233547675867962
+      Tutorial-Photoroom_14: -7805791895065472191
+      Tutorial-Photoroom_15: -8775868863740068736
+      Tutorial-Photoroom_16: -6104289230742283503
+      Tutorial-Photoroom_17: -5131576250199229332
+      Tutorial-Photoroom_18: 1373282367982719594
+      Tutorial-Photoroom_19: 1358624398438118297
+      Tutorial-Photoroom_2: 799390530971088334
+      Tutorial-Photoroom_20: 4035695494298550762
+      Tutorial-Photoroom_21: -4132410954918793747
+      Tutorial-Photoroom_22: -3364943548122511752
+      Tutorial-Photoroom_23: -1371443432207133268
+      Tutorial-Photoroom_24: 6938737362764983652
+      Tutorial-Photoroom_25: 2426898169123307761
+      Tutorial-Photoroom_26: 8863828380249574371
+      Tutorial-Photoroom_27: -4726108823628811011
+      Tutorial-Photoroom_28: -3422658258094193743
+      Tutorial-Photoroom_29: -8229305264773109779
+      Tutorial-Photoroom_3: -3995208062716131678
+      Tutorial-Photoroom_30: -7086742478325869483
+      Tutorial-Photoroom_31: -6496885518216094810
+      Tutorial-Photoroom_32: -8875338896847805789
+      Tutorial-Photoroom_33: -8339582067787317590
+      Tutorial-Photoroom_34: 8640223470325117381
+      Tutorial-Photoroom_35: 5994442322469282074
+      Tutorial-Photoroom_36: -7279035565926610368
+      Tutorial-Photoroom_37: 5251736360035978313
+      Tutorial-Photoroom_38: 3392236061260026938
+      Tutorial-Photoroom_39: 2695605843901380071
+      Tutorial-Photoroom_4: -1521487072700002548
+      Tutorial-Photoroom_40: -2231565024312380368
+      Tutorial-Photoroom_41: 5399881435728343370
+      Tutorial-Photoroom_42: 8889070227021663273
+      Tutorial-Photoroom_43: 784638506254558575
+      Tutorial-Photoroom_44: -8261311191169725543
+      Tutorial-Photoroom_45: 7049824297296320777
+      Tutorial-Photoroom_46: -7957464915297043340
+      Tutorial-Photoroom_47: -219990756490955122
+      Tutorial-Photoroom_48: 6157897097753703968
+      Tutorial-Photoroom_49: 8933049204704955133
+      Tutorial-Photoroom_5: 8124212093880614111
+      Tutorial-Photoroom_50: -4183015811614110569
+      Tutorial-Photoroom_51: 4430861871607912881
+      Tutorial-Photoroom_52: 9092770995525261896
+      Tutorial-Photoroom_53: 5397958212219642316
+      Tutorial-Photoroom_54: -5590093179276905802
+      Tutorial-Photoroom_55: -9101469843759339075
+      Tutorial-Photoroom_56: 1393064352986038110
+      Tutorial-Photoroom_57: -1225152929059357087
+      Tutorial-Photoroom_58: -2915527995422141023
+      Tutorial-Photoroom_59: -9015959106610973232
+      Tutorial-Photoroom_6: 5864609802101448669
+      Tutorial-Photoroom_60: 9016329668344669543
+      Tutorial-Photoroom_61: 1783025730436291679
+      Tutorial-Photoroom_62: -4280437670338906273
+      Tutorial-Photoroom_63: 1850082718159083372
+      Tutorial-Photoroom_64: -3568851570206200029
+      Tutorial-Photoroom_65: -1402612775418805968
+      Tutorial-Photoroom_7: 8102692564545453914
+      Tutorial-Photoroom_8: -1563770178237428355
+      Tutorial-Photoroom_9: -1432481609415571734
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,9 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-/// <summary>
-/// Pascolo casuale con supporto per Animator nei figli (Metodo Scatola)
-/// </summary>
+
 [RequireComponent(typeof(NavMeshAgent))]
 public class CowWander : MonoBehaviour
 {
@@ -27,7 +25,6 @@ public class CowWander : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
 
-        // AGGIORNAMENTO: Cerca l'Animator anche negli oggetti figli!
         anim = GetComponentInChildren<Animator>();
 
         home = penCenter != null ? penCenter.position : transform.position;
