@@ -1,0 +1,1300 @@
+fileFormatVersion: 2
+guid: ff7a1a45dd8e49341b7ee8d06f070e02
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5207804079435638006
+    second: Retry_0
+  - first:
+      213: 7966048895245437960
+    second: Retry_1
+  - first:
+      213: 5377520069278936217
+    second: Retry_2
+  - first:
+      213: -231366788424905344
+    second: Retry_3
+  - first:
+      213: 7001497922040812067
+    second: Retry_4
+  - first:
+      213: -1778554789519723038
+    second: Retry_5
+  - first:
+      213: 1907747134240368989
+    second: Retry_6
+  - first:
+      213: 2296948339811486057
+    second: Retry_7
+  - first:
+      213: 3139228244739710258
+    second: Retry_8
+  - first:
+      213: 2145652859228457091
+    second: Retry_9
+  - first:
+      213: -7377596201340395127
+    second: Retry_10
+  - first:
+      213: 5549627105006985145
+    second: Retry_11
+  - first:
+      213: -3808740468365148541
+    second: Retry_12
+  - first:
+      213: 2041485315197668874
+    second: Retry_13
+  - first:
+      213: -6105847584950403263
+    second: Retry_14
+  - first:
+      213: 7761838037978420595
+    second: Retry_15
+  - first:
+      213: 6172313675652411740
+    second: Retry_16
+  - first:
+      213: -478245483476662025
+    second: Retry_17
+  - first:
+      213: -3736041689402683809
+    second: Retry_18
+  - first:
+      213: -6644078756016322535
+    second: Retry_19
+  - first:
+      213: -9082797999805905298
+    second: Retry_20
+  - first:
+      213: -6917493453318335709
+    second: Retry_21
+  - first:
+      213: 2220662397825904787
+    second: Retry_22
+  - first:
+      213: 1495613481983383124
+    second: Retry_23
+  - first:
+      213: -8415888495387603373
+    second: Retry_24
+  - first:
+      213: 1463677604781166205
+    second: Retry_25
+  - first:
+      213: -6371740033590137192
+    second: Retry_26
+  - first:
+      213: -1002491152138885662
+    second: Retry_27
+  - first:
+      213: 1561149262235815039
+    second: Retry_28
+  - first:
+      213: -4256772375369408887
+    second: Retry_29
+  - first:
+      213: -6026766998445951569
+    second: Retry_30
+  - first:
+      213: 6524782832835322428
+    second: Retry_31
+  - first:
+      213: -4983068665818978304
+    second: Retry_32
+  - first:
+      213: 5793424286729889467
+    second: Retry_33
+  - first:
+      213: -4115996344516508126
+    second: Retry_34
+  - first:
+      213: -327203970100141847
+    second: Retry_35
+  - first:
+      213: 2393815007932246563
+    second: Retry_36
+  - first:
+      213: -2622186144679380395
+    second: Retry_37
+  - first:
+      213: 3725317604131238274
+    second: Retry_38
+  - first:
+      213: -3731284426806541002
+    second: Retry_39
+  - first:
+      213: 9088907847909262415
+    second: Retry_40
+  - first:
+      213: -7196540989685686909
+    second: Retry_41
+  - first:
+      213: 4163681799660927786
+    second: Retry_42
+  - first:
+      213: -1273048966816196787
+    second: Retry_43
+  - first:
+      213: 1190695609125353376
+    second: Retry_44
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Retry_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1277
+        height: 625
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f46796d736d54840800000000000000
+      internalID: 5207804079435638006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 394
+        width: 5
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80c4f78a3471d8e60800000000000000
+      internalID: 7966048895245437960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 271
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99ca7edf20ac0aa40800000000000000
+      internalID: 5377520069278936217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 233
+        width: 5
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08d4c1bb1250accf0800000000000000
+      internalID: -231366788424905344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 165
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 322d0eab3415a2160800000000000000
+      internalID: 7001497922040812067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_5
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 16
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e57b1597dd4157e0800000000000000
+      internalID: -1778554789519723038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_6
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 12
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d59aaa139eda97a10800000000000000
+      internalID: 1907747134240368989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_7
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 13
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96903e5685660ef10800000000000000
+      internalID: 2296948339811486057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_8
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 11
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23d559cc477c09b20800000000000000
+      internalID: 3139228244739710258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_9
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 12
+        width: 12
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3880d9548e3e6cd10800000000000000
+      internalID: 2145652859228457091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_10
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 18
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 981a5d2d7538d9990800000000000000
+      internalID: -7377596201340395127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_11
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 15
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9bf12d5e27c340d40800000000000000
+      internalID: 5549627105006985145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_12
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 15
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38eb07d39b2a42bc0800000000000000
+      internalID: -3808740468365148541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_13
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 11
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0e8882f310d45c10800000000000000
+      internalID: 2041485315197668874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_14
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 15
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14fba5eb8fba34ba0800000000000000
+      internalID: -6105847584950403263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_15
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 10
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37591d1529697bb60800000000000000
+      internalID: 7761838037978420595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_16
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 14
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c513c8fe59678a550800000000000000
+      internalID: 6172313675652411740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_17
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 14
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f840f1444eec59f0800000000000000
+      internalID: -478245483476662025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_18
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 16
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5e4a1db0e9e62cc0800000000000000
+      internalID: -3736041689402683809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_19
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 14
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9188defb29d7bc3a0800000000000000
+      internalID: -6644078756016322535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_20
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 11
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e66c0f6875b63f180800000000000000
+      internalID: -9082797999805905298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_21
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 16
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 323dedaca502000a0800000000000000
+      internalID: -6917493453318335709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_22
+      rect:
+        serializedVersion: 2
+        x: 402
+        y: 13
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 390fa7c6fa061de10800000000000000
+      internalID: 2220662397825904787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_23
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 14
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45697eaa98c71c410800000000000000
+      internalID: 1495613481983383124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_24
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 15
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35e0023b002c43b80800000000000000
+      internalID: -8415888495387603373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_25
+      rect:
+        serializedVersion: 2
+        x: 438
+        y: 13
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7e0da2d607005410800000000000000
+      internalID: 1463677604781166205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_26
+      rect:
+        serializedVersion: 2
+        x: 521
+        y: 13
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89e69b8c2380397a0800000000000000
+      internalID: -6371740033590137192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_27
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 17
+        width: 14
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e52a4acb9f6612f0800000000000000
+      internalID: -1002491152138885662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_28
+      rect:
+        serializedVersion: 2
+        x: 592
+        y: 17
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7ccde09bf05aa510800000000000000
+      internalID: 1561149262235815039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_29
+      rect:
+        serializedVersion: 2
+        x: 606
+        y: 16
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98e1964f318ece4c0800000000000000
+      internalID: -4256772375369408887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_30
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 11
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa5f499985f9c5ca0800000000000000
+      internalID: -6026766998445951569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_31
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 9
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3267bbaa6fac8a50800000000000000
+      internalID: 6524782832835322428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_32
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 5
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 008ea7a237598dab0800000000000000
+      internalID: -4983068665818978304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_33
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 11
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb6e7a3a1b0666050800000000000000
+      internalID: 5793424286729889467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_34
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 10
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2268944d12b01e6c0800000000000000
+      internalID: -4115996344516508126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_35
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 7
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e0651909b9857bf0800000000000000
+      internalID: -327203970100141847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_36
+      rect:
+        serializedVersion: 2
+        x: 271
+        y: 8
+        width: 10
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32aecc5111a883120800000000000000
+      internalID: 2393815007932246563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_37
+      rect:
+        serializedVersion: 2
+        x: 286
+        y: 9
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55a3f67289f1c9bd0800000000000000
+      internalID: -2622186144679380395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_38
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 9
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28170c59f9cf2b330800000000000000
+      internalID: 3725317604131238274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_39
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 9
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 635cf304590d73cc0800000000000000
+      internalID: -3731284426806541002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_40
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 10
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4444e65889422e70800000000000000
+      internalID: 9088907847909262415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_41
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 11
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38d1f3a4910c02c90800000000000000
+      internalID: -7196540989685686909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_42
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 4
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2b7c82698e58c930800000000000000
+      internalID: 4163681799660927786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_43
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 3
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d471e37a5b8355ee0800000000000000
+      internalID: -1273048966816196787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Retry_44
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 3
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a7b8811953368010800000000000000
+      internalID: 1190695609125353376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Retry_0: 5207804079435638006
+      Retry_1: 7966048895245437960
+      Retry_10: -7377596201340395127
+      Retry_11: 5549627105006985145
+      Retry_12: -3808740468365148541
+      Retry_13: 2041485315197668874
+      Retry_14: -6105847584950403263
+      Retry_15: 7761838037978420595
+      Retry_16: 6172313675652411740
+      Retry_17: -478245483476662025
+      Retry_18: -3736041689402683809
+      Retry_19: -6644078756016322535
+      Retry_2: 5377520069278936217
+      Retry_20: -9082797999805905298
+      Retry_21: -6917493453318335709
+      Retry_22: 2220662397825904787
+      Retry_23: 1495613481983383124
+      Retry_24: -8415888495387603373
+      Retry_25: 1463677604781166205
+      Retry_26: -6371740033590137192
+      Retry_27: -1002491152138885662
+      Retry_28: 1561149262235815039
+      Retry_29: -4256772375369408887
+      Retry_3: -231366788424905344
+      Retry_30: -6026766998445951569
+      Retry_31: 6524782832835322428
+      Retry_32: -4983068665818978304
+      Retry_33: 5793424286729889467
+      Retry_34: -4115996344516508126
+      Retry_35: -327203970100141847
+      Retry_36: 2393815007932246563
+      Retry_37: -2622186144679380395
+      Retry_38: 3725317604131238274
+      Retry_39: -3731284426806541002
+      Retry_4: 7001497922040812067
+      Retry_40: 9088907847909262415
+      Retry_41: -7196540989685686909
+      Retry_42: 4163681799660927786
+      Retry_43: -1273048966816196787
+      Retry_44: 1190695609125353376
+      Retry_5: -1778554789519723038
+      Retry_6: 1907747134240368989
+      Retry_7: 2296948339811486057
+      Retry_8: 3139228244739710258
+      Retry_9: 2145652859228457091
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

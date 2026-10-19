@@ -1,0 +1,702 @@
+fileFormatVersion: 2
+guid: 8fc24c19b9a73bb418abebd8f05eab5a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2535140960282934333
+    second: RetryIcon_0
+  - first:
+      213: -4008582912816039846
+    second: RetryIcon_1
+  - first:
+      213: 2137216956488798938
+    second: RetryIcon_2
+  - first:
+      213: 382118289340560523
+    second: RetryIcon_3
+  - first:
+      213: -1911665264628446601
+    second: RetryIcon_4
+  - first:
+      213: 2165765441757009833
+    second: RetryIcon_5
+  - first:
+      213: -3826776643764471739
+    second: RetryIcon_6
+  - first:
+      213: 1937733588852921074
+    second: RetryIcon_7
+  - first:
+      213: 1824714614232545121
+    second: RetryIcon_8
+  - first:
+      213: -3540694040847343249
+    second: RetryIcon_9
+  - first:
+      213: 7395389449850690178
+    second: RetryIcon_10
+  - first:
+      213: 2689945523378560523
+    second: RetryIcon_11
+  - first:
+      213: 2977045329047196366
+    second: RetryIcon_12
+  - first:
+      213: -1134087790269558367
+    second: RetryIcon_13
+  - first:
+      213: 7927677740952525147
+    second: RetryIcon_14
+  - first:
+      213: -1932185445074954370
+    second: RetryIcon_15
+  - first:
+      213: -6190621830891919651
+    second: RetryIcon_16
+  - first:
+      213: 385335352877871413
+    second: RetryIcon_17
+  - first:
+      213: 3662315221598415261
+    second: RetryIcon_18
+  - first:
+      213: 6010753071140583537
+    second: RetryIcon_19
+  - first:
+      213: 5387998597252250096
+    second: RetryIcon_20
+  - first:
+      213: 7522480080523207052
+    second: RetryIcon_21
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: RetryIcon_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1168
+        height: 1291
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c30bc67abe51dcd0800000000000000
+      internalID: -2535140960282934333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RetryIcon_1
+      rect:
+        serializedVersion: 2
+        x: 1112
+        y: 708
+        width: 45
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5836e44417ae58c0800000000000000
+      internalID: -4008582912816039846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RetryIcon_2
+      rect:
+        serializedVersion: 2
+        x: 1146
+        y: 491
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad2d47b9f7be8ad10800000000000000
+      internalID: 2137216956488798938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RetryIcon_3
+      rect:
+        serializedVersion: 2
+        x: 1149
+        y: 479
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b84f2524f8e8d4500800000000000000
+      internalID: 382118289340560523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RetryIcon_4
+      rect:
+        serializedVersion: 2
+        x: 1153
+        y: 466
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77a4e5cf1966875e0800000000000000
+      internalID: -1911665264628446601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RetryIcon_5
+      rect:
+        serializedVersion: 2
+        x: 1150
+        y: 446
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a75ebec1385e0e10800000000000000
+      internalID: 2165765441757009833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RetryIcon_6
+      rect:
+        serializedVersion: 2
+        x: 1145
+        y: 432
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54838a9eaee84eac0800000000000000
+      internalID: -3826776643764471739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RetryIcon_7
+      rect:
+        serializedVersion: 2
+        x: 1151
+        y: 434
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f2dbe8be6634ea10800000000000000
+      internalID: 1937733588852921074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RetryIcon_8
+      rect:
+        serializedVersion: 2
+        x: 1146
+        y: 399
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1677bcd1640b25910800000000000000
+      internalID: 1824714614232545121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RetryIcon_9
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 11
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f61a3fc778decdec0800000000000000
+      internalID: -3540694040847343249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RetryIcon_10
+      rect:
+        serializedVersion: 2
+        x: 525
+        y: 8
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28a950ea583b1a660800000000000000
+      internalID: 7395389449850690178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RetryIcon_11
+      rect:
+        serializedVersion: 2
+        x: 551
+        y: 0
+        width: 16
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0e912a933b945520800000000000000
+      internalID: 2689945523378560523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RetryIcon_12
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 5
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec2181624f6905920800000000000000
+      internalID: 2977045329047196366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RetryIcon_13
+      rect:
+        serializedVersion: 2
+        x: 577
+        y: 6
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a110e4d929e240f0800000000000000
+      internalID: -1134087790269558367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RetryIcon_14
+      rect:
+        serializedVersion: 2
+        x: 599
+        y: 8
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b591f3b17e4c40e60800000000000000
+      internalID: 7927677740952525147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RetryIcon_15
+      rect:
+        serializedVersion: 2
+        x: 609
+        y: 9
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e77902a239f7f25e0800000000000000
+      internalID: -1932185445074954370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RetryIcon_16
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 3
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd6a8ee7e3e761aa0800000000000000
+      internalID: -6190621830891919651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RetryIcon_17
+      rect:
+        serializedVersion: 2
+        x: 631
+        y: 7
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5317fab367cf85500800000000000000
+      internalID: 385335352877871413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RetryIcon_18
+      rect:
+        serializedVersion: 2
+        x: 658
+        y: 6
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9921ee4a4823d230800000000000000
+      internalID: 3662315221598415261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RetryIcon_19
+      rect:
+        serializedVersion: 2
+        x: 676
+        y: 11
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1783ce5621c7a6350800000000000000
+      internalID: 6010753071140583537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RetryIcon_20
+      rect:
+        serializedVersion: 2
+        x: 515
+        y: 0
+        width: 9
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f9f5876d2406ca40800000000000000
+      internalID: 5387998597252250096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RetryIcon_21
+      rect:
+        serializedVersion: 2
+        x: 587
+        y: 0
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c81a98507c7356860800000000000000
+      internalID: 7522480080523207052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      RetryIcon_0: -2535140960282934333
+      RetryIcon_1: -4008582912816039846
+      RetryIcon_10: 7395389449850690178
+      RetryIcon_11: 2689945523378560523
+      RetryIcon_12: 2977045329047196366
+      RetryIcon_13: -1134087790269558367
+      RetryIcon_14: 7927677740952525147
+      RetryIcon_15: -1932185445074954370
+      RetryIcon_16: -6190621830891919651
+      RetryIcon_17: 385335352877871413
+      RetryIcon_18: 3662315221598415261
+      RetryIcon_19: 6010753071140583537
+      RetryIcon_2: 2137216956488798938
+      RetryIcon_20: 5387998597252250096
+      RetryIcon_21: 7522480080523207052
+      RetryIcon_3: 382118289340560523
+      RetryIcon_4: -1911665264628446601
+      RetryIcon_5: 2165765441757009833
+      RetryIcon_6: -3826776643764471739
+      RetryIcon_7: 1937733588852921074
+      RetryIcon_8: 1824714614232545121
+      RetryIcon_9: -3540694040847343249
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
